@@ -1,20 +1,21 @@
-type Blog @model {
+type Swatch @model {
   id: ID!
-  name: String!
-  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+  ownerId: String!
+  ownerUsername: String!
+  hexCode: String!
 }
 
-type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+type MasterSwatch @model {
   id: ID!
-  title: String!
-  blogID: ID!
-  blog: Blog @connection(fields: ["blogID"])
-  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  ownerId: String!
+  ownerUsername: String!
+  swatches: [Swatch] @connection
 }
 
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+type Project @model {
   id: ID!
-  postID: ID!
-  post: Post @connection(fields: ["postID"])
-  content: String!
+  ownerId: String!
+  ownerUsername: String!
+  projectTitle: String!
+  swatches: [Swatch] @connection
 }
