@@ -1,19 +1,66 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createBlog = /* GraphQL */ `
-  mutation CreateBlog(
-    $input: CreateBlogInput!
-    $condition: ModelBlogConditionInput
+export const createSwatch = /* GraphQL */ `
+  mutation CreateSwatch(
+    $input: CreateSwatchInput!
+    $condition: ModelSwatchConditionInput
   ) {
-    createBlog(input: $input, condition: $condition) {
+    createSwatch(input: $input, condition: $condition) {
       id
-      name
-      posts {
+      ownerId
+      ownerUsername
+      hexCode
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSwatch = /* GraphQL */ `
+  mutation UpdateSwatch(
+    $input: UpdateSwatchInput!
+    $condition: ModelSwatchConditionInput
+  ) {
+    updateSwatch(input: $input, condition: $condition) {
+      id
+      ownerId
+      ownerUsername
+      hexCode
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSwatch = /* GraphQL */ `
+  mutation DeleteSwatch(
+    $input: DeleteSwatchInput!
+    $condition: ModelSwatchConditionInput
+  ) {
+    deleteSwatch(input: $input, condition: $condition) {
+      id
+      ownerId
+      ownerUsername
+      hexCode
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createMasterSwatch = /* GraphQL */ `
+  mutation CreateMasterSwatch(
+    $input: CreateMasterSwatchInput!
+    $condition: ModelMasterSwatchConditionInput
+  ) {
+    createMasterSwatch(input: $input, condition: $condition) {
+      id
+      ownerId
+      ownerUsername
+      swatches {
         items {
           id
-          title
-          blogID
+          ownerId
+          ownerUsername
+          hexCode
           createdAt
           updatedAt
         }
@@ -24,19 +71,21 @@ export const createBlog = /* GraphQL */ `
     }
   }
 `;
-export const updateBlog = /* GraphQL */ `
-  mutation UpdateBlog(
-    $input: UpdateBlogInput!
-    $condition: ModelBlogConditionInput
+export const updateMasterSwatch = /* GraphQL */ `
+  mutation UpdateMasterSwatch(
+    $input: UpdateMasterSwatchInput!
+    $condition: ModelMasterSwatchConditionInput
   ) {
-    updateBlog(input: $input, condition: $condition) {
+    updateMasterSwatch(input: $input, condition: $condition) {
       id
-      name
-      posts {
+      ownerId
+      ownerUsername
+      swatches {
         items {
           id
-          title
-          blogID
+          ownerId
+          ownerUsername
+          hexCode
           createdAt
           updatedAt
         }
@@ -47,19 +96,21 @@ export const updateBlog = /* GraphQL */ `
     }
   }
 `;
-export const deleteBlog = /* GraphQL */ `
-  mutation DeleteBlog(
-    $input: DeleteBlogInput!
-    $condition: ModelBlogConditionInput
+export const deleteMasterSwatch = /* GraphQL */ `
+  mutation DeleteMasterSwatch(
+    $input: DeleteMasterSwatchInput!
+    $condition: ModelMasterSwatchConditionInput
   ) {
-    deleteBlog(input: $input, condition: $condition) {
+    deleteMasterSwatch(input: $input, condition: $condition) {
       id
-      name
-      posts {
+      ownerId
+      ownerUsername
+      swatches {
         items {
           id
-          title
-          blogID
+          ownerId
+          ownerUsername
+          hexCode
           createdAt
           updatedAt
         }
@@ -70,29 +121,22 @@ export const deleteBlog = /* GraphQL */ `
     }
   }
 `;
-export const createPost = /* GraphQL */ `
-  mutation CreatePost(
-    $input: CreatePostInput!
-    $condition: ModelPostConditionInput
+export const createProject = /* GraphQL */ `
+  mutation CreateProject(
+    $input: CreateProjectInput!
+    $condition: ModelProjectConditionInput
   ) {
-    createPost(input: $input, condition: $condition) {
+    createProject(input: $input, condition: $condition) {
       id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
+      ownerId
+      ownerUsername
+      projectTitle
+      swatches {
         items {
           id
-          postID
-          content
+          ownerId
+          ownerUsername
+          hexCode
           createdAt
           updatedAt
         }
@@ -103,29 +147,22 @@ export const createPost = /* GraphQL */ `
     }
   }
 `;
-export const updatePost = /* GraphQL */ `
-  mutation UpdatePost(
-    $input: UpdatePostInput!
-    $condition: ModelPostConditionInput
+export const updateProject = /* GraphQL */ `
+  mutation UpdateProject(
+    $input: UpdateProjectInput!
+    $condition: ModelProjectConditionInput
   ) {
-    updatePost(input: $input, condition: $condition) {
+    updateProject(input: $input, condition: $condition) {
       id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
+      ownerId
+      ownerUsername
+      projectTitle
+      swatches {
         items {
           id
-          postID
-          content
+          ownerId
+          ownerUsername
+          hexCode
           createdAt
           updatedAt
         }
@@ -136,124 +173,27 @@ export const updatePost = /* GraphQL */ `
     }
   }
 `;
-export const deletePost = /* GraphQL */ `
-  mutation DeletePost(
-    $input: DeletePostInput!
-    $condition: ModelPostConditionInput
+export const deleteProject = /* GraphQL */ `
+  mutation DeleteProject(
+    $input: DeleteProjectInput!
+    $condition: ModelProjectConditionInput
   ) {
-    deletePost(input: $input, condition: $condition) {
+    deleteProject(input: $input, condition: $condition) {
       id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
+      ownerId
+      ownerUsername
+      projectTitle
+      swatches {
         items {
           id
-          postID
-          content
+          ownerId
+          ownerUsername
+          hexCode
           createdAt
           updatedAt
         }
         nextToken
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createComment = /* GraphQL */ `
-  mutation CreateComment(
-    $input: CreateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    createComment(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateComment = /* GraphQL */ `
-  mutation UpdateComment(
-    $input: UpdateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    updateComment(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteComment = /* GraphQL */ `
-  mutation DeleteComment(
-    $input: DeleteCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    deleteComment(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
       createdAt
       updatedAt
     }

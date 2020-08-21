@@ -1,16 +1,49 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getBlog = /* GraphQL */ `
-  query GetBlog($id: ID!) {
-    getBlog(id: $id) {
+export const getSwatch = /* GraphQL */ `
+  query GetSwatch($id: ID!) {
+    getSwatch(id: $id) {
       id
-      name
-      posts {
+      ownerId
+      ownerUsername
+      hexCode
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSwatchs = /* GraphQL */ `
+  query ListSwatchs(
+    $filter: ModelSwatchFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSwatchs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        ownerId
+        ownerUsername
+        hexCode
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getMasterSwatch = /* GraphQL */ `
+  query GetMasterSwatch($id: ID!) {
+    getMasterSwatch(id: $id) {
+      id
+      ownerId
+      ownerUsername
+      swatches {
         items {
           id
-          title
-          blogID
+          ownerId
+          ownerUsername
+          hexCode
           createdAt
           updatedAt
         }
@@ -21,17 +54,18 @@ export const getBlog = /* GraphQL */ `
     }
   }
 `;
-export const listBlogs = /* GraphQL */ `
-  query ListBlogs(
-    $filter: ModelBlogFilterInput
+export const listMasterSwatchs = /* GraphQL */ `
+  query ListMasterSwatchs(
+    $filter: ModelMasterSwatchFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listMasterSwatchs(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
-        posts {
+        ownerId
+        ownerUsername
+        swatches {
           nextToken
         }
         createdAt
@@ -41,26 +75,19 @@ export const listBlogs = /* GraphQL */ `
     }
   }
 `;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
+export const getProject = /* GraphQL */ `
+  query GetProject($id: ID!) {
+    getProject(id: $id) {
       id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
+      ownerId
+      ownerUsername
+      projectTitle
+      swatches {
         items {
           id
-          postID
-          content
+          ownerId
+          ownerUsername
+          hexCode
           createdAt
           updatedAt
         }
@@ -71,78 +98,21 @@ export const getPost = /* GraphQL */ `
     }
   }
 `;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
+export const listProjects = /* GraphQL */ `
+  query ListProjects(
+    $filter: ModelProjectFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
+        ownerId
+        ownerUsername
+        projectTitle
+        swatches {
           nextToken
         }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        postID
-        post {
-          id
-          title
-          blogID
-          createdAt
-          updatedAt
-        }
-        content
         createdAt
         updatedAt
       }

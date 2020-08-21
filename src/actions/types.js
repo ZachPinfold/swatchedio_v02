@@ -1,0 +1,11 @@
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+export const USER_LOADED = "USER_LOADED";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT = "LOGOUT";
+export const GET_COLORS = "GET_COLORS";
+export const COLOR_ERROR = "COLOR_ERROR";
+export const GET_RANDOM_COLORS = "GET_RANDOM_COLORS";
+export const GET_SECOND_COLORS = "GET_SECOND_COLORS";
