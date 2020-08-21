@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import BackgroundCard from "./BackgroundCard";
-import { getColors } from "../../actions/colors";
+import { getColors } from "../../colors";
 import { connect } from "react-redux";
 
 const Background = ({

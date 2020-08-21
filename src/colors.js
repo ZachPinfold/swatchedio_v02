@@ -4,7 +4,7 @@ import {
   COLOR_ERROR,
   GET_RANDOM_COLORS,
   GET_SECOND_COLORS
-} from "./types";
+} from "./actions/types";
 
 // load all colors
 
