@@ -13,6 +13,7 @@ import { loadUser } from "./actions/auth";
 function App() {
   return (
     <Provider store={store}>
+      -
       <div className='App'>
         <LogIn />
         <Register />

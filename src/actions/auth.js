@@ -37,6 +37,7 @@ export const register = (username, password, email, cb) => async dispatch => {
     });
     dispatch({ type: REGISTER_SUCCESS, payload: username });
   } catch (error) {
+    console.log(error);
     let err = null;
     !error.message ? (err = { message: error }) : (err = error);
     cb(err);

@@ -5,15 +5,9 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import config from "./config.json";
 import Amplify from "aws-amplify";
+import aws_exports from "./aws-exports";
 
-Amplify.configure({
-  Auth: {
-    mandatorySignIn: true,
-    region: config.cognito.REGION,
-    userPoolId: config.cognito.USER_POOL_ID,
-    userPoolWebClientId: config.cognito.APP_CLIENT_ID
-  }
-});
+Amplify.configure(aws_exports);
 
 ReactDOM.render(
   <React.StrictMode>
