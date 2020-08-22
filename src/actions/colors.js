@@ -13,7 +13,6 @@ import { listColorHexs } from "../graphql/queries";
 export const getColors = (random, first) => async dispatch => {
   try {
     const runAPI = async () => {
-      console.log("runAPI");
       const result1 = await API.graphql(
         graphqlOperation(listColorHexs, { format: "json" })
       );
@@ -39,7 +38,6 @@ export const getColors = (random, first) => async dispatch => {
   if (first === true) {
     try {
       const runAPI = async () => {
-        console.log("runAPI");
         const result1 = await API.graphql(
           graphqlOperation(listColorHexs, { format: "json" })
         );

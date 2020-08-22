@@ -21,9 +21,9 @@ function App() {
     <Provider store={store}>
       <Router>
         <Fragment>
-          {/* <Navbar openLogin={openLogin} openRegister={openRegister} /> */}
+          <Navbar openLogin={openLogin} openRegister={openRegister} />
           <Route exact path='/' component={Landing} />
-          {/* {login && <LogIn openLogin={openLogin} />} */}
+          {login && <LogIn openLogin={openLogin} />}
           {register && <Register openRegister={openRegister} />}
           <Switch>
             {/* <Route exact path='/login' component={LogIn} />

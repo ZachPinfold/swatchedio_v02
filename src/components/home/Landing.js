@@ -12,9 +12,7 @@ class Landing extends Component {
     const result = await API.graphql(
       graphqlOperation(listColorHexs, { format: "json" })
     );
-    // console.log(result.data);
     const obj = JSON.parse(result.data.listColorHexs);
-    // console.log(obj[0].colors);
   };
 
   render() {
