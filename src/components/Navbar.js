@@ -6,17 +6,25 @@ import { connect } from "react-redux";
 
 const Navbar = ({ logout, openLogin, openRegister }) => {
   const [buttonClass, setButtonClass] = useState("btn-primary");
+  const [logoClass, setLogoClass] = useState("nav-logo");
 
   const handleLogout = e => {
     e.preventDefault();
     logout();
   };
 
-  const handleHover = () => {
+  const handleLoginHover = () => {
     if (buttonClass === "btn-primary") setButtonClass("btn-primary-1");
     else if (buttonClass === "btn-primary-1") setButtonClass("btn-primary-2");
     else if (buttonClass === "btn-primary-2") setButtonClass("btn-primary-3");
     else if (buttonClass === "btn-primary-3") setButtonClass("btn-primary");
+  };
+
+  const handleLogoHover = () => {
+    if (logoClass === "nav-logo") setLogoClass("nav-logo-1");
+    else if (logoClass === "nav-logo-1") setLogoClass("nav-logo-2");
+    else if (logoClass === "nav-logo-2") setLogoClass("nav-logo-3");
+    else if (logoClass === "nav-logo-3") setLogoClass("nav-logo");
   };
 
   const guestLinks = (
@@ -28,7 +36,7 @@ const Navbar = ({ logout, openLogin, openRegister }) => {
       </li>
       <li>
         <button
-          onMouseLeave={handleHover}
+          onMouseLeave={handleLoginHover}
           className={buttonClass}
           onClick={() => openLogin(true)}
         >
@@ -40,7 +48,9 @@ const Navbar = ({ logout, openLogin, openRegister }) => {
 
   return (
     <nav>
-      <div className='nav-logo-area'>Logo</div>
+      <a onMouseLeave={handleLogoHover} className={logoClass}>
+        Swatched
+      </a>
       <div className='nav-buttons-area'>{guestLinks}</div>
       {/* <button onClick={handleLogout}>Logout</button> */}
     </nav>

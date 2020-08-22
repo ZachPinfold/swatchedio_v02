@@ -11,6 +11,8 @@
 :root {
   --green: #06d6a0;
   --orange: #ff6459;
+  --lily: "LilyScript";
+  --Crete: "CreteRound";
 }
 
 ul {
@@ -20,6 +22,26 @@ ul {
 * {
   padding: 0;
   margin: 0;
+}
+
+/* Navbar */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 15px 10px;
+  background-color: white;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-buttons-area {
+  display: flex;
 }
 
 .btn-primary-3,
@@ -62,21 +84,33 @@ ul {
   outline: 0;
 }
 
-/* Navbar */
-
-nav {
-  /* width: 100%; */
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  padding: 15px 10px;
-  background-color: white;
+.nav-logo-3,
+.nav-logo-2,
+.nav-logo-1,
+.nav-logo {
+  font-family: var(--lily);
+  font-size: 33px;
+  color: var(--green);
 }
 
-nav ul {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.nav-logo:hover {
+  cursor: pointer;
+  color: var(--orange);
+}
+
+.nav-logo-1:hover {
+  cursor: pointer;
+  color: #1693a7;
+}
+
+.nav-logo-2:hover {
+  cursor: pointer;
+  color: #2d1b33;
+}
+
+.nav-logo-3:hover {
+  cursor: pointer;
+  color: #c85866;
 }
 
 .register-link {
