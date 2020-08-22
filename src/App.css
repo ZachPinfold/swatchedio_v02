@@ -3,13 +3,63 @@
   src: url("assets/fonts/CreteRound-Regular.woff2") format("woff2");
 }
 
-button {
-  font-family: "CreteRound";
+@font-face {
+  font-family: "LilyScript";
+  src: url("assets/fonts/LilyScriptOne-Regular.woff2") format("woff2");
+}
+
+:root {
+  --green: #06d6a0;
+  --orange: #ff6459;
+}
+
+ul {
+  list-style-type: none;
 }
 
 * {
   padding: 0;
   margin: 0;
+}
+
+.btn-primary-3,
+.btn-primary-2,
+.btn-primary-1,
+.btn-primary {
+  font-family: "CreteRound";
+  background-color: var(--green);
+  text-decoration: none;
+  border: none;
+  padding: 3px 24px;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  cursor: pointer;
+  background-color: var(--orange);
+  color: white;
+}
+
+.btn-primary-1:hover {
+  cursor: pointer;
+  background-color: #1693a7;
+  color: white;
+}
+
+.btn-primary-2:hover {
+  cursor: pointer;
+  background-color: #2d1b33;
+  color: white;
+}
+
+.btn-primary-3:hover {
+  cursor: pointer;
+  background-color: #c85866;
+  color: white;
+}
+
+.btn-primary:focus {
+  outline: 0;
 }
 
 /* Navbar */
@@ -20,12 +70,18 @@ nav {
   justify-content: space-between;
   flex-direction: row;
   padding: 15px 10px;
-  background-color: grey;
+  background-color: white;
 }
 
-ul {
+nav ul {
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+.register-link {
+  margin-right: 12px;
+  cursor: pointer;
 }
 
 /* Modal */
@@ -69,11 +125,10 @@ ul {
   justify-content: space-between;
   height: 94vh;
   width: 100vw;
-  background-color: rgb(160, 160, 160);
 }
 
 .background-div-block {
-  margin-left: -4px;
+  /* margin-left: -4px; */
   height: 100%;
   transition: width 0.15s ease-out;
 }

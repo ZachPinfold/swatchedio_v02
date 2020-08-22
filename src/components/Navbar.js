@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { logout } from "../actions/auth";
 import { connect } from "react-redux";
 
 const Navbar = ({ logout, openLogin, openRegister }) => {
+  const [buttonClass, setButtonClass] = useState("btn-primary");
+
   const handleLogout = e => {
     e.preventDefault();
     logout();
   };
 
+  const handleHover = () => {
+    if (buttonClass === "btn-primary") setButtonClass("btn-primary-1");
+    else if (buttonClass === "btn-primary-1") setButtonClass("btn-primary-2");
+    else if (buttonClass === "btn-primary-2") setButtonClass("btn-primary-3");
+    else if (buttonClass === "btn-primary-3") setButtonClass("btn-primary");
+  };
+
   const guestLinks = (
     <ul>
       <li>
-        <button onClick={() => openRegister(true)}>Register</button>
+        <a className='register-link' onClick={() => openRegister(true)}>
+          Register
+        </a>
       </li>
       <li>
-        <button onClick={() => openLogin(true)}>Login</button>
+        <button
+          onMouseLeave={handleHover}
+          className={buttonClass}
+          onClick={() => openLogin(true)}
+        >
+          Login
+        </button>
       </li>
     </ul>
   );

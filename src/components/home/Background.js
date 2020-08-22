@@ -10,8 +10,8 @@ const Background = ({
   console.log();
 
   const [backGroundWidth, setBackgroundWidth] = useState({
-    onHover: "20vw",
-    offHover: "20vw",
+    onHover: "20.01vw",
+    offHover: "20.01vw",
     id: null
   });
   const [allFlipped, setAllFlipped] = useState({
@@ -36,14 +36,14 @@ const Background = ({
     const { id } = e.target;
     if (id === "5") {
       setBackgroundWidth({
-        offHover: "19.25vw",
-        onHover: "23vw",
+        offHover: "19.3vw",
+        onHover: "23.25vw",
         id
       });
     } else
       setBackgroundWidth({
         ...backGroundWidth,
-        offHover: "20vw",
+        offHover: "20.01vw",
         onHover: "23vw",
         id
       });
@@ -51,13 +51,18 @@ const Background = ({
 
   const offHoverEffect = e => {
     setBackgroundWidth({
-      offHover: "20vw",
+      offHover: "20.01vw",
       onHover: "23vw",
       id: null
     });
   };
 
   const handleClick = () => {
+    setBackgroundWidth({
+      offHover: "20.01vw",
+      onHover: "20.01vw",
+      id: null
+    });
     console.log(colorBooleon);
     getColors("new_random", "first");
     setColorFlipBooleon(!colorBooleon);
