@@ -120,3 +120,17 @@ export const listProjects = /* GraphQL */ `
     }
   }
 `;
+export const getColorHex = /* GraphQL */ `
+  query GetColorHex($id: ID!) {
+    getColorHex(id: $id) {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listColorHexs = /* GraphQL */ `
+  query ListColorHexs {
+    listColorHexs
+  }
+`;

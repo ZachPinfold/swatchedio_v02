@@ -199,3 +199,39 @@ export const deleteProject = /* GraphQL */ `
     }
   }
 `;
+export const createColorHex = /* GraphQL */ `
+  mutation CreateColorHex(
+    $input: CreateColorHexInput!
+    $condition: ModelColorHexConditionInput
+  ) {
+    createColorHex(input: $input, condition: $condition) {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateColorHex = /* GraphQL */ `
+  mutation UpdateColorHex(
+    $input: UpdateColorHexInput!
+    $condition: ModelColorHexConditionInput
+  ) {
+    updateColorHex(input: $input, condition: $condition) {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteColorHex = /* GraphQL */ `
+  mutation DeleteColorHex(
+    $input: DeleteColorHexInput!
+    $condition: ModelColorHexConditionInput
+  ) {
+    deleteColorHex(input: $input, condition: $condition) {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;

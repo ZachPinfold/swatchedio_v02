@@ -1,28 +1,28 @@
 {
-	"api": {
-		"swatchedv02": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"defaultAuthentication": {
-						"authenticationType": "API_KEY",
-						"apiKeyConfig": {
-							"apiKeyExpirationDays": 7,
-							"description": ""
-						}
-					},
-					"additionalAuthenticationProviders": []
-				}
-			}
-		}
-	},
-	"auth": {
-		"swatchedv02b552b9a4": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"customAuth": false
-		}
-	}
+    "api": {
+        "swatchedv02": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "apiKeyExpirationDays": 7,
+                            "description": ""
+                        }
+                    },
+                    "additionalAuthenticationProviders": []
+                }
+            }
+        }
+    },
+    "auth": {
+        "swatchedv02b552b9a4": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false
+        }
+    }
 }

@@ -12,28 +12,8 @@ import store from "./store";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import { loadUser } from "./actions/auth";
 import Navbar from "./components/Navbar";
-import axios from "axios";
 
 function App() {
-  useEffect(() => {
-    // axios.get(`/users`).then(res => {
-    //   const users = res.data;
-    //   setUsers(users);
-    // });
-
-    axios
-      .all([axios.get(`/palette`), axios.get(`/api/breeds/image/random`)])
-      .then(
-        axios.spread((user, dog) => {
-          const users = user.data;
-
-          const dogs = dog.data;
-
-          console.log(users, dogs);
-        })
-      );
-  }, []);
-
   const [login, openLogin] = useState(false);
   const [register, openRegister] = useState(false);
 

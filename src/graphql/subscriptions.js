@@ -172,3 +172,30 @@ export const onDeleteProject = /* GraphQL */ `
     }
   }
 `;
+export const onCreateColorHex = /* GraphQL */ `
+  subscription OnCreateColorHex {
+    onCreateColorHex {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateColorHex = /* GraphQL */ `
+  subscription OnUpdateColorHex {
+    onUpdateColorHex {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteColorHex = /* GraphQL */ `
+  subscription OnDeleteColorHex {
+    onDeleteColorHex {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;

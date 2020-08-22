@@ -19,3 +19,7 @@ type Project @model {
   projectTitle: String!
   swatches: [Swatch] @connection
 }
+
+type ColorHex @model {
+  colors: AWSJSON
+}
