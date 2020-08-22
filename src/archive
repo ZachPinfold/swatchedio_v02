@@ -1,0 +1,55 @@
+// GraphQL
+
+// Schema //
+
+// type Swatch @model {
+//     id: ID!
+//     ownerId: String!
+//     ownerUsername: String!
+//     hexCode: String!
+//   }
+
+//   type MasterSwatch @model {
+//     id: ID!
+//     ownerId: String!
+//     ownerUsername: String!
+//     swatches: [Swatch] @connection
+//   }
+
+//   type Project @model {
+//     id: ID!
+//     ownerId: String!
+//     ownerUsername: String!
+//     projectTitle: String!
+//     swatches: [Swatch] @connection
+//   }
+
+//   type ColorHex @model {
+//     colors: AWSJSON
+//   }
+
+// Queries //
+
+export const listColorHexs = /* GraphQL */ `
+  query ListColorHexs($format: String!) {
+    listColorHexs(format: $format)
+  }
+`;
+
+// Actions
+
+// Old Axios requests //
+
+const runAxios = async () => {
+  const res = await axios.get("/api/palettes/random?format=json");
+  if (res.data[0].colors.length === 5) return res.data[0].colors;
+  else return runAxios();
+};
+
+const result = runAxios();
+result.then(payload => {
+  dispatch({
+    type: random === "new_random" ? GET_RANDOM_COLORS : GET_COLORS,
+    payload: payload
+  });
+});
