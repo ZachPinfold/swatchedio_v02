@@ -163,17 +163,6 @@ nav ul {
   width: 100vw;
 }
 
-.background-div-card {
-  /* margin-left: -4px; */
-  height: 100%;
-  /* width: 100vw; */
-  transition: width 0.1s ease-out;
-}
-
-.background-div-card:hover {
-  cursor: pointer;
-}
-
 .hero-message {
   position: absolute;
   z-index: 3;
@@ -196,4 +185,34 @@ nav ul {
   margin-top: 20px;
   color: white;
   font-size: 22px;
+}
+
+/* Color Cards */
+
+.background-div-card {
+  /* margin-left: -4px; */
+  position: relative;
+  height: 100%;
+  transition: width 0.1s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-overlay {
+  position: absolute;
+  background-color: blue;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.background-div-card:hover {
+  cursor: pointer;
+}
+
+.card-copy-copy {
+  position: absolute;
+  font-family: var(--Crete);
+  overflow: hidden;
 }

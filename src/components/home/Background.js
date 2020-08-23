@@ -22,7 +22,6 @@ const Background = ({
   const [colorBooleon, setColorFlipBooleon] = useState(false);
   const [color1, setColor1] = useState(null);
   const [color2, setColor2] = useState(null);
-
   const [firstColorLoad, setFirstColorLoad] = useState(true);
 
   useEffect(() => {
@@ -33,7 +32,8 @@ const Background = ({
   const { onHover, offHover, id } = backGroundWidth;
 
   const hoverEffect = e => {
-    const { id } = e.target;
+    console.log(e.currentTarget);
+    const { id } = e.currentTarget;
     const num = id.toString();
     if (id === "5") {
       setBackgroundWidth({

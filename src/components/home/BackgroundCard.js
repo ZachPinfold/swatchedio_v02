@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import ReactCardFlip from "react-card-flip";
+import getContrastYIQ from "../utils/dominantColor";
 
 const BackgroundCard = ({
   hoverEffect,
@@ -15,10 +16,23 @@ const BackgroundCard = ({
   randomLoad
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [delay, setDelay] = useState(false);
+  const [showCopy, flipShowCopy] = useState(false);
+  const [copyColor, setCopyColor] = useState(null);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
+  };
+
+  const handleHover = e => {
+    hoverEffect(e);
+    flipShowCopy(true);
+    const textColor = getContrastYIQ(color);
+    setCopyColor(textColor);
+  };
+
+  const handleHoverOut = e => {
+    flipShowCopy(false);
+    offHoverEffect(e);
   };
 
   // console.log(
@@ -39,12 +53,20 @@ const BackgroundCard = ({
             width: id === divId ? onHover : offHover,
             backgroundColor: randomLoad ? color : color2
           }}
-          onMouseEnter={e => hoverEffect(e)}
-          onMouseOut={e => offHoverEffect(e)}
+          onMouseEnter={handleHover}
+          onMouseOut={handleHoverOut}
           id={divId}
           className='background-div-card'
         >
-          {/* <button onClick={handleClick}>Flip</button> */}
+          <h3
+            style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
+            onMouseEnter={e => hoverEffect(e)}
+            id={divId}
+            className='card-copy-copy'
+          >
+            Click to Copy
+          </h3>
+          <div id={divId} className='card-overlay'></div>
         </div>
 
         <div
@@ -52,12 +74,20 @@ const BackgroundCard = ({
             width: id === divId ? onHover : offHover,
             backgroundColor: !firstFlip ? color1Temp : color1
           }}
-          onMouseEnter={e => hoverEffect(e)}
-          onMouseOut={e => offHoverEffect(e)}
+          onMouseEnter={handleHover}
+          onMouseOut={handleHoverOut}
           id={divId}
           className='background-div-card'
         >
-          {/* <button onClick={handleClick}>Flip</button> */}
+          <h3
+            style={{ opacity: !showCopy ? "0" : "1" }}
+            onMouseEnter={e => hoverEffect(e)}
+            id={divId}
+            className='card-copy-copy'
+          >
+            Click to Copy
+          </h3>
+          <div id={divId} className='card-overlay'></div>
         </div>
       </ReactCardFlip>
     </Fragment>
