@@ -19,8 +19,15 @@ const BackgroundCard = ({
   const [showCopy, flipShowCopy] = useState(false);
   const [copyColor, setCopyColor] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [scale, setScale] = useState(1);
 
   const handleClick = color => {
+    setScale(0.98);
+    setTimeout(() => {
+      setScale(1);
+    }, 100);
+
+    console.log("click");
     navigator.clipboard.writeText(color);
     setCopied(true);
   };
@@ -68,7 +75,8 @@ const BackgroundCard = ({
         <div
           style={{
             width: id === divId ? onHover : offHover,
-            backgroundColor: randomLoad ? color : color2
+            backgroundColor: randomLoad ? color : color2,
+            transform: `scale(${scale})`
           }}
           onMouseEnter={e => handleHover(e, "front")}
           onMouseOut={handleHoverOut}
@@ -78,7 +86,10 @@ const BackgroundCard = ({
         >
           <div className='card-copy-div'>
             <h3
-              style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
+              style={{
+                color: copyColor,
+                opacity: !showCopy ? "0" : "1"
+              }}
               onMouseEnter={e => hoverEffect(e)}
               id={divId}
               className='card-copy-copy'
@@ -123,7 +134,7 @@ const BackgroundCard = ({
               id={divId}
               className='card-copy-copy'
             >
-              Click to Copy
+              {!copied ? "Click to Copy" : "Copied!"}
             </h3>
           </div>
           <div id={divId} className='card-overlay'></div>
