@@ -59,7 +59,11 @@ const Login = ({ login, openLogin }) => {
     <section className='modal-wrapper'>
       <div onClick={() => openLogin(false)} className='modal-backdrop'>
         <div onClick={e => e.stopPropagation()} className='modal-box'>
+          <p onClick={() => openLogin(false)} className='close-modal-x'>
+            x
+          </p>
           <h3 className='login-register-title'>Log in</h3>
+          <div className='break-line'></div>
           <FormErrors formerrors={errors} />
 
           <form onSubmit={handleSubmit}>
@@ -91,14 +95,21 @@ const Login = ({ login, openLogin }) => {
                 </span>
               </p>
             </div>
+            <div style={{ marginTop: "15px" }} className='break-line'></div>
+
             <div className='field'>
               <p className='control'>
-                <a href='/forgotpassword'>Forgot password?</a>
+                <button
+                  style={{ marginTop: "20px", padding: "4px 70px" }}
+                  className='btn-primary btn-login-modal'
+                >
+                  Login
+                </button>
               </p>
             </div>
-            <div className='field'>
+            <div className='field field-login'>
               <p className='control'>
-                <button className='button is-success'>Login</button>
+                <a className='login-register-sublink'>Forgot password?</a>
               </p>
             </div>
           </form>
