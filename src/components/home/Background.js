@@ -10,8 +10,8 @@ const Background = ({
   console.log();
 
   const [backGroundWidth, setBackgroundWidth] = useState({
-    onHover: "20.01vw",
-    offHover: "20.01vw",
+    onHover: "20.00vw",
+    offHover: "20.00vw",
     id: null
   });
   const [allFlipped, setAllFlipped] = useState({
@@ -34,16 +34,18 @@ const Background = ({
 
   const hoverEffect = e => {
     const { id } = e.target;
+    const num = id.toString();
+    console.log(num);
     if (id === "5") {
       setBackgroundWidth({
-        offHover: "19.3vw",
-        onHover: "23.25vw",
+        offHover: "19.26vw",
+        onHover: "23vw",
         id
       });
     } else
       setBackgroundWidth({
         ...backGroundWidth,
-        offHover: "20.01vw",
+        offHover: "19.26vw",
         onHover: "23vw",
         id
       });
@@ -60,7 +62,7 @@ const Background = ({
   const handleClick = () => {
     setBackgroundWidth({
       offHover: "20.01vw",
-      onHover: "20.01vw",
+      onHover: "20.00vw",
       id: null
     });
     console.log(colorBooleon);
@@ -75,9 +77,15 @@ const Background = ({
 
   return (
     <Fragment>
-      <button onClick={handleClick}>Flip</button>{" "}
       {!loading && (
         <div className='landing-div-background'>
+          <div class='hero-message'>
+            <h1 className='hero-heading'>Wash your projects with colors</h1>
+            <button className='btn-primary btn-landing' onClick={handleClick}>
+              {" "}
+              New Swatch
+            </button>
+          </div>{" "}
           <BackgroundCard
             hoverEffect={hoverEffect}
             offHoverEffect={offHoverEffect}

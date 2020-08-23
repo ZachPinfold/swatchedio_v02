@@ -21,6 +21,8 @@ const BackgroundCard = ({
     setIsFlipped(!isFlipped);
   };
 
+  console.log(offHover);
+
   // console.log(
   //   `color - ${color}`,
   //   `color 1 - ${color1}`,
@@ -42,9 +44,9 @@ const BackgroundCard = ({
           onMouseEnter={e => hoverEffect(e)}
           onMouseOut={e => offHoverEffect(e)}
           id={divId}
-          className='background-div-block'
+          className='background-div-card'
         >
-          <button onClick={handleClick}>Flip</button>
+          {/* <button onClick={handleClick}>Flip</button> */}
         </div>
 
         <div
@@ -55,9 +57,9 @@ const BackgroundCard = ({
           onMouseEnter={e => hoverEffect(e)}
           onMouseOut={e => offHoverEffect(e)}
           id={divId}
-          className='background-div-block'
+          className='background-div-card'
         >
-          <button onClick={handleClick}>Flip</button>
+          {/* <button onClick={handleClick}>Flip</button> */}
         </div>
       </ReactCardFlip>
     </Fragment>

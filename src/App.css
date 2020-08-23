@@ -32,6 +32,7 @@ nav {
   flex-direction: row;
   padding: 15px 10px;
   background-color: white;
+  border-bottom: 1px solid var(--green);
 }
 
 nav ul {
@@ -157,12 +158,39 @@ nav ul {
 .landing-div-background {
   display: flex;
   justify-content: space-between;
-  height: 94vh;
+  height: 91.4vh;
   width: 100vw;
 }
 
-.background-div-block {
+.background-div-card {
   /* margin-left: -4px; */
   height: 100%;
-  transition: width 0.15s ease-out;
+  /* width: 100vw; */
+  transition: width 0.1s ease-out;
+}
+
+.background-div-card:hover {
+  cursor: pointer;
+}
+
+.hero-message {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  top: 35%;
+  left: 20%;
+}
+
+.hero-heading {
+  font-family: var(--Crete);
+  font-size: 90px;
+  color: white;
+  width: 800px;
+}
+
+.btn-landing {
+  width: 200px;
+  padding: 10px 10px;
+  margin-top: 20px;
 }
