@@ -10,8 +10,8 @@ const Background = ({
   console.log();
 
   const [backGroundWidth, setBackgroundWidth] = useState({
-    onHover: "20.00vw",
-    offHover: "20.00vw",
+    onHover: "20.01vw",
+    offHover: "20.01vw",
     id: null
   });
   const [allFlipped, setAllFlipped] = useState({
@@ -61,8 +61,8 @@ const Background = ({
 
   const handleClick = () => {
     setBackgroundWidth({
-      offHover: "20.01vw",
-      onHover: "20.00vw",
+      offHover: "20.03vw",
+      onHover: "20.03vw",
       id: null
     });
     console.log(colorBooleon);
