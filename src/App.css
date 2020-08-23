@@ -8,11 +8,18 @@
   src: url("assets/fonts/LilyScriptOne-Regular.woff2") format("woff2");
 }
 
+@font-face {
+  font-family: "Helvetica Medium";
+  src: url("assets/fonts/240c57a0-fdce-440d-9ce3-85e0cb56f470.woff2")
+    format("woff2");
+}
+
 :root {
   --green: #06d6a0;
   --orange: #ff6459;
   --lily: "LilyScript";
   --Crete: "CreteRound";
+  --HelveticaM: "Helvetica Medium";
 }
 
 ul {
@@ -117,6 +124,7 @@ nav ul {
 .register-link {
   margin-right: 12px;
   cursor: pointer;
+  font-family: var(--Crete);
 }
 
 /* Modal */
@@ -191,12 +199,11 @@ nav ul {
 
 .background-div-card {
   /* margin-left: -4px; */
-  position: relative;
+  /* position: relative; */
   height: 100%;
   transition: width 0.1s ease-out;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .card-overlay {
@@ -211,8 +218,19 @@ nav ul {
   cursor: pointer;
 }
 
-.card-copy-copy {
+.card-copy-div {
   position: absolute;
-  font-family: var(--Crete);
   overflow: hidden;
+  align-self: flex-end;
+  margin-bottom: 40%;
+  text-align: center;
+}
+
+.card-hex-copy {
+  font-family: var(--HelveticaM);
+}
+
+.card-copy-copy {
+  margin-top: 10px;
+  font-family: var(--HelveticaM);
 }

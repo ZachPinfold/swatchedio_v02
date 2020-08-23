@@ -23,11 +23,25 @@ const BackgroundCard = ({
     setIsFlipped(!isFlipped);
   };
 
-  const handleHover = e => {
+  const handleHover = (e, frontback) => {
     hoverEffect(e);
     flipShowCopy(true);
-    const textColor = getContrastYIQ(color);
-    setCopyColor(textColor);
+    if (randomLoad) {
+      const textColor = getContrastYIQ(color);
+      setCopyColor(textColor);
+    }
+    if (!randomLoad && frontback === "front") {
+      const textColor = getContrastYIQ(color2);
+      setCopyColor(textColor);
+    }
+    if (!randomLoad && frontback === "back") {
+      const textColor = getContrastYIQ(color1);
+      setCopyColor(textColor);
+    }
+    if (!firstFlip && frontback === "back") {
+      const textColor = getContrastYIQ(color1Temp);
+      setCopyColor(textColor);
+    }
   };
 
   const handleHoverOut = e => {
@@ -42,6 +56,8 @@ const BackgroundCard = ({
   //   `color temp - ${color1Temp}`
   // );
 
+  console.log(firstFlip);
+
   return (
     <Fragment>
       <ReactCardFlip
@@ -53,19 +69,29 @@ const BackgroundCard = ({
             width: id === divId ? onHover : offHover,
             backgroundColor: randomLoad ? color : color2
           }}
-          onMouseEnter={handleHover}
+          onMouseEnter={e => handleHover(e, "front")}
           onMouseOut={handleHoverOut}
           id={divId}
           className='background-div-card'
         >
-          <h3
-            style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
-            onMouseEnter={e => hoverEffect(e)}
-            id={divId}
-            className='card-copy-copy'
-          >
-            Click to Copy
-          </h3>
+          <div className='card-copy-div'>
+            <h3
+              style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
+              onMouseEnter={e => hoverEffect(e)}
+              id={divId}
+              className='card-copy-copy'
+            >
+              {randomLoad ? color : color2}
+            </h3>
+            <h3
+              style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
+              onMouseEnter={e => hoverEffect(e)}
+              id={divId}
+              className='card-copy-copy'
+            >
+              Click to Copy
+            </h3>
+          </div>
           <div id={divId} className='card-overlay'></div>
         </div>
 
@@ -74,19 +100,29 @@ const BackgroundCard = ({
             width: id === divId ? onHover : offHover,
             backgroundColor: !firstFlip ? color1Temp : color1
           }}
-          onMouseEnter={handleHover}
+          onMouseEnter={e => handleHover(e, "back")}
           onMouseOut={handleHoverOut}
           id={divId}
           className='background-div-card'
         >
-          <h3
-            style={{ opacity: !showCopy ? "0" : "1" }}
-            onMouseEnter={e => hoverEffect(e)}
-            id={divId}
-            className='card-copy-copy'
-          >
-            Click to Copy
-          </h3>
+          <div className='card-copy-div'>
+            <h3
+              style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
+              onMouseEnter={e => hoverEffect(e)}
+              id={divId}
+              className='card-copy-copy'
+            >
+              {!firstFlip ? color1Temp : color1}
+            </h3>
+            <h3
+              style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
+              onMouseEnter={e => hoverEffect(e)}
+              id={divId}
+              className='card-copy-copy'
+            >
+              Click to Copy
+            </h3>
+          </div>
           <div id={divId} className='card-overlay'></div>
         </div>
       </ReactCardFlip>

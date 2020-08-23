@@ -32,7 +32,6 @@ const Background = ({
   const { onHover, offHover, id } = backGroundWidth;
 
   const hoverEffect = e => {
-    console.log(e.currentTarget);
     const { id } = e.currentTarget;
     const num = id.toString();
     if (id === "5") {
@@ -77,7 +76,7 @@ const Background = ({
     <Fragment>
       {!loading && (
         <div className='landing-div-background'>
-          <div class='hero-message'>
+          <div className='hero-message'>
             <h1 className='hero-heading'>Wash your projects with colors</h1>
             <button className='btn-primary btn-landing' onClick={handleClick}>
               {" "}
