@@ -154,12 +154,16 @@ nav ul {
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 30%;
-  width: 60%;
+  width: 600px;
   overflow-y: auto;
   background-color: white;
+  text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   z-index: 101;
   padding: 40px;
+}
+
+.login-register-title {
 }
 
 /* Landing page */
@@ -201,10 +205,9 @@ nav ul {
   /* margin-left: -4px; */
   /* position: relative; */
   height: 100%;
-  transition: width 0.1s ease-out;
+  transition: width 0.1s ease-out, transform 0.1s ease-out;
   display: flex;
   justify-content: center;
-  transition: transform 0.1s ease-out;
 }
 
 .card-overlay {

@@ -59,7 +59,7 @@ const Login = ({ login, openLogin }) => {
     <section className='modal-wrapper'>
       <div onClick={() => openLogin(false)} className='modal-backdrop'>
         <div onClick={e => e.stopPropagation()} className='modal-box'>
-          <h1>Log in</h1>
+          <h3 className='login-register-title'>Log in</h3>
           <FormErrors formerrors={errors} />
 
           <form onSubmit={handleSubmit}>
