@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import BackgroundCard from "./BackgroundCard";
 import { getColors } from "../../actions/colors";
 import { connect } from "react-redux";
+import colorHoverChange from "../utils/colorHoverChange";
 
 const Background = ({
   getColors,
@@ -24,6 +25,7 @@ const Background = ({
   const [color2, setColor2] = useState(null);
   const [firstColorLoad, setFirstColorLoad] = useState(true);
   const [pageLoad, setLoad] = useState(true);
+  const [buttonClass, setButtonClass] = useState("btn-primary btn-landing");
 
   useEffect(() => {
     getColors(null, firstColorLoad);
@@ -60,6 +62,8 @@ const Background = ({
   };
 
   const handleClick = () => {
+    const buttonColor = colorHoverChange(buttonClass, "landing");
+    setButtonClass(buttonColor);
     setBackgroundWidth({
       offHover: "20.03vw",
       onHover: "20.03vw",
@@ -81,8 +85,8 @@ const Background = ({
       {!loading && (
         <div className='landing-div-background'>
           <div className='hero-message'>
-            <h1 className='hero-heading'>Wash your projects with colors</h1>
-            <button className='btn-primary btn-landing' onClick={handleClick}>
+            <h1 className='hero-heading'>Wash your projects with color</h1>
+            <button className={buttonClass} onClick={handleClick}>
               {" "}
               New Palette
             </button>

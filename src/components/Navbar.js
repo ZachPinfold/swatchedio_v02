@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { logout } from "../actions/auth";
 import { connect } from "react-redux";
+import colorHoverChange from "./utils/colorHoverChange";
 
 const Navbar = ({ logout, openLogin, openRegister }) => {
   const [buttonClass, setButtonClass] = useState("btn-primary");
@@ -14,17 +15,13 @@ const Navbar = ({ logout, openLogin, openRegister }) => {
   };
 
   const handleLoginHover = () => {
-    if (buttonClass === "btn-primary") setButtonClass("btn-primary-1");
-    else if (buttonClass === "btn-primary-1") setButtonClass("btn-primary-2");
-    else if (buttonClass === "btn-primary-2") setButtonClass("btn-primary-3");
-    else if (buttonClass === "btn-primary-3") setButtonClass("btn-primary");
+    const classColor = colorHoverChange(buttonClass, "loginButton");
+    setButtonClass(classColor);
   };
 
   const handleLogoHover = () => {
-    if (logoClass === "nav-logo") setLogoClass("nav-logo-1");
-    else if (logoClass === "nav-logo-1") setLogoClass("nav-logo-2");
-    else if (logoClass === "nav-logo-2") setLogoClass("nav-logo-3");
-    else if (logoClass === "nav-logo-3") setLogoClass("nav-logo");
+    const classColor = colorHoverChange(logoClass, "logo");
+    setLogoClass(classColor);
   };
 
   const guestLinks = (

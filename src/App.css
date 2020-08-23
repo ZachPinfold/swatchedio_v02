@@ -276,6 +276,10 @@ input:-webkit-autofill:focus {
   font-size: 22px;
 }
 
+.btn-landing:active {
+  transform: scale(0.95);
+}
+
 /* Color Cards */
 
 .background-div-card {
