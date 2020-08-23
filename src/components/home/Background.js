@@ -84,7 +84,7 @@ const Background = ({
             <h1 className='hero-heading'>Wash your projects with colors</h1>
             <button className='btn-primary btn-landing' onClick={handleClick}>
               {" "}
-              New Swatch
+              New Palette
             </button>
           </div>{" "}
           <BackgroundCard

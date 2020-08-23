@@ -19,13 +19,23 @@ const BackgroundCard = ({
   const [showCopy, flipShowCopy] = useState(false);
   const [copyColor, setCopyColor] = useState(null);
   const [copied, setCopied] = useState(false);
-  const [scale, setScale] = useState(1);
+  const [frontScale, setFrontScale] = useState(1);
+  const [BackScale, setBackScale] = useState(1);
 
-  const handleClick = color => {
-    setScale(0.98);
-    setTimeout(() => {
-      setScale(1);
-    }, 100);
+  const handleClick = (color, frontback) => {
+    if (frontback === "front") {
+      setFrontScale(0.98);
+      setTimeout(() => {
+        setFrontScale(1);
+      }, 100);
+    }
+
+    if (frontback === "back") {
+      setBackScale(0.98);
+      setTimeout(() => {
+        setBackScale(1);
+      }, 100);
+    }
 
     console.log("click");
     navigator.clipboard.writeText(color);
@@ -76,11 +86,11 @@ const BackgroundCard = ({
           style={{
             width: id === divId ? onHover : offHover,
             backgroundColor: randomLoad ? color : color2,
-            transform: `scale(${scale})`
+            transform: `scale(${frontScale})`
           }}
           onMouseEnter={e => handleHover(e, "front")}
           onMouseOut={handleHoverOut}
-          onClick={() => handleClick(randomLoad ? color : color2)}
+          onClick={() => handleClick(randomLoad ? color : color2, "front")}
           id={divId}
           className='background-div-card'
         >
@@ -111,11 +121,12 @@ const BackgroundCard = ({
         <div
           style={{
             width: id === divId ? onHover : offHover,
-            backgroundColor: !firstFlip ? color1Temp : color1
+            backgroundColor: !firstFlip ? color1Temp : color1,
+            transform: `scale(${BackScale})`
           }}
           onMouseEnter={e => handleHover(e, "back")}
           onMouseOut={handleHoverOut}
-          onClick={() => handleClick(!firstFlip ? color1Temp : color1)}
+          onClick={() => handleClick(!firstFlip ? color1Temp : color1, "back")}
           id={divId}
           className='background-div-card'
         >
