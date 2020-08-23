@@ -16,6 +16,7 @@ import Navbar from "./components/Navbar";
 function App() {
   const [login, openLogin] = useState(false);
   const [register, openRegister] = useState(false);
+  const [loading, setLoad] = useState(true);
 
   return (
     <Provider store={store}>

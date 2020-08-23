@@ -222,12 +222,12 @@ nav ul {
   position: absolute;
   overflow: hidden;
   align-self: flex-end;
-  margin-bottom: 40%;
+  margin-bottom: 30%;
   text-align: center;
 }
 
 .card-hex-copy {
-  font-family: var(--HelveticaM);
+  font-family: var(--Crete);
 }
 
 .card-copy-copy {

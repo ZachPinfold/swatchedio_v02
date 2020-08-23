@@ -23,13 +23,15 @@ const Background = ({
   const [color1, setColor1] = useState(null);
   const [color2, setColor2] = useState(null);
   const [firstColorLoad, setFirstColorLoad] = useState(true);
+  const [pageLoad, setLoad] = useState(true);
 
   useEffect(() => {
     getColors(null, firstColorLoad);
     setFirstColorLoad(false);
+    setTimeout(() => {
+      setLoad(false);
+    }, 2000);
   }, [getColors]);
-
-  const { onHover, offHover, id } = backGroundWidth;
 
   const hoverEffect = e => {
     const { id } = e.currentTarget;
@@ -72,7 +74,9 @@ const Background = ({
     if (allFlipped.firstFlip) setSecondFlip(true);
   };
 
-  return (
+  return pageLoad ? (
+    <div>Loading</div>
+  ) : (
     <Fragment>
       {!loading && (
         <div className='landing-div-background'>

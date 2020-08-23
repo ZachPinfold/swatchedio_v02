@@ -18,9 +18,11 @@ const BackgroundCard = ({
   const [isFlipped, setIsFlipped] = useState(false);
   const [showCopy, flipShowCopy] = useState(false);
   const [copyColor, setCopyColor] = useState(null);
+  const [copied, setCopied] = useState(false);
 
-  const handleClick = () => {
-    setIsFlipped(!isFlipped);
+  const handleClick = color => {
+    navigator.clipboard.writeText(color);
+    setCopied(true);
   };
 
   const handleHover = (e, frontback) => {
@@ -47,6 +49,7 @@ const BackgroundCard = ({
   const handleHoverOut = e => {
     flipShowCopy(false);
     offHoverEffect(e);
+    setCopied(false);
   };
 
   // console.log(
@@ -55,8 +58,6 @@ const BackgroundCard = ({
   //   `color 2 - ${color2}`,
   //   `color temp - ${color1Temp}`
   // );
-
-  console.log(firstFlip);
 
   return (
     <Fragment>
@@ -71,6 +72,7 @@ const BackgroundCard = ({
           }}
           onMouseEnter={e => handleHover(e, "front")}
           onMouseOut={handleHoverOut}
+          onClick={() => handleClick(randomLoad ? color : color2)}
           id={divId}
           className='background-div-card'
         >
@@ -89,7 +91,7 @@ const BackgroundCard = ({
               id={divId}
               className='card-copy-copy'
             >
-              Click to Copy
+              {!copied ? "Click to Copy" : "Copied!"}
             </h3>
           </div>
           <div id={divId} className='card-overlay'></div>
@@ -102,6 +104,7 @@ const BackgroundCard = ({
           }}
           onMouseEnter={e => handleHover(e, "back")}
           onMouseOut={handleHoverOut}
+          onClick={() => handleClick(!firstFlip ? color1Temp : color1)}
           id={divId}
           className='background-div-card'
         >
