@@ -35,7 +35,6 @@ const Background = ({
   const hoverEffect = e => {
     const { id } = e.target;
     const num = id.toString();
-    console.log(num);
     if (id === "5") {
       setBackgroundWidth({
         offHover: "19.26vw",
@@ -65,7 +64,6 @@ const Background = ({
       onHover: "20.03vw",
       id: null
     });
-    console.log(colorBooleon);
     getColors("new_random", "first");
     setColorFlipBooleon(!colorBooleon);
     !firstLoad && !allFlipped.firstFlip && setColor1(colors2);

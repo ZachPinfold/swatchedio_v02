@@ -21,8 +21,6 @@ const BackgroundCard = ({
     setIsFlipped(!isFlipped);
   };
 
-  console.log(offHover);
-
   // console.log(
   //   `color - ${color}`,
   //   `color 1 - ${color1}`,
