@@ -2,6 +2,8 @@ import React, { useState, Fragment } from "react";
 import ReactCardFlip from "react-card-flip";
 import getContrastYIQ from "../utils/dominantColor";
 import { connect } from "react-redux";
+import ActionCard from "./ActionCard";
+import CopyArea from "./CopyArea";
 
 const BackgroundCard = ({
   hoverEffect,
@@ -80,6 +82,8 @@ const BackgroundCard = ({
         isFlipped={allFlipped || isFlipped}
         flipDirection='horizontal'
       >
+        {/* // First Card // */}
+
         <div
           style={{
             width: id === divId ? onHover : offHover,
@@ -92,60 +96,28 @@ const BackgroundCard = ({
           id={divId}
           className='background-div-card'
         >
-          <div onClick={e => e.stopPropagation()} className='actions-area'>
-            <div
-              onMouseOver={e => handleHover(e, "front")}
-              onClick={e => e.stopPropagation()}
-              id={divId}
-              className='click-more-circles'
-            >
-              <div onClick={handleMoreClick} className='circle-click-area'>
-                <div className='circle'></div>
-                <div className='circle'></div>
-                <div className='circle'></div>
-              </div>
-            </div>
-            <div onClick={e => e.stopPropagation()} className='more-card-box'>
-              <h3 className='more-card-title'>Actions</h3>
-              <div className='break-line'></div>
-              <div
-                style={{ marginBottom: "10px" }}
-                className='action-button-area'
-              >
-                <h3 className='more-card-add-btn'>Add to my Master Swatch</h3>
-                <h3 className='more-card-add-btn'>Add to my project...</h3>
-              </div>
-              <div className='break-line'></div>
+          <ActionCard
+            handleHover={handleHover}
+            divId={divId}
+            showCopy={showCopy}
+            handleMoreClick={handleMoreClick}
+            copyColor={copyColor}
+          />
 
-              <button style={{ marginTop: "10px" }} className='btn-primary'>
-                Sign up to Access
-              </button>
-            </div>
-          </div>
-
-          <div className='card-copy-div'>
-            <h3
-              style={{
-                color: copyColor,
-                opacity: !showCopy ? "0" : "1"
-              }}
-              onMouseEnter={e => hoverEffect(e)}
-              id={divId}
-              className='card-copy-copy'
-            >
-              {randomLoad ? color : color2}
-            </h3>
-            <h3
-              style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
-              onMouseEnter={e => hoverEffect(e)}
-              id={divId}
-              className='card-copy-copy'
-            >
-              {!copied ? "Click to Copy" : "Copied!"}
-            </h3>
-          </div>
+          <CopyArea
+            copyColor={copyColor}
+            showCopy={showCopy}
+            hoverEffect={hoverEffect}
+            divId={divId}
+            randomLoad={randomLoad}
+            color={color}
+            color2={color2}
+            copied={copied}
+          />
           <div id={divId} className='card-overlay'></div>
         </div>
+
+        {/* // Second Card // */}
 
         <div
           style={{
@@ -159,6 +131,17 @@ const BackgroundCard = ({
           id={divId}
           className='background-div-card'
         >
+          <CopyArea
+            copyColor={copyColor}
+            showCopy={showCopy}
+            hoverEffect={hoverEffect}
+            divId={divId}
+            randomLoad={randomLoad}
+            color={color1Temp}
+            color2={color1}
+            copied={copied}
+          />
+
           <div className='card-copy-div'>
             <h3
               style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
