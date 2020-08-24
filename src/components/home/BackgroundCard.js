@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import ReactCardFlip from "react-card-flip";
 import getContrastYIQ from "../utils/dominantColor";
+import { connect } from "react-redux";
 
 const BackgroundCard = ({
   hoverEffect,
@@ -13,7 +14,8 @@ const BackgroundCard = ({
   color1Temp,
   allFlipped,
   firstFlip,
-  randomLoad
+  randomLoad,
+  auth: { isAuthenticated }
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [showCopy, flipShowCopy] = useState(false);
@@ -24,20 +26,19 @@ const BackgroundCard = ({
 
   const handleClick = (color, frontback) => {
     if (frontback === "front") {
-      setFrontScale(0.98);
+      setFrontScale(0.95);
       setTimeout(() => {
         setFrontScale(1);
       }, 100);
     }
 
     if (frontback === "back") {
-      setBackScale(0.98);
+      setBackScale(0.95);
       setTimeout(() => {
         setBackScale(1);
       }, 100);
     }
 
-    console.log("click");
     navigator.clipboard.writeText(color);
     setCopied(true);
   };
@@ -69,12 +70,9 @@ const BackgroundCard = ({
     setCopied(false);
   };
 
-  // console.log(
-  //   `color - ${color}`,
-  //   `color 1 - ${color1}`,
-  //   `color 2 - ${color2}`,
-  //   `color temp - ${color1Temp}`
-  // );
+  const handleMoreClick = () => {
+    console.log("more");
+  };
 
   return (
     <Fragment>
@@ -88,12 +86,43 @@ const BackgroundCard = ({
             backgroundColor: randomLoad ? color : color2,
             transform: `scale(${frontScale})`
           }}
-          onMouseEnter={e => handleHover(e, "front")}
+          onMouseOver={e => handleHover(e, "front")}
           onMouseOut={handleHoverOut}
           onClick={() => handleClick(randomLoad ? color : color2, "front")}
           id={divId}
           className='background-div-card'
         >
+          <div onClick={e => e.stopPropagation()} className='actions-area'>
+            <div
+              onMouseOver={e => handleHover(e, "front")}
+              onClick={e => e.stopPropagation()}
+              id={divId}
+              className='click-more-circles'
+            >
+              <div onClick={handleMoreClick} className='circle-click-area'>
+                <div className='circle'></div>
+                <div className='circle'></div>
+                <div className='circle'></div>
+              </div>
+            </div>
+            <div onClick={e => e.stopPropagation()} className='more-card-box'>
+              <h3 className='more-card-title'>Actions</h3>
+              <div className='break-line'></div>
+              <div
+                style={{ marginBottom: "10px" }}
+                className='action-button-area'
+              >
+                <h3 className='more-card-add-btn'>Add to my Master Swatch</h3>
+                <h3 className='more-card-add-btn'>Add to my project...</h3>
+              </div>
+              <div className='break-line'></div>
+
+              <button style={{ marginTop: "10px" }} className='btn-primary'>
+                Sign up to Access
+              </button>
+            </div>
+          </div>
+
           <div className='card-copy-div'>
             <h3
               style={{
@@ -155,4 +184,8 @@ const BackgroundCard = ({
   );
 };
 
-export default BackgroundCard;
+const mstp = state => ({
+  auth: state.auth
+});
+
+export default connect(mstp, null)(BackgroundCard);
