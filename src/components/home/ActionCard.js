@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 const ActionCard = ({
@@ -7,7 +7,9 @@ const ActionCard = ({
   divId,
   showCopy,
   handleMoreClick,
-  copyColor
+  copyColor,
+  showAction,
+  toggleShowAction
 }) => {
   return (
     <div onClick={e => e.stopPropagation()} className='actions-area'>
@@ -21,6 +23,9 @@ const ActionCard = ({
           style={{ opacity: !showCopy ? "0" : "1" }}
           onClick={handleMoreClick}
           className='circle-click-area'
+          onClick={() => {
+            toggleShowAction(!showAction);
+          }}
         >
           <div
             style={{ marginTop: "0px", backgroundColor: copyColor }}
@@ -30,35 +35,44 @@ const ActionCard = ({
           <div style={{ backgroundColor: copyColor }} className='circle'></div>
         </div>
       </div>
-      <div onClick={e => e.stopPropagation()} className='more-card-box'>
-        <h3 className='more-card-title'>Actions</h3>
-        <div className='break-line'></div>
-        <div style={{ marginBottom: "10px" }} className='action-button-area'>
+      {showAction && (
+        <div onClick={e => e.stopPropagation()} className='more-card-box'>
           <h3
-            style={{ opacity: isAuthenticated ? "1" : "0.6" }}
-            className='more-card-add-btn'
+            onClick={() => toggleShowAction(false)}
+            className='action-x-close'
           >
-            Add to my Master Swatch
+            x
           </h3>
-          <h3
-            style={{ opacity: isAuthenticated ? "1" : "0.6" }}
-            className='more-card-add-btn'
-          >
-            Add to my project...
-          </h3>
+
+          <h3 className='more-card-title'>Actions</h3>
+          <div className='break-line'></div>
+          <div style={{ marginBottom: "10px" }} className='action-button-area'>
+            <h3
+              style={{ opacity: isAuthenticated ? "1" : "0.6" }}
+              className='more-card-add-btn'
+            >
+              Add to my Master Swatch
+            </h3>
+            <h3
+              style={{ opacity: isAuthenticated ? "1" : "0.6" }}
+              className='more-card-add-btn'
+            >
+              Add to my project...
+            </h3>
+          </div>
+          <div className='break-line'></div>
+          {isAuthenticated && (
+            <button style={{ marginTop: "10px" }} className='btn-primary'>
+              Add to swatch
+            </button>
+          )}
+          {!isAuthenticated && (
+            <button style={{ marginTop: "10px" }} className='btn-primary'>
+              Login to Access
+            </button>
+          )}
         </div>
-        <div className='break-line'></div>
-        {isAuthenticated && (
-          <button style={{ marginTop: "10px" }} className='btn-primary'>
-            Add to swatch
-          </button>
-        )}
-        {!isAuthenticated && (
-          <button style={{ marginTop: "10px" }} className='btn-primary'>
-            Sign up to Access
-          </button>
-        )}
-      </div>
+      )}
     </div>
   );
 };

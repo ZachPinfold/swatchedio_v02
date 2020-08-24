@@ -391,6 +391,7 @@ input:-webkit-autofill:focus {
 .more-card-title {
   font-family: var(--HelveticaM);
   font-size: var(--regularFont);
+  margin-top: -7px;
 }
 
 .more-card-add-btn {
@@ -402,4 +403,18 @@ input:-webkit-autofill:focus {
 .action-button-area {
   text-align: left;
   padding-left: 5px;
+}
+
+.action-x-close {
+  /* position: absolute; */
+  text-align: left;
+  font-size: var(--regularFont);
+  cursor: pointer;
+  opacity: 0.5;
+  width: 10px;
+  font-family: var(--HelveticaL);
+}
+
+.action-x-close:hover {
+  opacity: 1;
 }

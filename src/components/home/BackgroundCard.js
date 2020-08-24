@@ -25,6 +25,7 @@ const BackgroundCard = ({
   const [copied, setCopied] = useState(false);
   const [frontScale, setFrontScale] = useState(1);
   const [BackScale, setBackScale] = useState(1);
+  const [showAction, toggleShowAction] = useState(false);
 
   const handleClick = (color, frontback) => {
     if (frontback === "front") {
@@ -102,6 +103,8 @@ const BackgroundCard = ({
             showCopy={showCopy}
             handleMoreClick={handleMoreClick}
             copyColor={copyColor}
+            showAction={showAction}
+            toggleShowAction={toggleShowAction}
           />
 
           <CopyArea
