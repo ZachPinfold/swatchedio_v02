@@ -4,8 +4,15 @@ import { Link } from "react-router-dom";
 import { logout } from "../actions/auth";
 import { connect } from "react-redux";
 import colorHoverChange from "./utils/colorHoverChange";
+import { openDiscover } from "../actions/layout";
 
-const Navbar = ({ logout, openLogin, openRegister }) => {
+const Navbar = ({
+  logout,
+  openLogin,
+  openRegister,
+  openDiscover,
+  layout: { discover }
+}) => {
   const [buttonClass, setButtonClass] = useState("btn-primary");
   const [logoClass, setLogoClass] = useState("nav-logo");
 
@@ -26,6 +33,13 @@ const Navbar = ({ logout, openLogin, openRegister }) => {
 
   const guestLinks = (
     <ul>
+      {!discover && (
+        <li>
+          <a className='explore-link' onClick={() => openDiscover()}>
+            Discover
+          </a>
+        </li>
+      )}
       <li>
         <a className='register-link' onClick={() => openRegister(true)}>
           Register
@@ -62,7 +76,8 @@ Navbar.prototype = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  layout: state.layout
 });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout, openDiscover })(Navbar);

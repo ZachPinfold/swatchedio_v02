@@ -9,3 +9,5 @@ export const GET_COLORS = "GET_COLORS";
 export const COLOR_ERROR = "COLOR_ERROR";
 export const GET_RANDOM_COLORS = "GET_RANDOM_COLORS";
 export const GET_SECOND_COLORS = "GET_SECOND_COLORS";
+export const SHOW_EXPLORE = "SHOW_EXPLORE";
+export const NEW_PALETTE = "NEW_PALETTE";

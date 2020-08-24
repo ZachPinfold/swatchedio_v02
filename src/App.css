@@ -141,6 +141,29 @@ nav ul {
   font-family: var(--Crete);
 }
 
+.explore-link {
+  margin-right: 12px;
+  cursor: pointer;
+  font-family: var(--Crete);
+  color: var(--orange);
+}
+
+.new-palette-btn-discover {
+  height: 35px;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.discover-palette-area {
+  position: fixed;
+  top: 34px;
+  text-align: center;
+  width: 100%;
+  height: 40px;
+  /* background-color: blue; */
+}
+
 /* Modal */
 
 .modal-wrapper {
@@ -275,6 +298,7 @@ input:-webkit-autofill:focus {
   font-size: 90px;
   color: white;
   width: 800px;
+  text-shadow: 3px 3px rgba(0, 0, 0, 0.25);
 }
 
 .btn-landing {
@@ -340,7 +364,7 @@ input:-webkit-autofill:focus {
 
 .click-more-circles {
   width: 10px;
-  margin-top: 20px;
+  margin-top: 15px;
   z-index: 105;
   /* background-color: blue; */
   height: 50px;
@@ -356,8 +380,8 @@ input:-webkit-autofill:focus {
 }
 
 .circle {
-  width: 10px;
-  height: 10px;
+  width: 7px;
+  height: 7px;
   /* background-color: white; */
   border-radius: 20px;
   margin-top: 5px;

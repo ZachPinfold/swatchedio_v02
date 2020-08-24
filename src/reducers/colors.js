@@ -5,7 +5,7 @@ import {
   GET_SECOND_COLORS
 } from "../actions/types";
 
-const initiaState = {
+const initialState = {
   loading: true,
   randomLoad: true,
   firstLoad: true,
@@ -15,7 +15,7 @@ const initiaState = {
   error: {}
 };
 
-export default function (state = initiaState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_COLORS:

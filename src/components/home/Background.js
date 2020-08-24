@@ -6,7 +6,8 @@ import colorHoverChange from "../utils/colorHoverChange";
 
 const Background = ({
   getColors,
-  colors: { loading, colors, colors2, randomLoad, secondLoad, firstLoad }
+  colors: { loading, colors, colors2, randomLoad, secondLoad, firstLoad },
+  layout: { discover }
 }) => {
   console.log();
 
@@ -84,13 +85,30 @@ const Background = ({
     <Fragment>
       {!loading && (
         <div className='landing-div-background'>
-          <div className='hero-message'>
-            <h1 className='hero-heading'>Wash your projects with color</h1>
-            <button className={buttonClass} onClick={handleClick}>
-              {" "}
-              New Palette
-            </button>
-          </div>{" "}
+          {discover && (
+            <div className='discover-palette-area'>
+              <button
+                onClick={handleClick}
+                className={`${buttonClass} new-palette-btn-discover `}
+                style={{
+                  width: "150px",
+                  marginTop: "-20px",
+                  padding: "4px 10px"
+                }}
+              >
+                New Palette
+              </button>
+            </div>
+          )}
+          {!discover && (
+            <div className='hero-message'>
+              <h1 className='hero-heading'>Wash your projects with color</h1>
+              <button className={buttonClass} onClick={handleClick}>
+                {" "}
+                New Palette
+              </button>
+            </div>
+          )}
           <BackgroundCard
             hoverEffect={hoverEffect}
             offHoverEffect={offHoverEffect}
@@ -168,7 +186,8 @@ const Background = ({
 };
 
 const mts = state => ({
-  colors: state.colors
+  colors: state.colors,
+  layout: state.layout
 });
 
 export default connect(mts, { getColors })(Background);
