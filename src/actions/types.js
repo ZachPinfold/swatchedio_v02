@@ -11,3 +11,6 @@ export const GET_RANDOM_COLORS = "GET_RANDOM_COLORS";
 export const GET_SECOND_COLORS = "GET_SECOND_COLORS";
 export const SHOW_EXPLORE = "SHOW_EXPLORE";
 export const NEW_PALETTE = "NEW_PALETTE";
+export const ADD_SWATCH = "ADD_SWATCH";
+export const ADD_LIST = "ADD_LIST";
+export const DRAG_HAPPENED = "DRAG_HAPPENED";

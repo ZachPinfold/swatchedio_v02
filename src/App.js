@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "./components/auth/Register";
 import LogIn from "./components/auth/Login";
 import Landing from "./components/home/Landing";
+import Navbar from "./components/Navbar";
 
 // Redux
 
@@ -11,7 +12,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import { loadUser } from "./actions/auth";
-import Navbar from "./components/Navbar";
+import ProjectPage from "./components/Swatch page/ProjectPage";
 
 function App() {
   const [login, openLogin] = useState(false);
@@ -23,7 +24,8 @@ function App() {
       <Router>
         <Fragment>
           <Navbar openLogin={openLogin} openRegister={openRegister} />
-          <Route exact path='/' component={Landing} />
+          <ProjectPage />
+          {/* <Route exact path='/' component={Landing} /> */}
           {login && <LogIn openLogin={openLogin} />}
           {register && <Register openRegister={openRegister} />}
           <Switch>
