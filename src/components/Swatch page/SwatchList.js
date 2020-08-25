@@ -3,7 +3,7 @@ import SwatchCard from "./SwatchCard";
 import SwatchActionButton from "./SwatchActionButton";
 import { Droppable } from "react-beautiful-dnd";
 
-const SwatchList = ({ title, cards, listId }) => {
+const SwatchList = ({ title, cards, listId, index }) => {
   return (
     <Droppable droppableId={String(listId)}>
       {provided => (

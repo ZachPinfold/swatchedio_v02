@@ -13,7 +13,8 @@ export const sortSwatches = (
   droppableIdEnd,
   droppableIndexStart,
   droppableIndexEnd,
-  draggableId
+  draggableId,
+  type
 ) => dispatch => {
   dispatch({
     type: DRAG_HAPPENED,
@@ -22,7 +23,8 @@ export const sortSwatches = (
       droppableIdEnd,
       droppableIndexStart,
       droppableIndexEnd,
-      draggableId
+      draggableId,
+      type
     }
   });
 };

@@ -36,7 +36,12 @@ const ProjectPage = ({ swatchList, sortSwatches }) => {
 const styles = {
   listContainer: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    // width: "100vw",
+    marginLeft: 20,
+    paddingRight: 20,
+    position: "absolute",
+    marginTop: 100
   }
 };
 

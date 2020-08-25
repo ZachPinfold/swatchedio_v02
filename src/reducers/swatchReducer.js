@@ -58,9 +58,20 @@ export default function (state = initialState, action) {
         droppableIdEnd,
         droppableIndexStart,
         droppableIndexEnd,
-        draggableId
+        draggableId,
+        type
       } = payload;
       const newStateAfterMove = [...state];
+
+      console.log(type);
+
+      // draggin lists around
+
+      if (type === "list") {
+        const list = newStateAfterMove.splice(droppableIndexStart, 1);
+        newStateAfterMove.splice(droppableIndexEnd, 0, ...list);
+        return newStateAfterMove;
+      }
 
       // In the same list
       if (droppableIdStart === droppableIdEnd) {
@@ -71,6 +82,27 @@ export default function (state = initialState, action) {
         const card = list.cards.splice(droppableIndexStart, 1);
         list.cards.splice(droppableIndexEnd, 0, ...card);
       }
+
+      // Other List
+
+      if (droppableIdStart !== droppableIdEnd) {
+        // find list where drag happened
+        const listStart = state.find(
+          list => String(droppableIdStart) === String(list.id)
+        );
+
+        // Pull out the card from the list
+        const card = listStart.cards.splice(droppableIndexStart, 1);
+
+        // find the list where the drag ended
+        const listEnd = state.find(
+          list => String(droppableIdEnd) === String(list.id)
+        );
+
+        // put the card in the new list
+        listEnd.cards.splice(droppableIndexEnd, 0, ...card);
+      }
+
       return newStateAfterMove;
   }
   switch (type) {
