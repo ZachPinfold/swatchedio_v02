@@ -1,26 +1,26 @@
 import { ADD_SWATCH, ADD_LIST, DRAG_HAPPENED } from "../actions/types";
 
-let listId = 3;
+let listId = 4;
 let cardId = 8;
 
 const initialState = [
   {
-    title: "Last Episode",
+    title: "Project 1",
     id: 0,
     cards: [
-      { id: 1, text: "we created a static list and a static" },
-      { id: 2, text: "And, this is the second card that we're working with" }
+      { id: 1, text: "#39dje3" },
+      { id: 2, text: "#21dje3" }
+    ]
+  },
+  {
+    title: "Project 2",
+    id: 3,
+    cards: [
+      { id: 4, text: "#21dje1" },
+      { id: 5, text: "#FFFFFF" },
+      { id: 6, text: "#EEEEEE" }
     ]
   }
-  // {
-  //   title: "Next Episode",
-  //   id: 1,
-  //   cards: [
-  //     { id: 2, text: "we created a static list and a static" },
-  //     { id: 3, text: "And, this is the second card that we're working with" },
-  //     { id: 4, text: "And, this is the second card that we're working with" }
-  //   ]
-  // },
   // {
   //   title: "Another Episode",
   //   id: 2,

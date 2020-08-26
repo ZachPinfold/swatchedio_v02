@@ -12,7 +12,8 @@ const Navbar = ({
   openLogin,
   openRegister,
   openDiscover,
-  layout: { discover }
+  layout: { discover },
+  auth: { user, isAuthenticated }
 }) => {
   const [buttonClass, setButtonClass] = useState("btn-primary");
   const [logoClass, setLogoClass] = useState("nav-logo");
@@ -60,18 +61,42 @@ const Navbar = ({
     </ul>
   );
 
+  const userLinks = (
+    <ul>
+      {!discover && (
+        <li>
+          <a className='explore-link' onClick={() => openDiscover()}>
+            Discover
+          </a>
+        </li>
+      )}
+      <li>
+        <Link
+          to='/profile'
+          onMouseLeave={handleLoginHover}
+          className={buttonClass}
+        >
+          {user}
+        </Link>
+      </li>
+    </ul>
+  );
+
   return (
     <nav>
-      <a
-        onClick={() => {
-          history.go(0);
-        }}
+      <Link
+        to='/'
+        // onClick={() => {
+        //   history.go(0);
+        // }}
         onMouseLeave={handleLogoHover}
         className={logoClass}
       >
         Swatched
-      </a>
-      <div className='nav-buttons-area'>{guestLinks}</div>
+      </Link>
+      <div className='nav-buttons-area'>
+        {!isAuthenticated ? guestLinks : userLinks}
+      </div>
       {/* <button onClick={handleLogout}>Logout</button> */}
     </nav>
   );

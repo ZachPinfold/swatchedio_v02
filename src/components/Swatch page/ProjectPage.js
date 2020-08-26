@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SwatchList from "./SwatchList";
 import { connect } from "react-redux";
 import SwatchActionButton from "./SwatchActionButton";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sortSwatches } from "../../actions/swatch";
+import { closeDiscover } from "../../actions/layout";
+import { secondPageReset } from "../../actions/colors";
 import styled from "styled-components";
 
 const ListContainer = styled.div`
@@ -13,9 +15,20 @@ const ListContainer = styled.div`
   position: absolute;
 `;
 
-const ProjectPage = ({ swatchList, sortSwatches }) => {
+const ProjectPage = ({
+  swatchList,
+  sortSwatches,
+  closeDiscover,
+  secondPageReset
+}) => {
+  useEffect(() => {
+    secondPageReset();
+    closeDiscover();
+  }, []);
+
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
+
     if (!destination) {
       return;
     }
@@ -71,4 +84,6 @@ const mts = state => ({
   swatchList: state.swatchReducer
 });
 
-export default connect(mts, { sortSwatches })(ProjectPage);
+export default connect(mts, { sortSwatches, closeDiscover, secondPageReset })(
+  ProjectPage
+);

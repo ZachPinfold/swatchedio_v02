@@ -2,7 +2,8 @@ import {
   GET_COLORS,
   COLOR_ERROR,
   GET_RANDOM_COLORS,
-  GET_SECOND_COLORS
+  GET_SECOND_COLORS,
+  SECOND_PAGE_RESET
 } from "../actions/types";
 
 const initialState = {
@@ -46,6 +47,16 @@ export default function (state = initialState, action) {
         colors: payload,
         error: payload,
         colors: null
+      };
+    case SECOND_PAGE_RESET:
+      return {
+        loading: true,
+        randomLoad: true,
+        firstLoad: true,
+        secondLoad: true,
+        colors: null,
+        colors2: null,
+        error: {}
       };
     default:
       return state;

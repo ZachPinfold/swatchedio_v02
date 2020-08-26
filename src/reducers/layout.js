@@ -1,4 +1,4 @@
-import { SHOW_EXPLORE, NEW_PALETTE } from "../actions/types";
+import { SHOW_EXPLORE, NEW_PALETTE, HIDE_EXPLORE } from "../actions/types";
 
 const initialState = {
   discover: false
@@ -10,6 +10,12 @@ export default function (state = initialState, action) {
     case SHOW_EXPLORE:
       return {
         discover: true
+      };
+  }
+  switch (type) {
+    case HIDE_EXPLORE:
+      return {
+        discover: false
       };
   }
   switch (type) {

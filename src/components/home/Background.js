@@ -28,6 +28,8 @@ const Background = ({
   const [pageLoad, setLoad] = useState(true);
   const [buttonClass, setButtonClass] = useState("btn-primary btn-landing");
 
+  console.log(secondFlip);
+
   useEffect(() => {
     getColors(null, firstColorLoad);
     setFirstColorLoad(false);

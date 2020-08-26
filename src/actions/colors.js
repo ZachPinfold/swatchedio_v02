@@ -3,7 +3,8 @@ import {
   GET_COLORS,
   COLOR_ERROR,
   GET_RANDOM_COLORS,
-  GET_SECOND_COLORS
+  GET_SECOND_COLORS,
+  SECOND_PAGE_RESET
 } from "./types";
 import { API, graphqlOperation } from "aws-amplify";
 import { listColorHexs } from "../graphql/queries";
@@ -60,4 +61,10 @@ export const getColors = (random, first) => async dispatch => {
       });
     }
   }
+};
+
+// second page reset
+
+export const secondPageReset = () => dispatch => {
+  dispatch({ type: SECOND_PAGE_RESET });
 };

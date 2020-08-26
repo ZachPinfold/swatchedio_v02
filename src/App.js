@@ -19,18 +19,20 @@ function App() {
   const [register, openRegister] = useState(false);
   const [loading, setLoad] = useState(true);
 
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
     <Provider store={store}>
       <Router>
         <Fragment>
           <Navbar openLogin={openLogin} openRegister={openRegister} />
-          {/* <ProjectPage /> */}
-          <Route exact path='/' component={Landing} />
           {login && <LogIn openLogin={openLogin} />}
           {register && <Register openRegister={openRegister} />}
           <Switch>
-            {/* <Route exact path='/login' component={LogIn} />
-            <Route exact path='/login' component={Register} /> */}
+            <Route exact path='/' component={Landing} />
+            <Route exact path='/profile' component={ProjectPage} />
           </Switch>
         </Fragment>
       </Router>

@@ -75,6 +75,7 @@ nav ul {
 .btn-primary-2,
 .btn-primary-1,
 .btn-primary {
+  color: black;
   font-family: "CreteRound";
   background-color: var(--green);
   text-decoration: none;
