@@ -7,6 +7,8 @@ import CopyArea from "./CopyArea";
 
 const BackgroundCard = ({
   hoverEffect,
+  toggleShowAction,
+  showAction,
   offHoverEffect,
   backGroundWidth: { onHover, offHover, id },
   divId,
@@ -25,7 +27,6 @@ const BackgroundCard = ({
   const [copied, setCopied] = useState(false);
   const [frontScale, setFrontScale] = useState(1);
   const [BackScale, setBackScale] = useState(1);
-  const [showAction, toggleShowAction] = useState(false);
 
   useEffect(() => {
     const textColor = getContrastYIQ(color);
@@ -81,6 +82,8 @@ const BackgroundCard = ({
   const handleMoreClick = () => {
     console.log("more");
   };
+
+  console.log(id === divId);
 
   return (
     <Fragment>

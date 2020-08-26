@@ -26,7 +26,7 @@ const ActionCard = ({
           onClick={handleMoreClick}
           className='circle-click-area'
           onClick={() => {
-            toggleShowAction(!showAction);
+            toggleShowAction({ [divId]: !showAction[divId] });
           }}
         >
           <div
@@ -37,7 +37,7 @@ const ActionCard = ({
           <div style={{ backgroundColor: copyColor }} className='circle'></div>
         </div>
       </div>
-      {showAction && (
+      {showAction[divId] && (
         <div onClick={e => e.stopPropagation()} className='more-card-box'>
           <h3
             onClick={() => toggleShowAction(false)}

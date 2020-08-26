@@ -27,8 +27,13 @@ const Background = ({
   const [firstColorLoad, setFirstColorLoad] = useState(true);
   const [pageLoad, setLoad] = useState(true);
   const [buttonClass, setButtonClass] = useState("btn-primary btn-landing");
-
-  console.log(secondFlip);
+  const [showAction, toggleShowAction] = useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false
+  });
 
   useEffect(() => {
     getColors(null, firstColorLoad);
@@ -41,7 +46,6 @@ const Background = ({
   const hoverEffect = e => {
     const { id } = e.currentTarget;
     const num = id.toString();
-    console.log("resize");
     if (id === "5") {
       setBackgroundWidth({
         offHover: "19.26vw",
@@ -66,6 +70,7 @@ const Background = ({
   };
 
   const handleClick = () => {
+    toggleShowAction(false);
     const buttonColor = colorHoverChange(buttonClass, "landing");
     setButtonClass(buttonColor);
     setBackgroundWidth({
@@ -119,7 +124,10 @@ const Background = ({
                 </button>
               </div>
             )}
+
             <BackgroundCard
+              showAction={showAction}
+              toggleShowAction={toggleShowAction}
               hoverEffect={hoverEffect}
               offHoverEffect={offHoverEffect}
               backGroundWidth={backGroundWidth}
@@ -134,6 +142,8 @@ const Background = ({
               firstFlip={allFlipped.firstFlip}
             />
             <BackgroundCard
+              showAction={showAction}
+              toggleShowAction={toggleShowAction}
               hoverEffect={hoverEffect}
               offHoverEffect={offHoverEffect}
               backGroundWidth={backGroundWidth}
@@ -148,6 +158,8 @@ const Background = ({
               firstFlip={allFlipped.firstFlip}
             />
             <BackgroundCard
+              showAction={showAction}
+              toggleShowAction={toggleShowAction}
               hoverEffect={hoverEffect}
               offHoverEffect={offHoverEffect}
               backGroundWidth={backGroundWidth}
@@ -162,6 +174,8 @@ const Background = ({
               firstFlip={allFlipped.firstFlip}
             />
             <BackgroundCard
+              showAction={showAction}
+              toggleShowAction={toggleShowAction}
               hoverEffect={hoverEffect}
               offHoverEffect={offHoverEffect}
               backGroundWidth={backGroundWidth}
@@ -176,6 +190,8 @@ const Background = ({
               firstFlip={allFlipped.firstFlip}
             />
             <BackgroundCard
+              showAction={showAction}
+              toggleShowAction={toggleShowAction}
               hoverEffect={hoverEffect}
               offHoverEffect={offHoverEffect}
               backGroundWidth={backGroundWidth}
