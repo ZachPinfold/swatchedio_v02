@@ -48,26 +48,35 @@ export default function (state = initialState, action) {
     //   });
     //   return newState;
 
-    // case DRAG_HAPPENED:
-    //   const {
-    //     droppableIdStart,
-    //     droppableIdEnd,
-    //     droppableIndexStart,
-    //     droppableIndexEnd,
-    //     draggableId,
-    //     type
-    //   } = payload;
+    case DRAG_HAPPENED:
+      const {
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId,
+        type
+      } = payload;
 
-    //   const newStateAfterMove = [...state.projects];
+      const newStateAfterMove = [...state.projects];
 
-    //   if (type === "list") {
-    //     const list = newStateAfterMove.splice(droppableIndexStart, 1);
-    //     newStateAfterMove.splice(droppableIndexEnd, 0, ...list);
-    //     return {
-    //       ...state,
-    //       projects: newStateAfterMove
-    //     };
-    //   }
+      console.log(
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId,
+        type
+      );
+
+      if (type === "list") {
+        const list = newStateAfterMove.splice(droppableIndexStart, 1);
+        newStateAfterMove.splice(droppableIndexEnd, 0, ...list);
+        return {
+          ...state,
+          projects: newStateAfterMove
+        };
+      }
 
     // // In the same list
     // if (droppableIdStart === droppableIdEnd) {
