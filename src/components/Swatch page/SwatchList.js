@@ -14,7 +14,6 @@ const ListContainer = styled.div`
 `;
 
 const SwatchList = ({ title, cards, listId, index }) => {
-  console.log(cards);
   return (
     <Draggable draggableId={String(listId)} index={index}>
       {provided => (

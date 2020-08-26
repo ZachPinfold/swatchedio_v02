@@ -48,28 +48,26 @@ export default function (state = initialState, action) {
     //   });
     //   return newState;
 
-    // case DRAG_HAPPENED:
-    //   const {
-    //     droppableIdStart,
-    //     droppableIdEnd,
-    //     droppableIndexStart,
-    //     droppableIndexEnd,
-    //     draggableId,
-    //     type
-    //   } = payload;
-    //   const newStateAfterMove = [...state];
+    case DRAG_HAPPENED:
+      const {
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId,
+        type
+      } = payload;
 
-    //   console.log(droppableIdEnd);
+      const newStateAfterMove = [...state.projects];
 
-    // draggin lists around
-
-    // console.log(type);
-
-    // if (type === "list") {
-    //   const list = newStateAfterMove.splice(droppableIndexStart, 1);
-    //   newStateAfterMove.splice(droppableIndexEnd, 0, ...list);
-    //   return newStateAfterMove;
-    // }
+      if (type === "list") {
+        const list = newStateAfterMove.splice(droppableIndexStart, 1);
+        newStateAfterMove.splice(droppableIndexEnd, 0, ...list);
+        return {
+          ...state,
+          projects: newStateAfterMove
+        };
+      }
 
     // // In the same list
     // if (droppableIdStart === droppableIdEnd) {
@@ -99,10 +97,8 @@ export default function (state = initialState, action) {
     //   // put the card in the new list
     //   listEnd.cards.splice(droppableIndexEnd, 0, ...card);
     // }
-
-    // return newStateAfterMove;
-    // }
-    // switch (type) {
+  }
+  switch (type) {
     default:
       return state;
   }

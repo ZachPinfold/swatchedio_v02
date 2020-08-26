@@ -46,6 +46,8 @@ const ProjectPage = ({
     );
   };
 
+  console.log(swatchList.projects);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
