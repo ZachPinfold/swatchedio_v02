@@ -1,7 +1,7 @@
 import React from "react";
 import SwatchCard from "./SwatchCard";
 import SwatchActionButton from "./SwatchActionButton";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 const ListContainer = styled.div`
@@ -15,23 +15,33 @@ const ListContainer = styled.div`
 
 const SwatchList = ({ title, cards, listId, index }) => {
   return (
-    <Droppable droppableId={String(listId)}>
+    <Draggable draggableId={String(listId)} index={index}>
       {provided => (
-        <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
-          <h4>{title}</h4>
-          {cards.map((card, index) => (
-            <SwatchCard
-              index={index}
-              key={card.id}
-              text={card.text}
-              id={card.id}
-            />
-          ))}
-          <SwatchActionButton listId={listId} />
-          {provided.placeholder}
+        <ListContainer
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+          {...provided.dragHandleProps}
+        >
+          <Droppable droppableId={String(listId)} type='card'>
+            {provided => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                <h4>{title}</h4>
+                {cards.map((card, index) => (
+                  <SwatchCard
+                    index={index}
+                    key={card.id}
+                    text={card.text}
+                    id={card.id}
+                  />
+                ))}
+                {provided.placeholder}
+                <SwatchActionButton listId={listId} />
+              </div>
+            )}
+          </Droppable>
         </ListContainer>
       )}
-    </Droppable>
+    </Draggable>
   );
 };
 

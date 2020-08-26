@@ -1,26 +1,35 @@
 import { ADD_SWATCH, ADD_LIST, DRAG_HAPPENED } from "../actions/types";
 
-let listId = 2;
-let cardId = 5;
+let listId = 3;
+let cardId = 8;
 
 const initialState = [
   {
     title: "Last Episode",
     id: 0,
     cards: [
-      { id: 0, text: "we created a static list and a static" },
-      { id: 1, text: "And, this is the second card that we're working with" }
-    ]
-  },
-  {
-    title: "Next Episode",
-    id: 1,
-    cards: [
-      { id: 2, text: "we created a static list and a static" },
-      { id: 3, text: "And, this is the second card that we're working with" },
-      { id: 4, text: "And, this is the second card that we're working with" }
+      { id: 1, text: "we created a static list and a static" },
+      { id: 2, text: "And, this is the second card that we're working with" }
     ]
   }
+  // {
+  //   title: "Next Episode",
+  //   id: 1,
+  //   cards: [
+  //     { id: 2, text: "we created a static list and a static" },
+  //     { id: 3, text: "And, this is the second card that we're working with" },
+  //     { id: 4, text: "And, this is the second card that we're working with" }
+  //   ]
+  // },
+  // {
+  //   title: "Another Episode",
+  //   id: 2,
+  //   cards: [
+  //     { id: 5, text: "we created a static list and a static" },
+  //     { id: 6, text: "And, this is the second card that we're working with" },
+  //     { id: 7, text: "And, this is the second card that we're working with" }
+  //   ]
+  // }
 ];
 
 export default function (state = initialState, action) {
@@ -63,9 +72,9 @@ export default function (state = initialState, action) {
       } = payload;
       const newStateAfterMove = [...state];
 
-      console.log(type);
-
       // draggin lists around
+
+      console.log(type);
 
       if (type === "list") {
         const list = newStateAfterMove.splice(droppableIndexStart, 1);
@@ -78,7 +87,6 @@ export default function (state = initialState, action) {
         const list = state.find(
           list => String(droppableIdStart) === String(list.id)
         );
-        console.log(list);
         const card = list.cards.splice(droppableIndexStart, 1);
         list.cards.splice(droppableIndexEnd, 0, ...card);
       }

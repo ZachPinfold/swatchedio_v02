@@ -2,7 +2,7 @@ import React from "react";
 import SwatchList from "./SwatchList";
 import { connect } from "react-redux";
 import SwatchActionButton from "./SwatchActionButton";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sortSwatches } from "../../actions/swatch";
 import styled from "styled-components";
 
@@ -15,7 +15,7 @@ const ListContainer = styled.div`
 
 const ProjectPage = ({ swatchList, sortSwatches }) => {
   const onDragEnd = result => {
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
     if (!destination) {
       return;
     }
@@ -25,18 +25,32 @@ const ProjectPage = ({ swatchList, sortSwatches }) => {
       destination.droppableId,
       source.index,
       destination.index,
-      draggableId
+      draggableId,
+      type
     );
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <ListContainer>
-        {swatchList.map(list => (
-          <SwatchList listId={list.id} title={list.title} cards={list.cards} />
-        ))}
-        <SwatchActionButton list />
-      </ListContainer>
+      <div>
+        <h2>Hello Youtube</h2>
+        <Droppable droppableId='all-lists' direction='horizontal' type='list'>
+          {provided => (
+            <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
+              {swatchList.map((list, index) => (
+                <SwatchList
+                  listId={list.id}
+                  title={list.title}
+                  cards={list.cards}
+                  key={list.id}
+                  index={index}
+                />
+              ))}
+              <SwatchActionButton list />
+            </ListContainer>
+          )}
+        </Droppable>
+      </div>
     </DragDropContext>
   );
 };
