@@ -79,11 +79,7 @@ const BackgroundCard = ({
     setCopied(false);
   };
 
-  const handleMoreClick = () => {
-    console.log("more");
-  };
-
-  console.log(id === divId);
+  const handleMoreClick = () => {};
 
   return (
     <Fragment>

@@ -46,7 +46,6 @@ const ProjectPage = ({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
-        <h2>Hello Youtube</h2>
         <Droppable droppableId='all-lists' direction='horizontal' type='list'>
           {provided => (
             <ListContainer {...provided.droppableProps} ref={provided.innerRef}>

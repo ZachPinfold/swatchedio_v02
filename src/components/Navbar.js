@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { logout } from "../actions/auth";
+import { Link, useLocation } from "react-router-dom";
+import { logout, loadUser } from "../actions/auth";
 import { connect } from "react-redux";
 import colorHoverChange from "./utils/colorHoverChange";
-import { openDiscover } from "../actions/layout";
+import { openDiscover, closeDiscover } from "../actions/layout";
 import { useHistory } from "react-router";
 
 const Navbar = ({
@@ -12,11 +12,18 @@ const Navbar = ({
   openLogin,
   openRegister,
   openDiscover,
+  closeDiscover,
   layout: { discover },
   auth: { user, isAuthenticated }
 }) => {
   const [buttonClass, setButtonClass] = useState("btn-primary");
   const [logoClass, setLogoClass] = useState("nav-logo");
+
+  const location = useLocation();
+
+  const handleLogoClick = () => {
+    if (location.pathname === "/") closeDiscover();
+  };
 
   const handleLogout = e => {
     e.preventDefault();
@@ -86,11 +93,9 @@ const Navbar = ({
     <nav>
       <Link
         to='/'
-        // onClick={() => {
-        //   history.go(0);
-        // }}
         onMouseLeave={handleLogoHover}
         className={logoClass}
+        onClick={handleLogoClick}
       >
         Swatched
       </Link>
@@ -114,4 +119,8 @@ const mapStateToProps = state => ({
   layout: state.layout
 });
 
-export default connect(mapStateToProps, { logout, openDiscover })(Navbar);
+export default connect(mapStateToProps, {
+  logout,
+  openDiscover,
+  closeDiscover
+})(Navbar);
