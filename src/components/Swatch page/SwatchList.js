@@ -2,16 +2,22 @@ import React from "react";
 import SwatchCard from "./SwatchCard";
 import SwatchActionButton from "./SwatchActionButton";
 import { Droppable } from "react-beautiful-dnd";
+import styled from "styled-components";
+
+const ListContainer = styled.div`
+  background-color: grey;
+  border-radius: 3px;
+  width: 300px;
+  padding: 8px;
+  margin-right: 8px;
+  height: 100%;
+`;
 
 const SwatchList = ({ title, cards, listId, index }) => {
   return (
     <Droppable droppableId={String(listId)}>
       {provided => (
-        <div
-          {...provided.droppableProps}
-          ref={provided.innerRef}
-          style={styles.container}
-        >
+        <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
           <h4>{title}</h4>
           {cards.map((card, index) => (
             <SwatchCard
@@ -23,21 +29,10 @@ const SwatchList = ({ title, cards, listId, index }) => {
           ))}
           <SwatchActionButton listId={listId} />
           {provided.placeholder}
-        </div>
+        </ListContainer>
       )}
     </Droppable>
   );
-};
-
-const styles = {
-  container: {
-    backgroundColor: "grey",
-    borderRadius: 3,
-    width: "300px",
-    padding: 8,
-    marginRight: 8,
-    height: "100%"
-  }
 };
 
 export default SwatchList;

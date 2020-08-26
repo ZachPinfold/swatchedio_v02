@@ -4,6 +4,14 @@ import { connect } from "react-redux";
 import SwatchActionButton from "./SwatchActionButton";
 import { DragDropContext } from "react-beautiful-dnd";
 import { sortSwatches } from "../../actions/swatch";
+import styled from "styled-components";
+
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 100px;
+  position: absolute;
+`;
 
 const ProjectPage = ({ swatchList, sortSwatches }) => {
   const onDragEnd = result => {
@@ -23,12 +31,12 @@ const ProjectPage = ({ swatchList, sortSwatches }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div style={styles.listContainer}>
+      <ListContainer>
         {swatchList.map(list => (
           <SwatchList listId={list.id} title={list.title} cards={list.cards} />
         ))}
         <SwatchActionButton list />
-      </div>
+      </ListContainer>
     </DragDropContext>
   );
 };
