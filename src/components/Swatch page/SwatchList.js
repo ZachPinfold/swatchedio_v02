@@ -13,7 +13,8 @@ const ListContainer = styled.div`
   height: 100%;
 `;
 
-const SwatchList = ({ title, cards, listId, index }) => {
+const SwatchList = ({ title, swatches, listId, index }) => {
+  console.log(swatches);
   return (
     <Draggable draggableId={String(listId)} index={index}>
       {provided => (
@@ -26,7 +27,7 @@ const SwatchList = ({ title, cards, listId, index }) => {
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <h4>{title}</h4>
-                {cards.map((card, index) => (
+                {swatches.map((card, index) => (
                   <SwatchCard
                     index={index}
                     key={card.id}

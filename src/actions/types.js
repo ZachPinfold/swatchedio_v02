@@ -17,3 +17,4 @@ export const ADD_LIST = "ADD_LIST";
 export const DRAG_HAPPENED = "DRAG_HAPPENED";
 export const SECOND_PAGE_RESET = "SECOND_PAGE_RESET";
 export const ADD_USER = "ADD_USER";
+export const LOAD_PROJECTS = "LOAD_PROJECTS";

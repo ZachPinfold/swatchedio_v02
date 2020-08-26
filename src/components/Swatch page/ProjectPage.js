@@ -3,7 +3,7 @@ import SwatchList from "./SwatchList";
 import { connect } from "react-redux";
 import SwatchActionButton from "./SwatchActionButton";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { sortSwatches } from "../../actions/swatch";
+import { sortSwatches, loadProjects } from "../../actions/swatch";
 import { closeDiscover } from "../../actions/layout";
 import { secondPageReset } from "../../actions/colors";
 import { testAction } from "../../actions/testAction";
@@ -22,12 +22,16 @@ const ProjectPage = ({
   closeDiscover,
   secondPageReset,
   testAction,
-  test
+  test,
+  loadProjects
 }) => {
   useEffect(() => {
+    loadProjects();
     secondPageReset();
     closeDiscover();
   }, []);
+
+  console.log(swatchList.projects);
 
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
@@ -46,8 +50,6 @@ const ProjectPage = ({
     );
   };
 
-  console.log(swatchList.projects);
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
@@ -61,12 +63,12 @@ const ProjectPage = ({
         <Droppable droppableId='all-lists' direction='horizontal' type='list'>
           {provided => (
             <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
-              {swatchList.projects.map((list, index) => (
+              {swatchList.projects.map((project, index) => (
                 <SwatchList
-                  listId={list.id}
-                  title={list.title}
-                  cards={list.cards}
-                  key={list.id}
+                  listId={project.id}
+                  title={project.title}
+                  swatches={project.swatches.items}
+                  key={project.id}
                   index={index}
                 />
               ))}
@@ -100,5 +102,6 @@ export default connect(mts, {
   sortSwatches,
   closeDiscover,
   secondPageReset,
-  testAction
+  testAction,
+  loadProjects
 })(ProjectPage);

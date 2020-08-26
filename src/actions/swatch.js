@@ -1,4 +1,12 @@
-import { ADD_LIST, ADD_SWATCH, DRAG_HAPPENED } from "./types";
+import { ADD_LIST, ADD_SWATCH, DRAG_HAPPENED, LOAD_PROJECTS } from "./types";
+import { API, graphqlOperation } from "aws-amplify";
+import { listProjects } from "../graphql/queries";
+
+export const loadProjects = project => async dispatch => {
+  const result = await API.graphql(graphqlOperation(listProjects));
+  console.log(result);
+  dispatch({ type: LOAD_PROJECTS, payload: result.data.listProjects.items });
+};
 
 export const addProject = project => dispatch => {
   console.log("add project");

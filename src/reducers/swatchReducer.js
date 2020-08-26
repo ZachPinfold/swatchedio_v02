@@ -1,35 +1,29 @@
-import { ADD_SWATCH, ADD_LIST, DRAG_HAPPENED } from "../actions/types";
+import {
+  ADD_SWATCH,
+  ADD_LIST,
+  DRAG_HAPPENED,
+  LOAD_PROJECTS
+} from "../actions/types";
 
 const initialState = {
-  projects: [
-    {
-      title: "Project 1",
-      id: 0,
-      cards: [
-        { id: 1, text: "#39dje3" },
-        { id: 2, text: "#21dje3" }
-      ]
-    },
-    {
-      title: "Project 2",
-      id: 3,
-      cards: [
-        { id: 4, text: "#21dje1" },
-        { id: 5, text: "#FFFFFF" },
-        { id: 6, text: "#EEEEEE" }
-      ]
-    }
-  ]
+  projects: [],
+  loading: true,
+  erros: {}
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case ADD_LIST:
+    case LOAD_PROJECTS:
       return {
         ...state,
-        projects: [...state.projects, payload]
+        projects: payload
       };
+    // case ADD_LIST:
+    //   return {
+    //     ...state,
+    //     projects: payload
+    //   };
 
     // case ADD_SWATCH:
     //   const newCard = {

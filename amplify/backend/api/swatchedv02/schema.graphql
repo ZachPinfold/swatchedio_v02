@@ -1,7 +1,7 @@
-type Swatch @model {
+type Swatch @model @key(name: "byProject", fields: ["projectId", "hexCode"]) {
   id: ID!
+  projectId: String!
   ownerId: String!
-  ownerUsername: String!
   hexCode: String!
 }
 
@@ -15,9 +15,8 @@ type MasterSwatch @model {
 type Project @model {
   id: ID!
   ownerId: String!
-  ownerUsername: String!
   projectTitle: String!
-  swatches: [Swatch] @connection
+  swatches: [Swatch] @connection(keyName: "byProject", fields: ["id"])
 }
 
 type ColorHex @model {

@@ -111,7 +111,9 @@ export const listProjects = /* GraphQL */ `
         ownerUsername
         projectTitle
         swatches {
-          nextToken
+          items {
+            hexCode
+          }
         }
         createdAt
         updatedAt
