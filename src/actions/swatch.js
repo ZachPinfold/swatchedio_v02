@@ -1,7 +1,13 @@
 import { ADD_LIST, ADD_SWATCH, DRAG_HAPPENED } from "./types";
 
 export const addProject = project => dispatch => {
-  dispatch({ type: ADD_LIST, payload: project });
+  console.log("add project");
+  const projectObj = {
+    title: project,
+    id: 4,
+    cards: []
+  };
+  dispatch({ type: ADD_LIST, payload: projectObj });
 };
 
 export const addSwatch = (text, listId) => dispatch => {

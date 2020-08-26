@@ -29,8 +29,6 @@ const ProjectPage = ({
     closeDiscover();
   }, []);
 
-  console.log(test);
-
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
 
@@ -61,7 +59,7 @@ const ProjectPage = ({
         <Droppable droppableId='all-lists' direction='horizontal' type='list'>
           {provided => (
             <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
-              {swatchList.map((list, index) => (
+              {swatchList.projects.map((list, index) => (
                 <SwatchList
                   listId={list.id}
                   title={list.title}
