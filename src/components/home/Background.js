@@ -39,6 +39,7 @@ const Background = ({
   const hoverEffect = e => {
     const { id } = e.currentTarget;
     const num = id.toString();
+    console.log("resize");
     if (id === "5") {
       setBackgroundWidth({
         offHover: "19.26vw",

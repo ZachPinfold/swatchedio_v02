@@ -10,19 +10,19 @@ const ActionCard = ({
   copyColor,
   showAction,
   toggleShowAction,
-  layout: { discover }
+  layout: { discover },
+  frontBack
 }) => {
-  console.log(showCopy);
   return (
     <div onClick={e => e.stopPropagation()} className='actions-area'>
       <div
-        // onMouseOver={e => handleHover(e, "front")}
+        onMouseOver={e => handleHover(e, frontBack)}
         onClick={e => e.stopPropagation()}
         id={divId}
         className='click-more-circles'
       >
         <div
-          style={{ opacity: !discover ? "0" : "1" }}
+          style={{ opacity: !showCopy || !discover ? "0" : "1" }}
           onClick={handleMoreClick}
           className='circle-click-area'
           onClick={() => {

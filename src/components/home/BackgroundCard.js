@@ -110,6 +110,7 @@ const BackgroundCard = ({
             copyColor={copyColor}
             showAction={showAction}
             toggleShowAction={toggleShowAction}
+            frontBack={"front"}
           />
 
           <CopyArea
@@ -133,12 +134,23 @@ const BackgroundCard = ({
             backgroundColor: !firstFlip ? color1Temp : color1,
             transform: `scale(${BackScale})`
           }}
-          onMouseEnter={e => handleHover(e, "back")}
+          onMouseOver={e => handleHover(e, "back")}
           onMouseOut={handleHoverOut}
           onClick={() => handleClick(!firstFlip ? color1Temp : color1, "back")}
           id={divId}
           className='background-div-card'
         >
+          <ActionCard
+            handleHover={handleHover}
+            divId={divId}
+            showCopy={showCopy}
+            handleMoreClick={handleMoreClick}
+            copyColor={copyColor}
+            showAction={showAction}
+            toggleShowAction={toggleShowAction}
+            frontBack={"back"}
+          />
+
           <CopyArea
             copyColor={copyColor}
             showCopy={showCopy}
@@ -150,7 +162,7 @@ const BackgroundCard = ({
             copied={copied}
           />
 
-          <div className='card-copy-div'>
+          {/* <div className='card-copy-div'>
             <h3
               style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
               onMouseEnter={e => hoverEffect(e)}
@@ -167,7 +179,7 @@ const BackgroundCard = ({
             >
               {!copied ? "Click to Copy" : "Copied!"}
             </h3>
-          </div>
+          </div> */}
           <div id={divId} className='card-overlay'></div>
         </div>
       </ReactCardFlip>
