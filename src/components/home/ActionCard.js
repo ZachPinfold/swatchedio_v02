@@ -9,18 +9,20 @@ const ActionCard = ({
   handleMoreClick,
   copyColor,
   showAction,
-  toggleShowAction
+  toggleShowAction,
+  layout: { discover }
 }) => {
+  console.log(showCopy);
   return (
     <div onClick={e => e.stopPropagation()} className='actions-area'>
       <div
-        onMouseOver={e => handleHover(e, "front")}
+        // onMouseOver={e => handleHover(e, "front")}
         onClick={e => e.stopPropagation()}
         id={divId}
         className='click-more-circles'
       >
         <div
-          style={{ opacity: !showCopy ? "0" : "1" }}
+          style={{ opacity: !discover ? "0" : "1" }}
           onClick={handleMoreClick}
           className='circle-click-area'
           onClick={() => {
@@ -48,13 +50,13 @@ const ActionCard = ({
           <div className='break-line'></div>
           <div style={{ marginBottom: "10px" }} className='action-button-area'>
             <h3
-              style={{ opacity: isAuthenticated ? "1" : "0.6" }}
+              style={{ opacity: isAuthenticated ? "1" : "0.3" }}
               className='more-card-add-btn'
             >
               Add to my Master Swatch
             </h3>
             <h3
-              style={{ opacity: isAuthenticated ? "1" : "0.6" }}
+              style={{ opacity: isAuthenticated ? "1" : "0.3" }}
               className='more-card-add-btn'
             >
               Add to my project...
@@ -78,7 +80,8 @@ const ActionCard = ({
 };
 
 const mstp = state => ({
-  auth: state.auth
+  auth: state.auth,
+  layout: state.layout
 });
 
 export default connect(mstp, null)(ActionCard);

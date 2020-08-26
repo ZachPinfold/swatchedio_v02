@@ -5,6 +5,7 @@ import { logout } from "../actions/auth";
 import { connect } from "react-redux";
 import colorHoverChange from "./utils/colorHoverChange";
 import { openDiscover } from "../actions/layout";
+import { useHistory } from "react-router";
 
 const Navbar = ({
   logout,
@@ -30,6 +31,8 @@ const Navbar = ({
     const classColor = colorHoverChange(logoClass, "logo");
     setLogoClass(classColor);
   };
+
+  const history = useHistory();
 
   const guestLinks = (
     <ul>
@@ -59,7 +62,13 @@ const Navbar = ({
 
   return (
     <nav>
-      <a onMouseLeave={handleLogoHover} className={logoClass}>
+      <a
+        onClick={() => {
+          history.go(0);
+        }}
+        onMouseLeave={handleLogoHover}
+        className={logoClass}
+      >
         Swatched
       </a>
       <div className='nav-buttons-area'>{guestLinks}</div>

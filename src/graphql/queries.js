@@ -130,7 +130,7 @@ export const getColorHex = /* GraphQL */ `
   }
 `;
 export const listColorHexs = /* GraphQL */ `
-  query ListColorHexs($format: String!) {
-    listColorHexs(format: $format)
+  query ListColorHexs($format: String!, $hueOption: String) {
+    listColorHexs(format: $format, hueOption: $hueOption)
   }
 `;

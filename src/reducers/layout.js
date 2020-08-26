@@ -1,7 +1,7 @@
 import { SHOW_EXPLORE, NEW_PALETTE } from "../actions/types";
 
 const initialState = {
-  discover: true
+  discover: false
 };
 
 export default function (state = initialState, action) {

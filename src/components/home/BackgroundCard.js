@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import ReactCardFlip from "react-card-flip";
 import getContrastYIQ from "../utils/dominantColor";
 import { connect } from "react-redux";
@@ -26,6 +26,11 @@ const BackgroundCard = ({
   const [frontScale, setFrontScale] = useState(1);
   const [BackScale, setBackScale] = useState(1);
   const [showAction, toggleShowAction] = useState(false);
+
+  useEffect(() => {
+    const textColor = getContrastYIQ(color);
+    setCopyColor(textColor);
+  }, []);
 
   const handleClick = (color, frontback) => {
     if (frontback === "front") {

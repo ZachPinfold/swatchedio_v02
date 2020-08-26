@@ -103,7 +103,7 @@ const Background = ({
           <div
             style={{
               // marginTop: discover && "130px"
-              height: "84vh"
+              height: discover && "85vh"
             }}
             className='landing-div-background'
           >
