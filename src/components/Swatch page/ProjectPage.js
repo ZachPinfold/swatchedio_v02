@@ -6,6 +6,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sortSwatches } from "../../actions/swatch";
 import { closeDiscover } from "../../actions/layout";
 import { secondPageReset } from "../../actions/colors";
+import { testAction } from "../../actions/testAction";
 import styled from "styled-components";
 
 const ListContainer = styled.div`
@@ -19,12 +20,16 @@ const ProjectPage = ({
   swatchList,
   sortSwatches,
   closeDiscover,
-  secondPageReset
+  secondPageReset,
+  testAction,
+  test
 }) => {
   useEffect(() => {
     secondPageReset();
     closeDiscover();
   }, []);
+
+  console.log(test);
 
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
@@ -46,6 +51,13 @@ const ProjectPage = ({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
+        {test.users.map(user => (
+          <div>
+            <p>{user.user}</p>
+            <p>{user.age}</p>
+          </div>
+        ))}
+        <button onClick={() => testAction()}>Click Me</button>
         <Droppable droppableId='all-lists' direction='horizontal' type='list'>
           {provided => (
             <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
@@ -80,9 +92,13 @@ const styles = {
 };
 
 const mts = state => ({
-  swatchList: state.swatchReducer
+  swatchList: state.swatchReducer,
+  test: state.test
 });
 
-export default connect(mts, { sortSwatches, closeDiscover, secondPageReset })(
-  ProjectPage
-);
+export default connect(mts, {
+  sortSwatches,
+  closeDiscover,
+  secondPageReset,
+  testAction
+})(ProjectPage);
