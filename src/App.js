@@ -24,8 +24,8 @@ function App() {
       <Router>
         <Fragment>
           <Navbar openLogin={openLogin} openRegister={openRegister} />
-          <ProjectPage />
-          {/* <Route exact path='/' component={Landing} /> */}
+          {/* <ProjectPage /> */}
+          <Route exact path='/' component={Landing} />
           {login && <LogIn openLogin={openLogin} />}
           {register && <Register openRegister={openRegister} />}
           <Switch>

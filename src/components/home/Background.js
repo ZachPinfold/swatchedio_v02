@@ -84,7 +84,7 @@ const Background = ({
   ) : (
     <Fragment>
       {!loading && (
-        <div className='landing-div-background'>
+        <div className='background-container'>
           {discover && (
             <div className='discover-palette-area'>
               <button
@@ -100,85 +100,93 @@ const Background = ({
               </button>
             </div>
           )}
-          {!discover && (
-            <div className='hero-message'>
-              <h1 className='hero-heading'>Wash your projects with color</h1>
-              <button className={buttonClass} onClick={handleClick}>
-                {" "}
-                New Palette
-              </button>
-            </div>
-          )}
-          <BackgroundCard
-            hoverEffect={hoverEffect}
-            offHoverEffect={offHoverEffect}
-            backGroundWidth={backGroundWidth}
-            divId={"1"}
-            color={!firstLoad && `#${colors[0]}`}
-            color1={allFlipped.firstFlip && `#${color1[0]}`}
-            color2={secondFlip && `#${color2[0]}`}
-            color1Temp={!secondLoad && `#${colors2[0]}`}
-            delayTimer={1000}
-            randomLoad={randomLoad}
-            allFlipped={allFlipped.multiFlip}
-            firstFlip={allFlipped.firstFlip}
-          />
-          <BackgroundCard
-            hoverEffect={hoverEffect}
-            offHoverEffect={offHoverEffect}
-            backGroundWidth={backGroundWidth}
-            divId={"2"}
-            color={!firstLoad && `#${colors[1]}`}
-            color1={allFlipped.firstFlip && `#${color1[1]}`}
-            color2={secondFlip && `#${color2[1]}`}
-            color1Temp={!secondLoad && `#${colors2[1]}`}
-            delayTimer={1000}
-            randomLoad={randomLoad}
-            allFlipped={allFlipped.multiFlip}
-            firstFlip={allFlipped.firstFlip}
-          />
-          <BackgroundCard
-            hoverEffect={hoverEffect}
-            offHoverEffect={offHoverEffect}
-            backGroundWidth={backGroundWidth}
-            divId={"3"}
-            color={!firstLoad && `#${colors[2]}`}
-            color1={allFlipped.firstFlip && `#${color1[2]}`}
-            color2={secondFlip && `#${color2[2]}`}
-            color1Temp={!secondLoad && `#${colors2[2]}`}
-            delayTimer={1000}
-            randomLoad={randomLoad}
-            allFlipped={allFlipped.multiFlip}
-            firstFlip={allFlipped.firstFlip}
-          />
-          <BackgroundCard
-            hoverEffect={hoverEffect}
-            offHoverEffect={offHoverEffect}
-            backGroundWidth={backGroundWidth}
-            divId={"4"}
-            color={!firstLoad && `#${colors[3]}`}
-            color1={allFlipped.firstFlip && `#${color1[3]}`}
-            color2={secondFlip && `#${color2[3]}`}
-            color1Temp={!secondLoad && `#${colors2[3]}`}
-            delayTimer={1000}
-            randomLoad={randomLoad}
-            allFlipped={allFlipped.multiFlip}
-            firstFlip={allFlipped.firstFlip}
-          />
-          <BackgroundCard
-            hoverEffect={hoverEffect}
-            offHoverEffect={offHoverEffect}
-            backGroundWidth={backGroundWidth}
-            divId={"5"}
-            color={!firstLoad && `#${colors[4]}`}
-            color1={allFlipped.firstFlip && `#${color1[4]}`}
-            color2={secondFlip && `#${color2[4]}`}
-            color1Temp={!secondLoad && `#${colors2[4]}`}
-            delayTimer={1000}
-            randomLoad={randomLoad}
-            allFlipped={allFlipped.multiFlip}
-            firstFlip={allFlipped.firstFlip}
-          />
+          <div
+            style={{
+              // marginTop: discover && "130px"
+              height: "84vh"
+            }}
+            className='landing-div-background'
+          >
+            {!discover && (
+              <div className='hero-message'>
+                <h1 className='hero-heading'>Wash your projects with color</h1>
+                <button className={buttonClass} onClick={handleClick}>
+                  {" "}
+                  New Palette
+                </button>
+              </div>
+            )}
+            <BackgroundCard
+              hoverEffect={hoverEffect}
+              offHoverEffect={offHoverEffect}
+              backGroundWidth={backGroundWidth}
+              divId={"1"}
+              color={!firstLoad && `#${colors[0]}`}
+              color1={allFlipped.firstFlip && `#${color1[0]}`}
+              color2={secondFlip && `#${color2[0]}`}
+              color1Temp={!secondLoad && `#${colors2[0]}`}
+              delayTimer={1000}
+              randomLoad={randomLoad}
+              allFlipped={allFlipped.multiFlip}
+              firstFlip={allFlipped.firstFlip}
+            />
+            <BackgroundCard
+              hoverEffect={hoverEffect}
+              offHoverEffect={offHoverEffect}
+              backGroundWidth={backGroundWidth}
+              divId={"2"}
+              color={!firstLoad && `#${colors[1]}`}
+              color1={allFlipped.firstFlip && `#${color1[1]}`}
+              color2={secondFlip && `#${color2[1]}`}
+              color1Temp={!secondLoad && `#${colors2[1]}`}
+              delayTimer={1000}
+              randomLoad={randomLoad}
+              allFlipped={allFlipped.multiFlip}
+              firstFlip={allFlipped.firstFlip}
+            />
+            <BackgroundCard
+              hoverEffect={hoverEffect}
+              offHoverEffect={offHoverEffect}
+              backGroundWidth={backGroundWidth}
+              divId={"3"}
+              color={!firstLoad && `#${colors[2]}`}
+              color1={allFlipped.firstFlip && `#${color1[2]}`}
+              color2={secondFlip && `#${color2[2]}`}
+              color1Temp={!secondLoad && `#${colors2[2]}`}
+              delayTimer={1000}
+              randomLoad={randomLoad}
+              allFlipped={allFlipped.multiFlip}
+              firstFlip={allFlipped.firstFlip}
+            />
+            <BackgroundCard
+              hoverEffect={hoverEffect}
+              offHoverEffect={offHoverEffect}
+              backGroundWidth={backGroundWidth}
+              divId={"4"}
+              color={!firstLoad && `#${colors[3]}`}
+              color1={allFlipped.firstFlip && `#${color1[3]}`}
+              color2={secondFlip && `#${color2[3]}`}
+              color1Temp={!secondLoad && `#${colors2[3]}`}
+              delayTimer={1000}
+              randomLoad={randomLoad}
+              allFlipped={allFlipped.multiFlip}
+              firstFlip={allFlipped.firstFlip}
+            />
+            <BackgroundCard
+              hoverEffect={hoverEffect}
+              offHoverEffect={offHoverEffect}
+              backGroundWidth={backGroundWidth}
+              divId={"5"}
+              color={!firstLoad && `#${colors[4]}`}
+              color1={allFlipped.firstFlip && `#${color1[4]}`}
+              color2={secondFlip && `#${color2[4]}`}
+              color1Temp={!secondLoad && `#${colors2[4]}`}
+              delayTimer={1000}
+              randomLoad={randomLoad}
+              allFlipped={allFlipped.multiFlip}
+              firstFlip={allFlipped.firstFlip}
+            />
+          </div>
         </div>
       )}
     </Fragment>
