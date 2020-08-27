@@ -5,12 +5,13 @@ import { createProject } from "../graphql/mutations";
 
 export const loadProjects = project => async dispatch => {
   const result = await API.graphql(graphqlOperation(listProjects));
-  console.log(result);
-  dispatch({ type: LOAD_PROJECTS, payload: result.data.listProjects.items });
+  const orderedProjects = result.data.listProjects.items.sort((a, b) => {
+    return a.order - b.order;
+  });
+  dispatch({ type: LOAD_PROJECTS, payload: orderedProjects });
 };
 
 export const addProject = (projectTitle, index) => async dispatch => {
-  console.log(index);
   const input = {
     ownerId: "123",
     ownerUsername: "zach",
@@ -27,6 +28,7 @@ export const addSwatch = (text, listId) => dispatch => {
 };
 
 export const sortSwatches = (
+  projects,
   droppableIdStart,
   droppableIdEnd,
   droppableIndexStart,
@@ -34,15 +36,16 @@ export const sortSwatches = (
   draggableId,
   type
 ) => dispatch => {
-  dispatch({
-    type: DRAG_HAPPENED,
-    payload: {
-      droppableIdStart,
-      droppableIdEnd,
-      droppableIndexStart,
-      droppableIndexEnd,
-      draggableId,
-      type
-    }
-  });
+  console.log(projects);
+
+  if (type === "list") {
+    const list = projects.splice(droppableIndexStart, 1);
+    console.log(list);
+    projects.splice(droppableIndexEnd, 0, ...list);
+    console.log(projects);
+    dispatch({
+      type: DRAG_HAPPENED,
+      payload: projects
+    });
+  }
 };

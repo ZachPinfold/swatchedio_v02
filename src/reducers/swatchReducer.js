@@ -24,6 +24,11 @@ export default function (state = initialState, action) {
         ...state,
         projects: [...state.projects, payload]
       };
+    case DRAG_HAPPENED:
+      return {
+        ...state,
+        projects: payload
+      };
 
     // case ADD_SWATCH:
     //   const newCard = {

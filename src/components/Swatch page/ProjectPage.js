@@ -17,7 +17,7 @@ const ListContainer = styled.div`
 `;
 
 const ProjectPage = ({
-  swatchList,
+  projectList,
   sortSwatches,
   closeDiscover,
   secondPageReset,
@@ -39,6 +39,7 @@ const ProjectPage = ({
     }
 
     sortSwatches(
+      projectList.projects,
       source.droppableId,
       destination.droppableId,
       source.index,
@@ -47,6 +48,8 @@ const ProjectPage = ({
       type
     );
   };
+
+  console.log(projectList);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -61,7 +64,7 @@ const ProjectPage = ({
         <Droppable droppableId='all-lists' direction='horizontal' type='list'>
           {provided => (
             <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
-              {swatchList.projects.map((project, index) => (
+              {projectList.projects.map((project, index) => (
                 <SwatchList
                   listId={project.id}
                   title={project.projectTitle}
@@ -92,7 +95,7 @@ const styles = {
 };
 
 const mts = state => ({
-  swatchList: state.swatchReducer,
+  projectList: state.swatchReducer,
   test: state.test
 });
 
