@@ -1,7 +1,7 @@
 import { ADD_LIST, ADD_SWATCH, DRAG_HAPPENED, LOAD_PROJECTS } from "./types";
 import { API, graphqlOperation } from "aws-amplify";
 import { listProjects } from "../graphql/queries";
-import { createProject } from "../graphql/mutations";
+import { createProject, updateProject } from "../graphql/mutations";
 
 export const loadProjects = project => async dispatch => {
   const result = await API.graphql(graphqlOperation(listProjects));
@@ -36,13 +36,39 @@ export const sortSwatches = (
   draggableId,
   type
 ) => dispatch => {
-  console.log(projects);
+  // console.log(projects, droppableIndexStart, droppableIndexEnd);
 
   if (type === "list") {
+    projects.map(project => {
+      console.log(
+        project.order,
+        droppableIndexStart + 1,
+        droppableIndexEnd + 1
+      );
+      if (project.order === droppableIndexStart + 1) {
+        console.log(project);
+        API.graphql(
+          graphqlOperation(updateProject, {
+            input: { id: project.id, order: droppableIndexEnd + 1 }
+          })
+        );
+      }
+      if (
+        project.order <= droppableIndexEnd + 1 &&
+        project.order !== droppableIndexStart + 1
+      ) {
+        console.log(project);
+        console.log("project order -1 ---- ", project.order - 1);
+        API.graphql(
+          graphqlOperation(updateProject, {
+            input: { id: project.id, order: project.order - 1 }
+          })
+        );
+      }
+    });
+
     const list = projects.splice(droppableIndexStart, 1);
-    console.log(list);
     projects.splice(droppableIndexEnd, 0, ...list);
-    console.log(projects);
     dispatch({
       type: DRAG_HAPPENED,
       payload: projects

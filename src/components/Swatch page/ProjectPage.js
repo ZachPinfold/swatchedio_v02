@@ -49,8 +49,6 @@ const ProjectPage = ({
     );
   };
 
-  console.log(projectList);
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
