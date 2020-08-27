@@ -100,8 +100,6 @@ export default function (state = initialState, action) {
     //   // put the card in the new list
     //   listEnd.cards.splice(droppableIndexEnd, 0, ...card);
     // }
-  }
-  switch (type) {
     default:
       return state;
   }
