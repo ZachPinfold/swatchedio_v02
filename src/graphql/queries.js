@@ -8,6 +8,7 @@ export const getSwatch = /* GraphQL */ `
       ownerId
       ownerUsername
       hexCode
+      order
       createdAt
       updatedAt
     }
@@ -25,6 +26,7 @@ export const listSwatchs = /* GraphQL */ `
         ownerId
         ownerUsername
         hexCode
+        order
         createdAt
         updatedAt
       }
@@ -44,6 +46,7 @@ export const getMasterSwatch = /* GraphQL */ `
           ownerId
           ownerUsername
           hexCode
+          order
           createdAt
           updatedAt
         }
@@ -88,11 +91,13 @@ export const getProject = /* GraphQL */ `
           ownerId
           ownerUsername
           hexCode
+          order
           createdAt
           updatedAt
         }
         nextToken
       }
+      order
       createdAt
       updatedAt
     }
@@ -115,6 +120,7 @@ export const listProjects = /* GraphQL */ `
             hexCode
           }
         }
+        order
         createdAt
         updatedAt
       }
@@ -132,7 +138,7 @@ export const getColorHex = /* GraphQL */ `
   }
 `;
 export const listColorHexs = /* GraphQL */ `
-  query ListColorHexs($format: String!, $hueOption: String) {
-    listColorHexs(format: $format, hueOption: $hueOption)
+  query ListColorHexs($format: String!) {
+    listColorHexs(format: $format)
   }
 `;

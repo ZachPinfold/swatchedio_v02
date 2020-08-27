@@ -11,6 +11,7 @@ export const createSwatch = /* GraphQL */ `
       ownerId
       ownerUsername
       hexCode
+      order
       createdAt
       updatedAt
     }
@@ -26,6 +27,7 @@ export const updateSwatch = /* GraphQL */ `
       ownerId
       ownerUsername
       hexCode
+      order
       createdAt
       updatedAt
     }
@@ -41,6 +43,7 @@ export const deleteSwatch = /* GraphQL */ `
       ownerId
       ownerUsername
       hexCode
+      order
       createdAt
       updatedAt
     }
@@ -61,6 +64,7 @@ export const createMasterSwatch = /* GraphQL */ `
           ownerId
           ownerUsername
           hexCode
+          order
           createdAt
           updatedAt
         }
@@ -86,6 +90,7 @@ export const updateMasterSwatch = /* GraphQL */ `
           ownerId
           ownerUsername
           hexCode
+          order
           createdAt
           updatedAt
         }
@@ -111,6 +116,7 @@ export const deleteMasterSwatch = /* GraphQL */ `
           ownerId
           ownerUsername
           hexCode
+          order
           createdAt
           updatedAt
         }
@@ -137,11 +143,13 @@ export const createProject = /* GraphQL */ `
           ownerId
           ownerUsername
           hexCode
+          order
           createdAt
           updatedAt
         }
         nextToken
       }
+      order
       createdAt
       updatedAt
     }
@@ -163,11 +171,13 @@ export const updateProject = /* GraphQL */ `
           ownerId
           ownerUsername
           hexCode
+          order
           createdAt
           updatedAt
         }
         nextToken
       }
+      order
       createdAt
       updatedAt
     }
@@ -189,11 +199,13 @@ export const deleteProject = /* GraphQL */ `
           ownerId
           ownerUsername
           hexCode
+          order
           createdAt
           updatedAt
         }
         nextToken
       }
+      order
       createdAt
       updatedAt
     }

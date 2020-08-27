@@ -36,6 +36,34 @@ export const listColorHexs = /* GraphQL */ `
   }
 `;
 
+
+export const listProjects = /* GraphQL */ `
+  query ListProjects(
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        ownerId
+        ownerUsername
+        projectTitle
+        swatches {
+          items {
+            hexCode
+          }
+        }
+        order
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+
+
 // Actions
 
 // Old Axios requests //
@@ -58,18 +86,18 @@ result.then(payload => {
 
 // Resolver //
 
-// {
-//     "version": "2018-05-29",
-//     "method": "GET",
-//     ## E.G. if full path is https://api.xxxxxxxxx.com/posts then resourcePath would be /posts **
-//     "resourcePath": "/api/palettes/random",
-//     "params":{
-//         "query": $util.toJson($ctx.args),
-//         "headers": {
-//             "Authorization": "$ctx.request.headers.Authorization"
-//         }
-//     }
-// }
+ {
+     "version": "2018-05-29",
+     "method": "GET",
+     ## E.G. if full path is https://api.xxxxxxxxx.com/posts then resourcePath would be /posts **
+     "resourcePath": "/api/palettes/random",
+     "params":{
+         "query": $util.toJson($ctx.args),
+         "headers": {
+             "Authorization": "$ctx.request.headers.Authorization"
+         }
+     }
+}
 
 // ## Raise a GraphQL field error in case of a datasource invocation error
 // #if($ctx.error)

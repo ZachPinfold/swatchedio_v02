@@ -4,7 +4,13 @@ import TextareaAutosize from "react-textarea-autosize";
 import { addProject, addSwatch } from "../../actions/swatch";
 import { connect } from "react-redux";
 
-const SwatchActionButton = ({ list, addProject, addSwatch, listId }) => {
+const SwatchActionButton = ({
+  list,
+  addProject,
+  addSwatch,
+  listId,
+  swatchList
+}) => {
   const [text, setForm] = useState("");
   const [openForm, setOpenForm] = useState(false);
 
@@ -37,7 +43,8 @@ const SwatchActionButton = ({ list, addProject, addSwatch, listId }) => {
   };
 
   const handleAddProject = () => {
-    if (text) addProject(text);
+    const index = swatchList.projects.length + 1;
+    if (text) addProject(text, index);
     else return;
   };
 
@@ -105,4 +112,8 @@ const styles = {
   }
 };
 
-export default connect(null, { addProject, addSwatch })(SwatchActionButton);
+const mpst = state => ({
+  swatchList: state.swatchReducer
+});
+
+export default connect(mpst, { addProject, addSwatch })(SwatchActionButton);

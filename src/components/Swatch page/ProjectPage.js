@@ -31,8 +31,6 @@ const ProjectPage = ({
     closeDiscover();
   }, []);
 
-  console.log(swatchList.projects);
-
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
 
@@ -66,7 +64,7 @@ const ProjectPage = ({
               {swatchList.projects.map((project, index) => (
                 <SwatchList
                   listId={project.id}
-                  title={project.title}
+                  title={project.projectTitle}
                   swatches={project.swatches.items}
                   key={project.id}
                   index={index}

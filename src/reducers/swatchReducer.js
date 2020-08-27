@@ -19,11 +19,11 @@ export default function (state = initialState, action) {
         ...state,
         projects: payload
       };
-    // case ADD_LIST:
-    //   return {
-    //     ...state,
-    //     projects: payload
-    //   };
+    case ADD_LIST:
+      return {
+        ...state,
+        projects: [...state.projects, payload]
+      };
 
     // case ADD_SWATCH:
     //   const newCard = {
