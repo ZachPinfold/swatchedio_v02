@@ -3,7 +3,8 @@ import {
   ADD_LIST,
   LOAD_PROJECTS,
   PROJECT_DRAG_HAPPENED,
-  SWATCH_DRAG_HAPPENED
+  SWATCH_DRAG_HAPPENED,
+  SWATCH_BETWEEN_DRAG_HAPPENED
 } from "../actions/types";
 
 const initialState = {
@@ -39,6 +40,18 @@ export default function (state = initialState, action) {
             : project
         )
       };
+    case SWATCH_BETWEEN_DRAG_HAPPENED:
+      return {
+        ...state,
+        projects: state.projects.map(project =>
+          project.id === payload.droppableIdStart
+            ? { ...project, swatches: payload.projectsFrom }
+            : project.id === payload.droppableIdEnd
+            ? { ...project, swatches: payload.projectsTo }
+            : project
+        )
+      };
+
     case ADD_SWATCH:
       return {
         ...state,
@@ -48,13 +61,6 @@ export default function (state = initialState, action) {
             : project
         )
       };
-
-    // case ADD_SWATCH:
-    //   const newCard = {
-    //     text: payload.text,
-    //     id: cardId
-    //   };
-    //   cardId += 1;
 
     //   const newState = state.map(list => {
     //     if (list.id === payload.listId) {

@@ -343,8 +343,6 @@ input:-webkit-autofill:focus {
 }
 
 .background-div-card {
-  /* margin-left: -4px; */
-  /* position: relative; */
   height: 100%;
   transition: width 0.1s ease-out, transform 0.1s ease-out;
   display: flex;

@@ -7,16 +7,8 @@ import { sortSwatches, loadProjects } from "../../actions/swatch";
 import { closeDiscover } from "../../actions/layout";
 import { secondPageReset } from "../../actions/colors";
 import { testAction } from "../../actions/testAction";
-import { onUpdateProject } from "../../graphql/subscriptions";
 import styled from "styled-components";
 import { API, graphqlOperation } from "aws-amplify";
-
-const ListContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 100px;
-  position: absolute;
-`;
 
 const ProjectPage = ({
   projectList,
@@ -31,6 +23,7 @@ const ProjectPage = ({
     loadProjects();
     secondPageReset();
     closeDiscover();
+    document.body.style.background = "blue";
   }, []);
 
   // createPostListener =
@@ -53,16 +46,18 @@ const ProjectPage = ({
     );
   };
 
+  const ListContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+    position: absolute;
+    height: auto;
+    width: 100%;
+  `;
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
-        {test.users.map(user => (
-          <div>
-            <p>{user.user}</p>
-            <p>{user.age}</p>
-          </div>
-        ))}
-        <button onClick={() => testAction()}>Click Me</button>
         <Droppable droppableId='all-lists' direction='horizontal' type='list'>
           {provided => (
             <ListContainer {...provided.droppableProps} ref={provided.innerRef}>

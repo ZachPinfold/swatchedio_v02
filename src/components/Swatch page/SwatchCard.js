@@ -11,7 +11,6 @@ const CardContainer = styled.div`
 `;
 
 const SwatchCard = ({ text, id, index, order, hexCode }) => {
-  console.log(id);
   return (
     <Draggable draggableId={String(id)} index={index}>
       {provided => (

@@ -3,7 +3,8 @@ import {
   ADD_SWATCH,
   PROJECT_DRAG_HAPPENED,
   SWATCH_DRAG_HAPPENED,
-  LOAD_PROJECTS
+  LOAD_PROJECTS,
+  SWATCH_BETWEEN_DRAG_HAPPENED
 } from "./types";
 import { API, graphqlOperation } from "aws-amplify";
 import { listProjects } from "../graphql/queries";
@@ -123,8 +124,6 @@ export const sortSwatches = (
         return swatch;
       });
 
-      console.log(targetProject);
-
       const list = targetProject.splice(droppableIndexStart, 1);
       targetProject.splice(droppableIndexEnd, 0, ...list);
       const items = { items: targetProject };
@@ -132,14 +131,58 @@ export const sortSwatches = (
         type: SWATCH_DRAG_HAPPENED,
         payload: { items, droppableIdStart }
       });
+    }
 
-      // console.log(targetProject);
+    if (droppableIdStart !== droppableIdEnd) {
+      const ProjectRemovedFrom = projects.filter(project => {
+        if (project.id === droppableIdStart) return project;
+      });
 
-      // const list = state.find(
-      //   list => String(droppableIdStart) === String(list.id)
-      // );
-      // const card = list.cards.splice(droppableIndexStart, 1);
-      // list.cards.splice(droppableIndexEnd, 0, ...card);
+      const ProjectGoingTo = projects.filter(project => {
+        if (project.id === droppableIdEnd) return project;
+      });
+
+      const swatchToMove = ProjectRemovedFrom[0].swatches.items.splice(
+        droppableIndexStart,
+        1
+      );
+
+      ProjectGoingTo[0].swatches.items.splice(
+        droppableIndexEnd,
+        0,
+        ...swatchToMove
+      );
+
+      ProjectGoingTo[0].swatches.items.forEach((swatch, index) => {
+        API.graphql(
+          graphqlOperation(updateSwatch, {
+            input: {
+              id: swatch.id,
+              order: index,
+              projectSwatchesId: droppableIdEnd
+            }
+          })
+        );
+      });
+
+      ProjectRemovedFrom[0].swatches.items.forEach((swatch, index) => {
+        API.graphql(
+          graphqlOperation(updateSwatch, {
+            input: {
+              id: swatch.id,
+              order: index
+            }
+          })
+        );
+      });
+
+      const projectsTo = { items: ProjectGoingTo[0].swatches.items };
+      const projectsFrom = { items: ProjectRemovedFrom[0].swatches.items };
+
+      dispatch({
+        type: SWATCH_BETWEEN_DRAG_HAPPENED,
+        payload: { projectsTo, projectsFrom, droppableIdStart, droppableIdEnd }
+      });
     }
   }
 

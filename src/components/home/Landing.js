@@ -6,6 +6,7 @@ import { listColorHexs } from "../../graphql/queries";
 const Landing = () => {
   useEffect(() => {
     getPosts();
+    document.body.style.background = "white";
   }, []);
 
   const getPosts = async () => {
