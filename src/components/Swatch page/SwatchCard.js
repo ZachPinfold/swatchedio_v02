@@ -10,7 +10,7 @@ const CardContainer = styled.div`
   margin-bottom: 8px;
 `;
 
-const SwatchCard = ({ text, id, index }) => {
+const SwatchCard = ({ text, id, index, order }) => {
   return (
     <Draggable draggableId={String(id)} index={index}>
       {provided => (
@@ -22,7 +22,7 @@ const SwatchCard = ({ text, id, index }) => {
           <Card>
             <CardContent>
               <Typography color='textSecondary' gutterBottom>
-                {text}
+                {order}
               </Typography>
             </CardContent>
           </Card>

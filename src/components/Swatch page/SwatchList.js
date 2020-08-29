@@ -28,14 +28,15 @@ const SwatchList = ({ title, swatches, listId, index }) => {
                 <h4>{title}</h4>
                 {swatches.map((card, index) => (
                   <SwatchCard
+                    order={card.order}
                     index={index}
                     key={card.id}
                     text={card.text}
-                    id={card.id}
+                    id={card.order}
                   />
                 ))}
                 {provided.placeholder}
-                <SwatchActionButton listId={listId} />
+                <SwatchActionButton swatches={swatches} listId={listId} />
               </div>
             )}
           </Droppable>

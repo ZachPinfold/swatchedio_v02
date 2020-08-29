@@ -9,6 +9,7 @@ const SwatchActionButton = ({
   addProject,
   addSwatch,
   listId,
+  swatches,
   swatchList
 }) => {
   const [text, setForm] = useState("");
@@ -46,16 +47,20 @@ const SwatchActionButton = ({
     let index = 0;
     if (swatchList.projects.length === 0) index = 0;
     else index = swatchList.projects.length;
-    if (text) addProject(text, index);
-    else return;
+    if (text) {
+      addProject(text, index);
+      setForm("");
+    } else return;
   };
 
   const handleAddSwatch = () => {
-    console.log(text);
+    let index = 0;
+    if (swatches.length === 0) index = 0;
+    else index = swatches.length;
     if (text) {
-      addSwatch(text, listId);
+      addSwatch(text, listId, index, swatches);
       setForm("");
-    } else return;
+    }
   };
 
   const renderForm = () => {

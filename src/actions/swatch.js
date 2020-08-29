@@ -1,15 +1,24 @@
 import { ADD_LIST, ADD_SWATCH, DRAG_HAPPENED, LOAD_PROJECTS } from "./types";
 import { API, graphqlOperation } from "aws-amplify";
-import { listProjects } from "../graphql/queries";
-import { createProject, updateProject } from "../graphql/mutations";
+import { listProjects, listSwatchs } from "../graphql/queries";
+import {
+  createProject,
+  updateProject,
+  createSwatch
+} from "../graphql/mutations";
 
-export const loadProjects = project => async (dispatch, getState) => {
+export const loadProjects = project => async dispatch => {
   const result = await API.graphql(graphqlOperation(listProjects));
   const orderedProjects = result.data.listProjects.items.sort((a, b) => {
     return a.order - b.order;
   });
   dispatch({ type: LOAD_PROJECTS, payload: orderedProjects });
 };
+
+// export const loadSwatches = project => async dispatch => {
+//   const result = await API.graphql(graphqlOperation(listSwatchs));
+//   console.log(result);
+// };
 
 export const addProject = (projectTitle, index) => async dispatch => {
   const input = {
@@ -22,8 +31,23 @@ export const addProject = (projectTitle, index) => async dispatch => {
   dispatch({ type: ADD_LIST, payload: result.data.createProject });
 };
 
-export const addSwatch = (text, listId) => dispatch => {
-  dispatch({ type: ADD_SWATCH, payload: { text, listId } });
+export const addSwatch = (
+  swatchHexCode,
+  projectId,
+  index,
+  swatches
+) => async dispatch => {
+  const input = {
+    ownerId: "123",
+    ownerUsername: "zach",
+    hexCode: swatchHexCode,
+    order: index,
+    projectSwatchesId: projectId
+  };
+  swatches.push(input);
+  const items = { items: swatches };
+  const result = await API.graphql(graphqlOperation(createSwatch, { input }));
+  dispatch({ type: ADD_SWATCH, payload: { items, projectId } });
 };
 
 export const sortSwatches = (

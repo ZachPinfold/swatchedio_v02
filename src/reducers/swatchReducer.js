@@ -29,6 +29,15 @@ export default function (state = initialState, action) {
         ...state,
         projects: payload
       };
+    case ADD_SWATCH:
+      return {
+        ...state,
+        projects: state.projects.map(project =>
+          project.id === payload.projectId
+            ? { ...project, swatches: payload.items }
+            : project
+        )
+      };
 
     // case ADD_SWATCH:
     //   const newCard = {
