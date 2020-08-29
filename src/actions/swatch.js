@@ -3,7 +3,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listProjects } from "../graphql/queries";
 import { createProject, updateProject } from "../graphql/mutations";
 
-export const loadProjects = project => async dispatch => {
+export const loadProjects = project => async (dispatch, getState) => {
   const result = await API.graphql(graphqlOperation(listProjects));
   const orderedProjects = result.data.listProjects.items.sort((a, b) => {
     return a.order - b.order;
@@ -19,7 +19,6 @@ export const addProject = (projectTitle, index) => async dispatch => {
     order: index
   };
   const result = await API.graphql(graphqlOperation(createProject, { input }));
-  console.log(result);
   dispatch({ type: ADD_LIST, payload: result.data.createProject });
 };
 
@@ -35,43 +34,56 @@ export const sortSwatches = (
   droppableIndexEnd,
   draggableId,
   type
-) => dispatch => {
-  // console.log(projects, droppableIndexStart, droppableIndexEnd);
-
+) => (dispatch, getState) => {
+  const state = getState();
+  // console.log(state.swatchReducer.projects[0]);
+  // console.log(projects);
   if (type === "list") {
-    projects.map(project => {
-      console.log(
-        project.order,
-        droppableIndexStart + 1,
-        droppableIndexEnd + 1
-      );
-      if (project.order === droppableIndexStart + 1) {
-        console.log(project);
+    const leftToRightChange = projects.map((project, index) => {
+      if (index === droppableIndexStart) {
         API.graphql(
           graphqlOperation(updateProject, {
-            input: { id: project.id, order: droppableIndexEnd + 1 }
+            input: { id: project.id, order: droppableIndexEnd }
           })
         );
+        project.order = droppableIndexEnd;
       }
       if (
-        project.order <= droppableIndexEnd + 1 &&
-        project.order !== droppableIndexStart + 1
+        droppableIndexStart < droppableIndexEnd &&
+        index <= droppableIndexEnd &&
+        index !== droppableIndexStart &&
+        index > droppableIndexStart
       ) {
-        console.log(project);
-        console.log("project order -1 ---- ", project.order - 1);
         API.graphql(
           graphqlOperation(updateProject, {
             input: { id: project.id, order: project.order - 1 }
           })
         );
+        project.order = project.order - 1;
       }
+      if (
+        droppableIndexStart > droppableIndexEnd &&
+        index >= droppableIndexEnd &&
+        index !== droppableIndexStart &&
+        index < droppableIndexStart
+      ) {
+        API.graphql(
+          graphqlOperation(updateProject, {
+            input: { id: project.id, order: project.order + 1 }
+          })
+        );
+        project.order = project.order + 1;
+      }
+      return project;
     });
 
-    const list = projects.splice(droppableIndexStart, 1);
-    projects.splice(droppableIndexEnd, 0, ...list);
+    console.log(leftToRightChange);
+
+    const list = leftToRightChange.splice(droppableIndexStart, 1);
+    leftToRightChange.splice(droppableIndexEnd, 0, ...list);
     dispatch({
       type: DRAG_HAPPENED,
-      payload: projects
+      payload: leftToRightChange
     });
   }
 };

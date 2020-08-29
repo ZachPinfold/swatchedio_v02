@@ -7,7 +7,9 @@ import { sortSwatches, loadProjects } from "../../actions/swatch";
 import { closeDiscover } from "../../actions/layout";
 import { secondPageReset } from "../../actions/colors";
 import { testAction } from "../../actions/testAction";
+import { onUpdateProject } from "../../graphql/subscriptions";
 import styled from "styled-components";
+import { API, graphqlOperation } from "aws-amplify";
 
 const ListContainer = styled.div`
   display: flex;
@@ -30,6 +32,8 @@ const ProjectPage = ({
     secondPageReset();
     closeDiscover();
   }, []);
+
+  // createPostListener =
 
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
@@ -71,6 +75,7 @@ const ProjectPage = ({
                   index={index}
                 />
               ))}
+              {provided.placeholder}
               <SwatchActionButton list />
             </ListContainer>
           )}
