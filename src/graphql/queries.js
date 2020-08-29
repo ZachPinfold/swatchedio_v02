@@ -119,6 +119,7 @@ export const listProjects = /* GraphQL */ `
           items {
             hexCode
             order
+            id
           }
         }
         order

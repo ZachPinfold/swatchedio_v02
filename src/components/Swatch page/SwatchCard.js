@@ -10,7 +10,8 @@ const CardContainer = styled.div`
   margin-bottom: 8px;
 `;
 
-const SwatchCard = ({ text, id, index, order }) => {
+const SwatchCard = ({ text, id, index, order, hexCode }) => {
+  console.log(id);
   return (
     <Draggable draggableId={String(id)} index={index}>
       {provided => (
@@ -22,7 +23,7 @@ const SwatchCard = ({ text, id, index, order }) => {
           <Card>
             <CardContent>
               <Typography color='textSecondary' gutterBottom>
-                {order}
+                {hexCode}
               </Typography>
             </CardContent>
           </Card>

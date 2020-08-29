@@ -32,7 +32,8 @@ const SwatchList = ({ title, swatches, listId, index }) => {
                     index={index}
                     key={card.id}
                     text={card.text}
-                    id={card.order}
+                    id={card.id}
+                    hexCode={card.hexCode}
                   />
                 ))}
                 {provided.placeholder}

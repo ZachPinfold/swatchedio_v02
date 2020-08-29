@@ -1,8 +1,9 @@
 import {
   ADD_SWATCH,
   ADD_LIST,
-  DRAG_HAPPENED,
-  LOAD_PROJECTS
+  LOAD_PROJECTS,
+  PROJECT_DRAG_HAPPENED,
+  SWATCH_DRAG_HAPPENED
 } from "../actions/types";
 
 const initialState = {
@@ -24,10 +25,19 @@ export default function (state = initialState, action) {
         ...state,
         projects: [...state.projects, payload]
       };
-    case DRAG_HAPPENED:
+    case PROJECT_DRAG_HAPPENED:
       return {
         ...state,
         projects: payload
+      };
+    case SWATCH_DRAG_HAPPENED:
+      return {
+        ...state,
+        projects: state.projects.map(project =>
+          project.id === payload.droppableIdStart
+            ? { ...project, swatches: payload.items }
+            : project
+        )
       };
     case ADD_SWATCH:
       return {
