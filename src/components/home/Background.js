@@ -3,6 +3,7 @@ import BackgroundCard from "./BackgroundCard";
 import { getColors } from "../../actions/colors";
 import { connect } from "react-redux";
 import colorHoverChange from "../utils/colorHoverChange";
+import DiscoverPanel from "./DiscoverPanel";
 
 const Background = ({
   getColors,
@@ -69,7 +70,7 @@ const Background = ({
     });
   };
 
-  const handleClick = () => {
+  const handleClick = (discover, hueColour) => {
     toggleShowAction(false);
     const buttonColor = colorHoverChange(buttonClass, "landing");
     setButtonClass(buttonColor);
@@ -78,7 +79,7 @@ const Background = ({
       onHover: "20.03vw",
       id: null
     });
-    getColors("new_random", "first");
+    getColors("new_random", "first", discover, hueColour);
     setColorFlipBooleon(!colorBooleon);
     !firstLoad && !allFlipped.firstFlip && setColor1(colors2);
     allFlipped.firstFlip && !colorBooleon && setColor1(colors);
@@ -94,19 +95,10 @@ const Background = ({
       {!loading && (
         <div className='background-container'>
           {discover && (
-            <div className='discover-palette-area'>
-              <button
-                onClick={handleClick}
-                className={`${buttonClass} new-palette-btn-discover `}
-                style={{
-                  width: "150px",
-                  marginTop: "-20px",
-                  padding: "4px 10px"
-                }}
-              >
-                New Palette
-              </button>
-            </div>
+            <DiscoverPanel
+              handleClick={handleClick}
+              buttonClass={buttonClass}
+            />
           )}
           <div
             style={{

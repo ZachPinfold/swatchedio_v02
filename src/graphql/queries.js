@@ -118,7 +118,6 @@ export const listProjects = /* GraphQL */ `
         swatches {
           items {
             hexCode
-            order
             id
           }
         }
@@ -142,5 +141,20 @@ export const getColorHex = /* GraphQL */ `
 export const listColorHexs = /* GraphQL */ `
   query ListColorHexs($format: String!) {
     listColorHexs(format: $format)
+  }
+`;
+export const getColorHexDiscover = /* GraphQL */ `
+  query GetColorHexDiscover($id: ID!) {
+    getColorHexDiscover(id: $id) {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const listColorHexDiscovers = /* GraphQL */ `
+  query ListColorHexDiscovers($hueOption: String, $format: String!) {
+    listColorHexDiscovers(hueOption: $hueOption, format: $format)
   }
 `;

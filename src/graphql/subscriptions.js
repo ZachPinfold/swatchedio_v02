@@ -211,3 +211,30 @@ export const onDeleteColorHex = /* GraphQL */ `
     }
   }
 `;
+export const onCreateColorHexDiscover = /* GraphQL */ `
+  subscription OnCreateColorHexDiscover {
+    onCreateColorHexDiscover {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateColorHexDiscover = /* GraphQL */ `
+  subscription OnUpdateColorHexDiscover {
+    onUpdateColorHexDiscover {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteColorHexDiscover = /* GraphQL */ `
+  subscription OnDeleteColorHexDiscover {
+    onDeleteColorHexDiscover {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;

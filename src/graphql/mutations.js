@@ -247,3 +247,39 @@ export const deleteColorHex = /* GraphQL */ `
     }
   }
 `;
+export const createColorHexDiscover = /* GraphQL */ `
+  mutation CreateColorHexDiscover(
+    $input: CreateColorHexDiscoverInput!
+    $condition: ModelColorHexDiscoverConditionInput
+  ) {
+    createColorHexDiscover(input: $input, condition: $condition) {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateColorHexDiscover = /* GraphQL */ `
+  mutation UpdateColorHexDiscover(
+    $input: UpdateColorHexDiscoverInput!
+    $condition: ModelColorHexDiscoverConditionInput
+  ) {
+    updateColorHexDiscover(input: $input, condition: $condition) {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteColorHexDiscover = /* GraphQL */ `
+  mutation DeleteColorHexDiscover(
+    $input: DeleteColorHexDiscoverInput!
+    $condition: ModelColorHexDiscoverConditionInput
+  ) {
+    deleteColorHexDiscover(input: $input, condition: $condition) {
+      colors
+      createdAt
+      updatedAt
+    }
+  }
+`;

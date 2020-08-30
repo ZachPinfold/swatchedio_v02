@@ -25,3 +25,7 @@ type Project @model {
 type ColorHex @model {
   colors: AWSJSON
 }
+
+type ColorHexDiscover @model {
+  colors: AWSJSON
+}

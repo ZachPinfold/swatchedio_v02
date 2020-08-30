@@ -4,25 +4,27 @@ import SwatchActionButton from "./SwatchActionButton";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
+const ListContainer = styled.div`
+  background-color: grey;
+  border-radius: 3px;
+  /* width: 300px; */
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  margin-right: 8px;
+  transition: height 0.4s ease-out;
+  height: 100%;
+  /* width: ${({ size }) =>
+    (size === "small" && "200px") || (size === "large" && "200px")}; */
+`;
+
 const SwatchList = ({ title, swatches, listId, index }) => {
-  const ListContainer = styled.div`
-    background-color: grey;
-    border-radius: 3px;
-    /* width: 300px; */
-    padding: 8px;
-    margin-right: 8px;
-    height: 100%;
-    width: ${({ size }) =>
-      (size === "small" && "200px") || (size === "large" && "200px")};
-  `;
-
-  console.log(index === 0);
-
   return (
     <Draggable
-      isDragDisabled={index === 0}
+      // isDragDisabled={index === 0}
       draggableId={String(listId)}
       index={index}
+      key={listId}
     >
       {provided => (
         <ListContainer

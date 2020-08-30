@@ -279,9 +279,15 @@ input:-webkit-autofill:focus {
   /* position: fixed; */
   /* top: 70px; */
   padding-bottom: 11px;
-  margin-top: 20px;
+  padding-top: 12px;
   text-align: center;
   width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-bottom: 1px solid var(--orange);
+  background-color: #fafafa;
+
   /* position: absolute; */
   /* background-color: blue; */
 }

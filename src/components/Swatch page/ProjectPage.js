@@ -46,39 +46,36 @@ const ProjectPage = ({
     );
   };
 
-  const ListContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin-top: 100px;
-    position: absolute;
-    height: auto;
-    width: 100%;
-  `;
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div>
-        <Droppable droppableId='all-lists' direction='horizontal' type='list'>
-          {provided => (
-            <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
-              {projectList.projects.map((project, index) => (
-                <SwatchList
-                  listId={project.id}
-                  title={project.projectTitle}
-                  swatches={project.swatches.items}
-                  key={project.id}
-                  index={index}
-                />
-              ))}
-              {provided.placeholder}
-              <SwatchActionButton list />
-            </ListContainer>
-          )}
-        </Droppable>
-      </div>
+      <Droppable droppableId='all-lists' direction='horizontal' type='list'>
+        {provided => (
+          <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
+            {projectList.projects.map((project, index) => (
+              <SwatchList
+                listId={project.id}
+                title={project.projectTitle}
+                swatches={project.swatches.items}
+                key={project.id}
+                index={index}
+              />
+            ))}
+            {provided.placeholder}
+            <SwatchActionButton list />
+          </ListContainer>
+        )}
+      </Droppable>
     </DragDropContext>
   );
 };
+
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* margin-top: 100px;
+position: absolute;
+ */
+`;
 
 const styles = {
   listContainer: {
