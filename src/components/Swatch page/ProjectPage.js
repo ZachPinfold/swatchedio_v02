@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SwatchList from "./SwatchList";
 import { connect } from "react-redux";
 import SwatchActionButton from "./SwatchActionButton";
@@ -9,6 +9,7 @@ import { secondPageReset } from "../../actions/colors";
 import { testAction } from "../../actions/testAction";
 import styled from "styled-components";
 import { API, graphqlOperation } from "aws-amplify";
+import Loader from "../layout/Loader";
 
 const ProjectPage = ({
   projectList,
@@ -19,12 +20,20 @@ const ProjectPage = ({
   test,
   loadProjects
 }) => {
+  const [pageLoad, setLoad] = useState(true);
+
   useEffect(() => {
     loadProjects();
     secondPageReset();
     closeDiscover();
-    document.body.style.background = "blue";
+    setTimeout(() => {
+      setLoad(false);
+    }, 1000);
   }, []);
+
+  if (!pageLoad) {
+    document.body.style.background = "#1F334C";
+  }
 
   // createPostListener =
 
@@ -46,7 +55,9 @@ const ProjectPage = ({
     );
   };
 
-  return (
+  return pageLoad ? (
+    <Loader />
+  ) : (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId='all-lists' direction='horizontal' type='list'>
         {provided => (
@@ -72,9 +83,8 @@ const ProjectPage = ({
 const ListContainer = styled.div`
   display: flex;
   flex-direction: row;
-  /* margin-top: 100px;
-position: absolute;
- */
+  margin-top: 100px;
+  position: absolute;
 `;
 
 const styles = {

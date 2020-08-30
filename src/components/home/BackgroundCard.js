@@ -160,25 +160,6 @@ const BackgroundCard = ({
             color2={color1}
             copied={copied}
           />
-
-          {/* <div className='card-copy-div'>
-            <h3
-              style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
-              onMouseEnter={e => hoverEffect(e)}
-              id={divId}
-              className='card-copy-copy'
-            >
-              {!firstFlip ? color1Temp : color1}
-            </h3>
-            <h3
-              style={{ color: copyColor, opacity: !showCopy ? "0" : "1" }}
-              onMouseEnter={e => hoverEffect(e)}
-              id={divId}
-              className='card-copy-copy'
-            >
-              {!copied ? "Click to Copy" : "Copied!"}
-            </h3>
-          </div> */}
           <div id={divId} className='card-overlay'></div>
         </div>
       </ReactCardFlip>

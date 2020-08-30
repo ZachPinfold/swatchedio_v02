@@ -14,7 +14,8 @@ const Navbar = ({
   openDiscover,
   closeDiscover,
   layout: { discover },
-  auth: { user, isAuthenticated }
+  auth: { user, isAuthenticated },
+  swatch
 }) => {
   const [buttonClass, setButtonClass] = useState("btn-primary");
   const [logoClass, setLogoClass] = useState("nav-logo");
@@ -90,7 +91,12 @@ const Navbar = ({
   );
 
   return (
-    <nav>
+    <nav
+      style={{
+        overflow: "hidden",
+        position: swatch.projectPage ? "fixed" : null
+      }}
+    >
       <Link
         to='/'
         onMouseLeave={handleLogoHover}
@@ -102,7 +108,6 @@ const Navbar = ({
       <div className='nav-buttons-area'>
         {!isAuthenticated ? guestLinks : userLinks}
       </div>
-      {/* <button onClick={handleLogout}>Logout</button> */}
     </nav>
   );
 };
@@ -116,7 +121,8 @@ Navbar.prototype = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  layout: state.layout
+  layout: state.layout,
+  swatch: state.swatchReducer
 });
 
 export default connect(mapStateToProps, {

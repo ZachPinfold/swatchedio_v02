@@ -4,13 +4,15 @@ import {
   LOAD_PROJECTS,
   PROJECT_DRAG_HAPPENED,
   SWATCH_DRAG_HAPPENED,
-  SWATCH_BETWEEN_DRAG_HAPPENED
+  SWATCH_BETWEEN_DRAG_HAPPENED,
+  HOME_REVERT
 } from "../actions/types";
 
 const initialState = {
   projects: [],
   loading: true,
-  erros: {}
+  errors: {},
+  projectPage: false
 };
 
 export default function (state = initialState, action) {
@@ -19,7 +21,8 @@ export default function (state = initialState, action) {
     case LOAD_PROJECTS:
       return {
         ...state,
-        projects: payload
+        projects: payload,
+        projectPage: true
       };
     case ADD_LIST:
       return {
@@ -61,75 +64,11 @@ export default function (state = initialState, action) {
             : project
         )
       };
-
-    //   const newState = state.map(list => {
-    //     if (list.id === payload.listId) {
-    //       return {
-    //         ...list,
-    //         cards: [...list.cards, newCard]
-    //       };
-    //     } else return list;
-    //   });
-    //   return newState;
-
-    // case DRAG_HAPPENED:
-    //   const {
-    //     droppableIdStart,
-    //     droppableIdEnd,
-    //     droppableIndexStart,
-    //     droppableIndexEnd,
-    //     draggableId,
-    //     type
-    //   } = payload;
-
-    //   const newStateAfterMove = [...state.projects];
-
-    //   console.log(
-    //     droppableIdStart,
-    //     droppableIdEnd,
-    //     droppableIndexStart,
-    //     droppableIndexEnd,
-    //     draggableId,
-    //     type
-    //   );
-
-    //   if (type === "list") {
-    //     const list = newStateAfterMove.splice(droppableIndexStart, 1);
-    //     newStateAfterMove.splice(droppableIndexEnd, 0, ...list);
-    //     return {
-    //       ...state,
-    //       projects: newStateAfterMove
-    //     };
-    //   }
-
-    // // In the same list
-    // if (droppableIdStart === droppableIdEnd) {
-    //   const list = state.find(
-    //     list => String(droppableIdStart) === String(list.id)
-    //   );
-    //   const card = list.cards.splice(droppableIndexStart, 1);
-    //   list.cards.splice(droppableIndexEnd, 0, ...card);
-    // }
-
-    // // Other List
-
-    // if (droppableIdStart !== droppableIdEnd) {
-    //   // find list where drag happened
-    //   const listStart = state.find(
-    //     list => String(droppableIdStart) === String(list.id)
-    //   );
-
-    //   // Pull out the card from the list
-    //   const card = listStart.cards.splice(droppableIndexStart, 1);
-
-    //   // find the list where the drag ended
-    //   const listEnd = state.find(
-    //     list => String(droppableIdEnd) === String(list.id)
-    //   );
-
-    //   // put the card in the new list
-    //   listEnd.cards.splice(droppableIndexEnd, 0, ...card);
-    // }
+    case HOME_REVERT:
+      return {
+        ...state,
+        projectPage: false
+      };
     default:
       return state;
   }

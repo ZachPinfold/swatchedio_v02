@@ -13,6 +13,8 @@ const ActionCard = ({
   layout: { discover },
   frontBack
 }) => {
+  const [circleSize, setCircleSize] = useState(false);
+
   return (
     <div onClick={e => e.stopPropagation()} className='actions-area'>
       <div
@@ -22,7 +24,9 @@ const ActionCard = ({
         className='click-more-circles'
       >
         <div
-          style={{ opacity: !showCopy || !discover ? "0" : "1" }}
+          style={{ display: !showCopy || !discover ? "none" : "block" }}
+          onMouseOver={() => setCircleSize(true)}
+          onMouseOut={() => setCircleSize(false)}
           onClick={handleMoreClick}
           className='circle-click-area'
           onClick={() => {
@@ -30,11 +34,27 @@ const ActionCard = ({
           }}
         >
           <div
-            style={{ marginTop: "0px", backgroundColor: copyColor }}
+            style={{
+              transform: circleSize ? "scale(1.2)" : "scale(1)",
+              marginTop: "0px",
+              backgroundColor: copyColor
+            }}
             className='circle'
           ></div>
-          <div style={{ backgroundColor: copyColor }} className='circle'></div>
-          <div style={{ backgroundColor: copyColor }} className='circle'></div>
+          <div
+            style={{
+              transform: circleSize ? "scale(1.2)" : "scale(1)",
+              backgroundColor: copyColor
+            }}
+            className='circle'
+          ></div>
+          <div
+            style={{
+              transform: circleSize ? "scale(1.2)" : "scale(1)",
+              backgroundColor: copyColor
+            }}
+            className='circle'
+          ></div>
         </div>
       </div>
       {showAction[divId] && (

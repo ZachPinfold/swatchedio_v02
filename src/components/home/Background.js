@@ -4,11 +4,14 @@ import { getColors } from "../../actions/colors";
 import { connect } from "react-redux";
 import colorHoverChange from "../utils/colorHoverChange";
 import DiscoverPanel from "./DiscoverPanel";
+import { revertHome } from "../../actions/swatch";
+import Loader from "../layout/Loader";
 
 const Background = ({
   getColors,
   colors: { loading, colors, colors2, randomLoad, secondLoad, firstLoad },
-  layout: { discover }
+  layout: { discover },
+  revertHome
 }) => {
   console.log();
 
@@ -37,6 +40,7 @@ const Background = ({
   });
 
   useEffect(() => {
+    revertHome();
     getColors(null, firstColorLoad);
     setFirstColorLoad(false);
     setTimeout(() => {
@@ -89,7 +93,7 @@ const Background = ({
   };
 
   return pageLoad ? (
-    <div>Loading</div>
+    <Loader />
   ) : (
     <Fragment>
       {!loading && (
@@ -209,4 +213,4 @@ const mts = state => ({
   layout: state.layout
 });
 
-export default connect(mts, { getColors })(Background);
+export default connect(mts, { getColors, revertHome })(Background);

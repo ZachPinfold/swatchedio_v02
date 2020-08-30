@@ -4,7 +4,8 @@ import {
   PROJECT_DRAG_HAPPENED,
   SWATCH_DRAG_HAPPENED,
   LOAD_PROJECTS,
-  SWATCH_BETWEEN_DRAG_HAPPENED
+  SWATCH_BETWEEN_DRAG_HAPPENED,
+  HOME_REVERT
 } from "./types";
 import { API, graphqlOperation } from "aws-amplify";
 import { listProjects } from "../graphql/queries";
@@ -232,4 +233,8 @@ export const sortSwatches = (
       payload: leftToRightChange
     });
   }
+};
+
+export const revertHome = () => dispatch => {
+  dispatch({ type: HOME_REVERT });
 };
