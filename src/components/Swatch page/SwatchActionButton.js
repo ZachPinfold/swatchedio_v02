@@ -3,6 +3,7 @@ import { Icon, Card, Button } from "@material-ui/core";
 import TextareaAutosize from "react-textarea-autosize";
 import { addProject, addSwatch } from "../../actions/swatch";
 import { connect } from "react-redux";
+import getContrastYIQ from "../utils/dominantColor";
 
 const SwatchActionButton = ({
   list,
@@ -16,6 +17,7 @@ const SwatchActionButton = ({
   const [openForm, setOpenForm] = useState(false);
   const [correctRegex, setCorrectRegex] = useState(true);
   const [allowButton, setAllowButton] = useState(false);
+  const [copyColor, setCopyColor] = useState(null);
 
   const buttonRender = () => {
     const buttonText = list ? "Add a new project" : "# add new hex code";
@@ -50,6 +52,8 @@ const SwatchActionButton = ({
         const regex = /^#[0-9A-F]{6}$/i;
         const test = regex.test(e.target.value);
         if (test) {
+          const textColor = getContrastYIQ(e.target.value);
+          setCopyColor(textColor);
           setAllowButton(true);
           setCorrectRegex(true);
         } else if (!test) {
@@ -80,6 +84,7 @@ const SwatchActionButton = ({
       setCorrectRegex(true);
       addSwatch(text, listId, index, swatches);
       setForm("");
+      setCopyColor(null);
     }
   };
 
@@ -111,8 +116,8 @@ const SwatchActionButton = ({
             value={text}
             onChange={handleInputChange}
             style={{
+              color: !copyColor ? "black" : copyColor,
               backgroundColor: !allowButton ? "white" : text,
-
               resize: "none",
               width: "100%",
               outline: "none",

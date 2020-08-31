@@ -231,6 +231,7 @@ nav ul {
 }
 
 .input {
+  color: green;
   margin-top: 15px;
   padding: 10px 10px;
   border: 0.3px solid grey;
@@ -527,11 +528,23 @@ input:-webkit-autofill:focus {
 }
 
 .card-action-container {
-  background-color: green;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 210px;
   height: 50px;
   position: fixed;
-  border-radius: 5px;
+  /* border-radius: 5px; */
+}
+
+.delete-swatch {
+  background-color: var(--orange);
+}
+
+.delete-swatch:hover {
+  background-color: var(--green);
 }
 
 /* Loader */

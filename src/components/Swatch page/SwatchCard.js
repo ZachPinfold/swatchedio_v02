@@ -28,6 +28,8 @@ const SwatchCard = ({
   const [copyHover, setCopyHover] = useState(false);
   const [showCopied, setShowCopied] = useState(false);
   const [showCircle, setCircleHover] = useState(false);
+  const [showCardActions, setShowCardActions] = useState(false);
+  const [showCardDelete, setCardDelete] = useState(false);
 
   useEffect(() => {
     const textColor = getContrastYIQ(hexCode);
@@ -51,98 +53,106 @@ const SwatchCard = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <Card style={{ backgroundColor: hexCode, minHeight: 90 }}>
+          <Card
+            onMouseOver={() => setShowCardActions(true)}
+            onMouseLeave={() => setShowCardActions(false)}
+            style={{ backgroundColor: hexCode, minHeight: 90 }}
+          >
             <div className='card-container'>
-              <h3
-                className='card-text'
-                style={{ color: copyColor }}
-                gutterBottom
-              >
+              <h3 className='card-text' style={{ color: copyColor }}>
                 {hexCode}
               </h3>
-              <div className='card-action-container'>
-                <button
-                  onClick={() =>
-                    deleteSwatchCard(id, projectId, swatches, index)
-                  }
-                >
-                  Delete
-                </button>
-              </div>
 
-              <div
-                style={{
-                  color: copyColor,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center"
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-end",
-                    width: "100%",
-                    marginBottom: "2px"
-                  }}
-                >
+              {showCardDelete && (
+                <div className='card-action-container'>
+                  <button
+                    className='btn-primary delete-swatch'
+                    onClick={() =>
+                      deleteSwatchCard(id, projectId, swatches, index)
+                    }
+                  >
+                    Delete color
+                  </button>
+                </div>
+              )}
+              {showCardActions && (
+                <div>
                   <div
-                    onMouseOver={() => setCircleHover(true)}
-                    onMouseOut={() => setCircleHover(false)}
                     style={{
-                      padding: "5px 5px 5px 3px",
+                      color: copyColor,
                       display: "flex",
-                      flexDirection: "row",
-                      backgroundColor: showCircle ? "#cfcfcf" : "transparent",
-                      borderRadius: "3px",
-                      cursor: "pointer"
+                      flexDirection: "column",
+                      alignItems: "center"
                     }}
                   >
                     <div
-                      style={{ backgroundColor: copyColor }}
-                      className='small-circle'
-                    ></div>
-                    <div
-                      style={{ backgroundColor: copyColor }}
-                      className='small-circle'
-                    ></div>
-                    <div
-                      style={{ backgroundColor: copyColor }}
-                      className='small-circle'
-                    ></div>
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "flex-end",
+                        width: "100%",
+                        marginBottom: "2px"
+                      }}
+                    >
+                      <div
+                        onMouseOver={() => setCircleHover(true)}
+                        onMouseOut={() => setCircleHover(false)}
+                        onClick={() => setCardDelete(!showCardDelete)}
+                        style={{
+                          padding: "5px 5px 5px 3px",
+                          display: "flex",
+                          flexDirection: "row",
+                          backgroundColor: showCircle
+                            ? "#cfcfcf"
+                            : "transparent",
+                          borderRadius: "3px",
+                          cursor: "pointer"
+                        }}
+                      >
+                        <div
+                          style={{ backgroundColor: copyColor }}
+                          className='small-circle'
+                        ></div>
+                        <div
+                          style={{ backgroundColor: copyColor }}
+                          className='small-circle'
+                        ></div>
+                        <div
+                          style={{ backgroundColor: copyColor }}
+                          className='small-circle'
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "7px",
+                      marginRight: "4.5px",
+                      color: copyColor,
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "flex-end"
+                    }}
+                  >
+                    {showCopied && <p className='copied-text'>{`copied!`}</p>}
+                    <i
+                      onMouseOver={() => {
+                        setCopyHover(true);
+                      }}
+                      onMouseOut={() => {
+                        setCopyHover(false);
+                      }}
+                      onClick={handleCopy}
+                      style={{
+                        opacity: copyHover ? "1" : "0.5",
+                        cursor: "pointer",
+                        color: copyColor
+                      }}
+                      class='fas fa-copy'
+                    ></i>
                   </div>
                 </div>
-                <div
-                  style={{
-                    marginTop: "7px",
-                    color: copyColor,
-                    display: "flex",
-                    flexDirection: "row"
-                  }}
-                >
-                  {showCopied && (
-                    <p st className='copied-text'>
-                      copied!
-                    </p>
-                  )}
-                  <i
-                    onMouseOver={() => {
-                      setCopyHover(true);
-                    }}
-                    onMouseOut={() => {
-                      setCopyHover(false);
-                    }}
-                    onClick={handleCopy}
-                    style={{
-                      opacity: copyHover ? "1" : "0.5",
-                      cursor: "pointer",
-                      color: copyColor
-                    }}
-                    class='fas fa-copy'
-                  ></i>
-                </div>
-              </div>
+              )}
             </div>
           </Card>
         </CardContainer>
