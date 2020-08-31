@@ -529,10 +529,6 @@ input:-webkit-autofill:focus {
 
 .card-action-container {
   background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 210px;
   height: 50px;
   position: fixed;
@@ -540,11 +536,17 @@ input:-webkit-autofill:focus {
 }
 
 .delete-swatch {
-  background-color: var(--orange);
+  margin-left: 10px;
+  margin-top: 15px;
+  background-color: transparent;
+  border: none;
+  color: var(--orange);
+  font-family: var(--HelveticaM);
+  cursor: pointer;
 }
 
 .delete-swatch:hover {
-  background-color: var(--green);
+  text-decoration: underline;
 }
 
 /* Loader */

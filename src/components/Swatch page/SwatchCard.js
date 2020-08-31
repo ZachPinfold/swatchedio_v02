@@ -66,7 +66,7 @@ const SwatchCard = ({
               {showCardDelete && (
                 <div className='card-action-container'>
                   <button
-                    className='btn-primary delete-swatch'
+                    className='delete-swatch'
                     onClick={() =>
                       deleteSwatchCard(id, projectId, swatches, index)
                     }

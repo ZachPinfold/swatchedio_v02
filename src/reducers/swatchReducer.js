@@ -6,7 +6,8 @@ import {
   SWATCH_DRAG_HAPPENED,
   SWATCH_BETWEEN_DRAG_HAPPENED,
   HOME_REVERT,
-  DELETE_SWATCH
+  DELETE_SWATCH,
+  DELETE_PROJECT
 } from "../actions/types";
 
 const initialState = {
@@ -74,6 +75,11 @@ export default function (state = initialState, action) {
             ? { ...project, swatches: payload.items }
             : project
         )
+      };
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        projects: payload.projects
       };
 
     case HOME_REVERT:

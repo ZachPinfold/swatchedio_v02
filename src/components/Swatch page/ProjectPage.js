@@ -69,6 +69,7 @@ const ProjectPage = ({
             <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
               {projectList.projects.map((project, index) => (
                 <SwatchList
+                  projectList={projectList.projects}
                   listId={project.id}
                   title={project.projectTitle}
                   swatches={project.swatches.items}

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import SwatchCard from "./SwatchCard";
 import SwatchActionButton from "./SwatchActionButton";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { deleteProjectById } from "../../actions/swatch";
 
 const ListContainer = styled.div`
   background-color: ${({ master }) =>
@@ -18,7 +20,17 @@ const ListContainer = styled.div`
     (size === "small" && "200") || (size === "large" && "400px")};
 `;
 
-const SwatchList = ({ title, swatches, listId, index }) => {
+const SwatchList = ({
+  title,
+  swatches,
+  listId,
+  index,
+  deleteProjectById,
+  projectList
+}) => {
+  const [showCircleBack, setshowCircleBack] = useState(false);
+  const [showDelete, setshowDelete] = useState(false);
+
   return (
     <Draggable
       // isDragDisabled={index === 0}
@@ -41,7 +53,7 @@ const SwatchList = ({ title, swatches, listId, index }) => {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    justifyContent: "centre"
+                    justifyContent: title !== "Master" && "space-between"
                   }}
                 >
                   {title === "Master" && (
@@ -56,12 +68,66 @@ const SwatchList = ({ title, swatches, listId, index }) => {
                   >
                     {title}
                   </h4>
+                  {title !== "Master" && (
+                    <div
+                      onMouseOver={() => setshowCircleBack(true)}
+                      onMouseOut={() => setshowCircleBack(false)}
+                      onClick={() => setshowDelete(!showDelete)}
+                      style={{
+                        height: "10px",
+                        padding: "6px 5px 0px 3px",
+                        display: "flex",
+                        flexDirection: "row",
+                        backgroundColor: showCircleBack
+                          ? "black"
+                          : "transparent",
+                        borderRadius: "3px",
+                        cursor: "pointer"
+                      }}
+                    >
+                      <div
+                        style={{
+                          backgroundColor: showCircleBack ? "white" : "black"
+                        }}
+                        className='small-circle'
+                      ></div>
+                      <div
+                        style={{
+                          backgroundColor: showCircleBack ? "white" : "black"
+                        }}
+                        className='small-circle'
+                      ></div>
+                      <div
+                        style={{
+                          backgroundColor: showCircleBack ? "white" : "black"
+                        }}
+                        className='small-circle'
+                      ></div>
+                    </div>
+                  )}
                   {title === "Master" && (
-                    <p className='master-subtitle'>
-                      - All your favourites go here
-                    </p>
+                    <p className='master-subtitle'>- For all your favourites</p>
                   )}
                 </div>
+                {showDelete && (
+                  <div
+                    style={{
+                      zIndex: "100",
+                      marginTop: "-100px",
+                      marginLeft: "72px"
+                    }}
+                    className='card-action-container'
+                  >
+                    <button
+                      onClick={() =>
+                        deleteProjectById(listId, projectList, index)
+                      }
+                      className='delete-swatch'
+                    >
+                      Delete project
+                    </button>
+                  </div>
+                )}
 
                 {swatches.map((card, index) => (
                   <SwatchCard
@@ -86,4 +152,4 @@ const SwatchList = ({ title, swatches, listId, index }) => {
   );
 };
 
-export default SwatchList;
+export default connect(null, { deleteProjectById })(SwatchList);

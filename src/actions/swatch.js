@@ -6,7 +6,8 @@ import {
   LOAD_PROJECTS,
   SWATCH_BETWEEN_DRAG_HAPPENED,
   HOME_REVERT,
-  DELETE_SWATCH
+  DELETE_SWATCH,
+  DELETE_PROJECT
 } from "./types";
 import { API, graphqlOperation } from "aws-amplify";
 import { listProjects } from "../graphql/queries";
@@ -15,7 +16,8 @@ import {
   updateProject,
   createSwatch,
   updateSwatch,
-  deleteSwatch
+  deleteSwatch,
+  deleteProject
 } from "../graphql/mutations";
 
 // LOAD PROJECTS
@@ -45,6 +47,42 @@ export const addProject = (projectTitle, index) => async dispatch => {
   };
   const result = await API.graphql(graphqlOperation(createProject, { input }));
   dispatch({ type: ADD_LIST, payload: result.data.createProject });
+};
+
+// DELETE PROJECT
+
+export const deleteProjectById = (
+  projectId,
+  oldProjects,
+  index
+) => async dispatch => {
+  await API.graphql(
+    graphqlOperation(deleteProject, {
+      input: { id: projectId }
+    })
+  );
+
+  oldProjects.splice(index, 1);
+
+  const projects = oldProjects.map((project, index) => {
+    project.order = index;
+    API.graphql(
+      graphqlOperation(updateProject, {
+        input: {
+          id: project.id,
+          order: index
+        }
+      })
+    );
+    return project;
+  });
+
+  console.log(projects);
+
+  dispatch({
+    type: DELETE_PROJECT,
+    payload: { projectId, projects }
+  });
 };
 
 // ADD SWATCH
@@ -91,7 +129,6 @@ export const deleteSwatchCard = (
     })
   );
 
-  // const updatedSwatches = swatches.splice(index, 1);
   swatches.splice(index, 1);
   console.log(swatches);
 

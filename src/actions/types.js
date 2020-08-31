@@ -12,6 +12,7 @@ export const GET_SECOND_COLORS = "GET_SECOND_COLORS";
 export const SHOW_EXPLORE = "SHOW_EXPLORE";
 export const HIDE_EXPLORE = "HIDE_EXPLORE";
 export const NEW_PALETTE = "NEW_PALETTE";
+export const DELETE_PROJECT = "DELETE_PROJECT";
 export const ADD_SWATCH = "ADD_SWATCH";
 export const DELETE_SWATCH = "DELETE_SWATCH";
 export const ADD_LIST = "ADD_LIST";
