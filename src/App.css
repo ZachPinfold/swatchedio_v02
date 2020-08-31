@@ -470,6 +470,70 @@ input:-webkit-autofill:focus {
   opacity: 1;
 }
 
+.top-color-text {
+  color: white;
+  font-family: var(--HelveticaM);
+  font-size: var(--smallFont);
+}
+
+.warning-text {
+  color: var(--orange);
+  font-family: var(--HelveticaL);
+  font-size: var(--smallFont);
+  margin: 10px 0px;
+}
+
+.card-text {
+  font-family: var(--HelveticaM);
+  font-size: var(--regularFont);
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.copied-text {
+  font-family: var(--HelveticaM);
+  font-size: var(--smallFont);
+  margin-right: 5px;
+}
+
+.project-title {
+  font-family: var(--HelveticaM);
+  font-size: var(--regularFont);
+  margin-bottom: 10px;
+}
+
+.add-new-text {
+  font-family: var(--HelveticaL);
+  font-size: var(--regularFont);
+}
+
+.master-subtitle {
+  font-family: var(--HelveticaL);
+  font-size: var(--smallFont);
+  margin-left: 5px;
+  padding-top: 1px;
+}
+
+.small-circle {
+  width: 3px;
+  height: 3px;
+  border-radius: 5px;
+  margin-left: 3px;
+}
+
+.card-action-container {
+  background-color: green;
+  width: 210px;
+  height: 50px;
+  position: fixed;
+  border-radius: 5px;
+}
+
 /* Loader */
 
 @keyframes ldio-3ma625hz2r {

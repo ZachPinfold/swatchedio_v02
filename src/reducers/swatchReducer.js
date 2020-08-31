@@ -5,7 +5,8 @@ import {
   PROJECT_DRAG_HAPPENED,
   SWATCH_DRAG_HAPPENED,
   SWATCH_BETWEEN_DRAG_HAPPENED,
-  HOME_REVERT
+  HOME_REVERT,
+  DELETE_SWATCH
 } from "../actions/types";
 
 const initialState = {
@@ -64,6 +65,17 @@ export default function (state = initialState, action) {
             : project
         )
       };
+
+    case DELETE_SWATCH:
+      return {
+        ...state,
+        projects: state.projects.map(project =>
+          project.id === payload.projectId
+            ? { ...project, swatches: payload.items }
+            : project
+        )
+      };
+
     case HOME_REVERT:
       return {
         ...state,

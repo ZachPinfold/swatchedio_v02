@@ -5,17 +5,17 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 const ListContainer = styled.div`
-  background-color: grey;
+  background-color: ${({ master }) =>
+    (master === true && "#e3fcf6") || (master === false && "white")};
   border-radius: 3px;
   /* width: 300px; */
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  padding: 10px;
   margin-right: 8px;
-  transition: height 0.4s ease-out;
   height: 100%;
-  /* width: ${({ size }) =>
-    (size === "small" && "200px") || (size === "large" && "200px")}; */
+  width: ${({ size }) =>
+    (size === "small" && "200") || (size === "large" && "400px")};
 `;
 
 const SwatchList = ({ title, swatches, listId, index }) => {
@@ -28,7 +28,8 @@ const SwatchList = ({ title, swatches, listId, index }) => {
     >
       {provided => (
         <ListContainer
-          size={index === 0 ? "small" : "large"}
+          master={title === "Master" ? true : false}
+          size={title === "master" ? "large" : "small"}
           {...provided.draggableProps}
           ref={provided.innerRef}
           {...provided.dragHandleProps}
@@ -36,7 +37,32 @@ const SwatchList = ({ title, swatches, listId, index }) => {
           <Droppable droppableId={String(listId)} type='card'>
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                <h4>{title}</h4>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "centre"
+                  }}
+                >
+                  {title === "Master" && (
+                    <i style={{ marginRight: "5px" }} class='far fa-star'></i>
+                  )}
+
+                  <h4
+                    style={{
+                      marginBottom: "10px"
+                    }}
+                    className='project-title'
+                  >
+                    {title}
+                  </h4>
+                  {title === "Master" && (
+                    <p className='master-subtitle'>
+                      - All your favourites go here
+                    </p>
+                  )}
+                </div>
+
                 {swatches.map((card, index) => (
                   <SwatchCard
                     order={card.order}
@@ -45,6 +71,8 @@ const SwatchList = ({ title, swatches, listId, index }) => {
                     text={card.text}
                     id={card.id}
                     hexCode={card.hexCode}
+                    projectId={listId}
+                    swatches={swatches}
                   />
                 ))}
                 {provided.placeholder}

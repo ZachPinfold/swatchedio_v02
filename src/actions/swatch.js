@@ -5,7 +5,8 @@ import {
   SWATCH_DRAG_HAPPENED,
   LOAD_PROJECTS,
   SWATCH_BETWEEN_DRAG_HAPPENED,
-  HOME_REVERT
+  HOME_REVERT,
+  DELETE_SWATCH
 } from "./types";
 import { API, graphqlOperation } from "aws-amplify";
 import { listProjects } from "../graphql/queries";
@@ -13,8 +14,11 @@ import {
   createProject,
   updateProject,
   createSwatch,
-  updateSwatch
+  updateSwatch,
+  deleteSwatch
 } from "../graphql/mutations";
+
+// LOAD PROJECTS
 
 export const loadProjects = project => async dispatch => {
   const result = await API.graphql(graphqlOperation(listProjects));
@@ -30,6 +34,8 @@ export const loadProjects = project => async dispatch => {
   dispatch({ type: LOAD_PROJECTS, payload: orderedProjects });
 };
 
+// ADD PROJECT
+
 export const addProject = (projectTitle, index) => async dispatch => {
   const input = {
     ownerId: "123",
@@ -40,6 +46,8 @@ export const addProject = (projectTitle, index) => async dispatch => {
   const result = await API.graphql(graphqlOperation(createProject, { input }));
   dispatch({ type: ADD_LIST, payload: result.data.createProject });
 };
+
+// ADD SWATCH
 
 export const addSwatch = (
   swatchHexCode,
@@ -68,6 +76,45 @@ export const addSwatch = (
 
   dispatch({ type: ADD_SWATCH, payload: { items, projectId } });
 };
+
+// DELETE SWATCH
+
+export const deleteSwatchCard = (
+  swatchId,
+  projectId,
+  swatches,
+  index
+) => async dispatch => {
+  await API.graphql(
+    graphqlOperation(deleteSwatch, {
+      input: { id: swatchId }
+    })
+  );
+
+  // const updatedSwatches = swatches.splice(index, 1);
+  swatches.splice(index, 1);
+  console.log(swatches);
+
+  const items = swatches.map((swatch, index) => {
+    swatch.order = index;
+    API.graphql(
+      graphqlOperation(updateSwatch, {
+        input: {
+          id: swatch.id,
+          order: index
+        }
+      })
+    );
+    return swatch;
+  });
+
+  dispatch({
+    type: DELETE_SWATCH,
+    payload: { projectId, items: { items } }
+  });
+};
+
+// SORT SWATCHES/PROJECTS
 
 export const sortSwatches = (
   projects,
@@ -234,6 +281,8 @@ export const sortSwatches = (
     });
   }
 };
+
+// REVERT HOME
 
 export const revertHome = () => dispatch => {
   dispatch({ type: HOME_REVERT });

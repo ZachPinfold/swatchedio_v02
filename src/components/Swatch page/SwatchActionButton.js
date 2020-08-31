@@ -14,9 +14,11 @@ const SwatchActionButton = ({
 }) => {
   const [text, setForm] = useState("");
   const [openForm, setOpenForm] = useState(false);
+  const [correctRegex, setCorrectRegex] = useState(true);
+  const [allowButton, setAllowButton] = useState(false);
 
   const buttonRender = () => {
-    const buttonText = list ? "Add another list" : "Add another card";
+    const buttonText = list ? "Add a new project" : "# add new hex code";
     const buttonTextOpacity = list ? "1" : "0.5";
     const buttonTextColour = list ? "white" : "inherit";
     const buttonTextBackground = list ? "rgba(0,0,0,.15)" : "inherit";
@@ -33,15 +35,32 @@ const SwatchActionButton = ({
           backgroundColor: buttonTextBackground
         }}
       >
-        <Icon>add</Icon>
-        <p>{buttonText}</p>
+        <p className='add-new-text'>{buttonText}</p>
       </div>
     );
   };
 
   const handleInputChange = e => {
-    setForm(e.target.value);
+    if (e.target.value === "") {
+      setCorrectRegex(true);
+      setForm("");
+    } else {
+      setForm(e.target.value);
+      if (!list) {
+        const regex = /^#[0-9A-F]{6}$/i;
+        const test = regex.test(e.target.value);
+        if (test) {
+          setAllowButton(true);
+          setCorrectRegex(true);
+        } else if (!test) {
+          setAllowButton(false);
+          setCorrectRegex(false);
+        }
+      }
+    }
   };
+
+  console.log(correctRegex);
 
   const handleAddProject = () => {
     let index = 0;
@@ -58,47 +77,61 @@ const SwatchActionButton = ({
     if (swatches.length === 0) index = 0;
     else index = swatches.length;
     if (text) {
+      setCorrectRegex(true);
       addSwatch(text, listId, index, swatches);
       setForm("");
     }
   };
 
   const renderForm = () => {
-    const placeholder = list ? "enter list title" : "enter card title";
-    const buttonTitle = list ? "add list" : "add card";
+    const placeholder = list ? "enter project title" : "Add a hex color #";
+    const buttonTitle = list ? "add project" : "add hex color";
 
     return (
       <div>
+        {!list && !correctRegex && (
+          <p className='warning-text'>
+            Please enter a valid hex code (eg, #876057)
+          </p>
+        )}
         <Card
           style={{
+            backgroundColor: !allowButton ? "white" : text,
             overflow: "visible",
-            minHeight: 80,
+            minHeight: 90,
             minWidth: 272,
             padding: "6px 8px 2px"
           }}
         >
-          <TextareaAutosize
+          <input
             placeholder={placeholder}
+            className='input'
             autoFocus
             onBlur={() => setOpenForm(false)}
             value={text}
             onChange={handleInputChange}
             style={{
+              backgroundColor: !allowButton ? "white" : text,
+
               resize: "none",
               width: "100%",
               outline: "none",
-              border: "none"
+              border: "none",
+              padding: "0px",
+              marginTop: "0px"
             }}
           />
         </Card>
-        <div>
-          <Button
+        <div style={{ textAlign: "center" }}>
+          <button
+            className='btn-primary'
+            disabled={!list && !allowButton && true}
             onMouseDown={list ? handleAddProject : handleAddSwatch}
             variant='contained'
-            style={{ color: "white", backgroundColor: "green" }}
+            style={{ marginTop: "10px", opacity: !allowButton ? "0.6" : "1" }}
           >
             {buttonTitle}
-          </Button>
+          </button>
         </div>
       </div>
     );
