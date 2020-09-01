@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { addSwatch } from "../../actions/swatch";
+import { listProjects } from "../../graphql/queries";
+import { API, graphqlOperation } from "aws-amplify";
 
 const ActionCard = ({
   auth: { isAuthenticated },
@@ -11,9 +14,52 @@ const ActionCard = ({
   showAction,
   toggleShowAction,
   layout: { discover },
-  frontBack
+  frontBack,
+  randomLoad,
+  color,
+  color2,
+  addSwatch,
+  colors
 }) => {
   const [circleSize, setCircleSize] = useState(false);
+  const [addToMaster, toggleAddToMaster] = useState(false);
+  const [masterProject, addMasterProject] = useState(null);
+  const [projectArray, addProjects] = useState([]);
+  const [addToProject, toggleAddToProject] = useState(false);
+
+  const handleMasterToggle = async () => {
+    toggleAddToMaster(!addToMaster);
+    const result = await API.graphql(graphqlOperation(listProjects));
+    result.data.listProjects.items.forEach(project => {
+      if (project.projectTitle === "Master") {
+        addMasterProject(project);
+      }
+    });
+  };
+
+  const handleAddToProject = async () => {
+    addToMaster &&
+      addSwatch(
+        randomLoad ? color : color2,
+        masterProject.id,
+        masterProject.swatches.items.length,
+        masterProject.swatches.items
+      );
+  };
+
+  const toggleAddProject = async () => {
+    const projectArr = [];
+    const result = await API.graphql(graphqlOperation(listProjects));
+    result.data.listProjects.items.forEach(project => {
+      if (project.projectTitle !== "Master") {
+        projectArr.push(project);
+      }
+    });
+    addProjects(projectArr);
+    toggleAddToProject(!addToProject);
+  };
+
+  console.log(projectArray);
 
   return (
     <div onClick={e => e.stopPropagation()} className='actions-area'>
@@ -69,22 +115,56 @@ const ActionCard = ({
           <h3 className='more-card-title'>Actions</h3>
           <div className='break-line'></div>
           <div style={{ marginBottom: "10px" }} className='action-button-area'>
+            <div className='action-copy-line'>
+              <h3
+                onClick={handleMasterToggle}
+                className={
+                  isAuthenticated
+                    ? "more-card-add-btn-on"
+                    : "more-card-add-btn-off"
+                }
+              >
+                Add to my Master Swatch
+              </h3>
+              {addToMaster && (
+                <i
+                  style={{
+                    color: "#06d6a0",
+                    marginTop: "10px",
+                    marginLeft: "5px"
+                  }}
+                  class='far fa-check-circle'
+                ></i>
+              )}
+            </div>
+
             <h3
-              style={{ opacity: isAuthenticated ? "1" : "0.3" }}
-              className='more-card-add-btn'
-            >
-              Add to my Master Swatch
-            </h3>
-            <h3
-              style={{ opacity: isAuthenticated ? "1" : "0.3" }}
-              className='more-card-add-btn'
+              onClick={toggleAddProject}
+              className={
+                isAuthenticated
+                  ? "more-card-add-btn-on"
+                  : "more-card-add-btn-off"
+              }
             >
               Add to my project...
             </h3>
+            {addToProject && (
+              <div className='add-project-options'>
+                <ul>
+                  {projectArray.map(project => (
+                    <li>{project.projectTitle}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           <div className='break-line'></div>
           {isAuthenticated && (
-            <button style={{ marginTop: "10px" }} className='btn-primary'>
+            <button
+              onClick={handleAddToProject}
+              style={{ marginTop: "10px" }}
+              className='btn-primary'
+            >
               Add to swatch
             </button>
           )}
@@ -101,7 +181,8 @@ const ActionCard = ({
 
 const mstp = state => ({
   auth: state.auth,
-  layout: state.layout
+  layout: state.layout,
+  colors: state.colors
 });
 
-export default connect(mstp, null)(ActionCard);
+export default connect(mstp, { addSwatch })(ActionCard);

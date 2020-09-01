@@ -446,10 +446,32 @@ input:-webkit-autofill:focus {
   margin-top: -7px;
 }
 
-.more-card-add-btn {
+.more-card-add-btn-off {
   font-family: var(--HelveticaL);
   font-size: var(--smallFont);
   margin-top: 10px;
+  opacity: 0.3;
+}
+
+.more-card-add-btn-on {
+  font-family: var(--HelveticaL);
+  font-size: var(--smallFont);
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.more-card-add-btn-on:hover {
+  color: var(--green);
+}
+
+.action-copy-line {
+  display: flex;
+  flex-direction: row;
+}
+
+.add-project-options {
+  margin-top: 10px;
+  background-color: #e3fcf6;
 }
 
 .action-button-area {

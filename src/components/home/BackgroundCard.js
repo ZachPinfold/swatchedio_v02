@@ -110,6 +110,9 @@ const BackgroundCard = ({
             showAction={showAction}
             toggleShowAction={toggleShowAction}
             frontBack={"front"}
+            randomLoad={randomLoad}
+            color={color}
+            color2={color2}
           />
 
           <CopyArea
@@ -148,6 +151,9 @@ const BackgroundCard = ({
             showAction={showAction}
             toggleShowAction={toggleShowAction}
             frontBack={"back"}
+            randomLoad={randomLoad}
+            color={color1Temp}
+            color2={color1}
           />
 
           <CopyArea
