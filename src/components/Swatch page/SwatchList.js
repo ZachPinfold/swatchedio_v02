@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SwatchCard from "./SwatchCard";
 import SwatchActionButton from "./SwatchActionButton";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { deleteProjectById } from "../../actions/swatch";
+import useOnClickOutside from "use-onclickoutside";
 
 const ListContainer = styled.div`
   background-color: ${({ master }) =>
@@ -30,6 +31,14 @@ const SwatchList = ({
 }) => {
   const [showCircleBack, setshowCircleBack] = useState(false);
   const [showDelete, setshowDelete] = useState(false);
+
+  const wrapperRef = useRef(null);
+
+  const closeDeleteBox = () => {
+    setshowDelete(false);
+  };
+
+  useOnClickOutside(wrapperRef, closeDeleteBox);
 
   return (
     <Draggable
@@ -111,6 +120,7 @@ const SwatchList = ({
                 </div>
                 {showDelete && (
                   <div
+                    ref={wrapperRef}
                     style={{
                       zIndex: "100",
                       marginTop: "-100px",

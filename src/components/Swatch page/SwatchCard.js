@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Card from "@material-ui/core/Card";
 import { Draggable } from "react-beautiful-dnd";
 import { Provider } from "react-redux";
@@ -6,6 +6,7 @@ import styled from "styled-components";
 import getContrastYIQ from "../utils/dominantColor";
 import { deleteSwatchCard } from "../../actions/swatch";
 import { connect } from "react-redux";
+import useOnClickOutside from "use-onclickoutside";
 
 const CardContainer = styled.div`
   margin-bottom: 8px;
@@ -30,11 +31,17 @@ const SwatchCard = ({
   const [showCircle, setCircleHover] = useState(false);
   const [showCardActions, setShowCardActions] = useState(false);
   const [showCardDelete, setCardDelete] = useState(false);
+  const wrapperRef = useRef(null);
 
   useEffect(() => {
     const textColor = getContrastYIQ(hexCode);
     setCopyColor(textColor);
   }, []);
+
+  const closeDeleteBox = () => {
+    setCardDelete(false);
+  };
+  useOnClickOutside(wrapperRef, closeDeleteBox);
 
   const handleCopy = () => {
     setShowCopied(true);
@@ -66,6 +73,7 @@ const SwatchCard = ({
               {showCardDelete && (
                 <div className='card-action-container'>
                   <button
+                    ref={wrapperRef}
                     className='delete-swatch'
                     onClick={() =>
                       deleteSwatchCard(id, projectId, swatches, index)

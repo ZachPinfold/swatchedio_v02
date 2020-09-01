@@ -64,8 +64,6 @@ const SwatchActionButton = ({
     }
   };
 
-  console.log(correctRegex);
-
   const handleAddProject = () => {
     let index = 0;
     if (swatchList.projects.length === 0) index = 0;
