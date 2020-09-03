@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addSwatch } from "../../actions/swatch";
 import { listProjects } from "../../graphql/queries";
 import { API, graphqlOperation } from "aws-amplify";
+import { updateProject } from "../../graphql/mutations";
 
 const ActionCard = ({
   auth: { isAuthenticated },
@@ -24,8 +25,10 @@ const ActionCard = ({
   const [circleSize, setCircleSize] = useState(false);
   const [addToMaster, toggleAddToMaster] = useState(false);
   const [masterProject, addMasterProject] = useState(null);
+  const [projectIds, addProjectId] = useState([]);
   const [projectArray, addProjects] = useState([]);
-  const [addToProject, toggleAddToProject] = useState(false);
+  const [projects, toggleViewProjectIcon] = useState([]);
+  const [viewProjects, toggleViewProject] = useState(false);
 
   const handleMasterToggle = async () => {
     toggleAddToMaster(!addToMaster);
@@ -45,9 +48,21 @@ const ActionCard = ({
         masterProject.swatches.items.length,
         masterProject.swatches.items
       );
+    projectIds.length > 0 &&
+      projectArray.forEach(project => {
+        const includeId = projectIds.includes(project.id);
+        if (includeId === true) {
+          addSwatch(
+            randomLoad ? color : color2,
+            project.id,
+            project.swatches.items.length,
+            project.swatches.items
+          );
+        }
+      });
   };
 
-  const toggleAddProject = async () => {
+  const toggleViewLoadProjects = async () => {
     const projectArr = [];
     const result = await API.graphql(graphqlOperation(listProjects));
     result.data.listProjects.items.forEach(project => {
@@ -56,10 +71,26 @@ const ActionCard = ({
       }
     });
     addProjects(projectArr);
-    toggleAddToProject(!addToProject);
+    toggleViewProject(true);
   };
 
-  console.log(projectArray);
+  const toggleAddProject = async (index, projectId) => {
+    const isProjectIdInThere = projectIds.includes(projectId);
+    if (isProjectIdInThere === false) addProjectId([...projectIds, projectId]);
+    projectIds.forEach(project => {
+      if (project === projectId) {
+        addProjectId(projectIds.filter(project => project !== projectId));
+      }
+    });
+
+    const isProjectThere = projects.includes(index);
+    if (isProjectThere === false) toggleViewProjectIcon([...projects, index]);
+    projects.forEach(project => {
+      if (project === index) {
+        toggleViewProjectIcon(projects.filter(project => project !== index));
+      }
+    });
+  };
 
   return (
     <div onClick={e => e.stopPropagation()} className='actions-area'>
@@ -139,7 +170,7 @@ const ActionCard = ({
             </div>
 
             <h3
-              onClick={toggleAddProject}
+              onClick={toggleViewLoadProjects}
               className={
                 isAuthenticated
                   ? "more-card-add-btn-on"
@@ -148,11 +179,35 @@ const ActionCard = ({
             >
               Add to my project...
             </h3>
-            {addToProject && (
-              <div className='add-project-options'>
+            {viewProjects && (
+              <div style={{ padding: "10px" }} className='add-project-options'>
                 <ul>
-                  {projectArray.map(project => (
-                    <li>{project.projectTitle}</li>
+                  {projectArray.map((project, index) => (
+                    <li>
+                      <div className='action-copy-line'>
+                        <h3
+                          onClick={() => toggleAddProject(index, project.id)}
+                          style={{ marginTop: index === 0 ? "0px" : "10px" }}
+                          className='more-card-add-btn-on'
+                        >
+                          {" "}
+                          {project.projectTitle}
+                        </h3>
+                        {projects.map(
+                          project =>
+                            project === index && (
+                              <i
+                                style={{
+                                  color: "#06d6a0",
+                                  marginTop: index !== 0 ? "10px" : "0px",
+                                  marginLeft: "5px"
+                                }}
+                                class='far fa-check-circle'
+                              ></i>
+                            )
+                        )}
+                      </div>
+                    </li>
                   ))}
                 </ul>
               </div>
