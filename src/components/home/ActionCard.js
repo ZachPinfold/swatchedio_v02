@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { connect } from "react-redux";
 import { addSwatch } from "../../actions/swatch";
 import { listProjects } from "../../graphql/queries";
 import { API, graphqlOperation } from "aws-amplify";
-import { updateProject } from "../../graphql/mutations";
+// import useOnClickOutside from "use-onclickoutside";
 
 const ActionCard = ({
   auth: { isAuthenticated },
@@ -30,6 +30,12 @@ const ActionCard = ({
   const [projects, toggleViewProjectIcon] = useState([]);
   const [viewProjects, toggleViewProject] = useState(false);
   const [colorsAdded, setColorsAdded] = useState(false);
+  const wrapperRef = useRef(null);
+
+  // const closeDeleteBox = () => {
+  //   toggleShowAction(false);
+  // };
+  // useOnClickOutside(wrapperRef, closeDeleteBox);
 
   const handleMasterToggle = async () => {
     toggleAddToMaster(!addToMaster);
@@ -157,7 +163,11 @@ const ActionCard = ({
         </div>
       </div>
       {showAction[divId] && (
-        <div onClick={e => e.stopPropagation()} className='more-card-box'>
+        <div
+          ref={wrapperRef}
+          onClick={e => e.stopPropagation()}
+          className='more-card-box'
+        >
           {colorsAdded && (
             <div
               // style={{ opacity: colorsAdded ? "1" : "0" }}

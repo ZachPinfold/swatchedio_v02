@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
-import { logout, loadUser } from "../actions/auth";
+import { logout, loadUser } from "../../actions/auth";
 import { connect } from "react-redux";
-import colorHoverChange from "./utils/colorHoverChange";
-import { openDiscover, closeDiscover } from "../actions/layout";
+import colorHoverChange from "../utils/colorHoverChange";
+import { openDiscover, closeDiscover } from "../../actions/layout";
 import { useHistory } from "react-router";
+import NavDropdown from "./NavDropdown";
 
 const Navbar = ({
   logout,
@@ -93,7 +94,7 @@ const Navbar = ({
   return (
     <nav
       style={{
-        overflow: "hidden",
+        // overflow: "hidden",
         position: swatch.projectPage ? "fixed" : null
       }}
     >
@@ -105,8 +106,11 @@ const Navbar = ({
       >
         Swatched
       </Link>
-      <div className='nav-buttons-area'>
-        {!isAuthenticated ? guestLinks : userLinks}
+      <div className='nav-link-area'>
+        <div className='nav-buttons-area'>
+          {!isAuthenticated ? guestLinks : userLinks}
+        </div>
+        <NavDropdown />
       </div>
     </nav>
   );

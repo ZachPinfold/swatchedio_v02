@@ -16,8 +16,8 @@ const Background = ({
   console.log();
 
   const [backGroundWidth, setBackgroundWidth] = useState({
-    onHover: "20.01vw",
-    offHover: "20.01vw",
+    onHover: "20.00vw",
+    offHover: "20.00vw",
     id: null
   });
   const [allFlipped, setAllFlipped] = useState({
