@@ -29,6 +29,7 @@ const ActionCard = ({
   const [projectArray, addProjects] = useState([]);
   const [projects, toggleViewProjectIcon] = useState([]);
   const [viewProjects, toggleViewProject] = useState(false);
+  const [colorsAdded, setColorsAdded] = useState(false);
 
   const handleMasterToggle = async () => {
     toggleAddToMaster(!addToMaster);
@@ -41,13 +42,15 @@ const ActionCard = ({
   };
 
   const handleAddToProject = async () => {
-    addToMaster &&
+    if (addToMaster) {
       addSwatch(
         randomLoad ? color : color2,
         masterProject.id,
         masterProject.swatches.items.length,
         masterProject.swatches.items
       );
+      actionCompleted();
+    }
     projectIds.length > 0 &&
       projectArray.forEach(project => {
         const includeId = projectIds.includes(project.id);
@@ -58,20 +61,39 @@ const ActionCard = ({
             project.swatches.items.length,
             project.swatches.items
           );
+          actionCompleted();
         }
       });
   };
 
+  const actionCompleted = () => {
+    setColorsAdded(true);
+    setTimeout(() => {
+      setCircleSize(false);
+      toggleAddToMaster(false);
+      addMasterProject(null);
+      addProjectId([]);
+      addProjects([]);
+      toggleViewProjectIcon([]);
+      toggleViewProject(false);
+      setColorsAdded(false);
+      toggleShowAction(false);
+    }, 1000);
+  };
+
   const toggleViewLoadProjects = async () => {
-    const projectArr = [];
-    const result = await API.graphql(graphqlOperation(listProjects));
-    result.data.listProjects.items.forEach(project => {
-      if (project.projectTitle !== "Master") {
-        projectArr.push(project);
-      }
-    });
-    addProjects(projectArr);
-    toggleViewProject(true);
+    if (viewProjects) toggleViewProject(false);
+    else {
+      const projectArr = [];
+      const result = await API.graphql(graphqlOperation(listProjects));
+      result.data.listProjects.items.forEach(project => {
+        if (project.projectTitle !== "Master") {
+          projectArr.push(project);
+        }
+      });
+      addProjects(projectArr);
+      !viewProjects && toggleViewProject(true);
+    }
   };
 
   const toggleAddProject = async (index, projectId) => {
@@ -136,6 +158,15 @@ const ActionCard = ({
       </div>
       {showAction[divId] && (
         <div onClick={e => e.stopPropagation()} className='more-card-box'>
+          {colorsAdded && (
+            <div
+              // style={{ opacity: colorsAdded ? "1" : "0" }}
+              className='action-complete-overlay'
+            >
+              <h3 className='project-added-copy'>Colors added!</h3>
+            </div>
+          )}
+
           <h3
             onClick={() => toggleShowAction(false)}
             className='action-x-close'
@@ -217,7 +248,10 @@ const ActionCard = ({
           {isAuthenticated && (
             <button
               onClick={handleAddToProject}
-              style={{ marginTop: "10px" }}
+              style={{
+                marginTop: "10px",
+                opacity: projectIds.length > 0 || addToMaster ? "1" : "0.6"
+              }}
               className='btn-primary'
             >
               Add to swatch

@@ -420,6 +420,13 @@ input:-webkit-autofill:focus {
   flex-direction: column;
 }
 
+.actions-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .more-card-box {
   z-index: 105;
   margin-top: 20px;
@@ -431,13 +438,26 @@ input:-webkit-autofill:focus {
   border-radius: 5px;
   padding: 10px;
   cursor: default;
+  position: relative;
 }
 
-.actions-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.action-complete-overlay {
+  position: absolute;
+  z-index: 1000;
+  height: 100%;
   width: 100%;
+  margin: -10px;
+  background-color: var(--green);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s ease-out;
+  opacity: 1;
+}
+.project-added-copy {
+  font-size: var(--largeFont);
+  font-family: var(--Crete);
+  color: white;
 }
 
 .more-card-title {
