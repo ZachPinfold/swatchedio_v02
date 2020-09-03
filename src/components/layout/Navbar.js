@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
-import { logout, loadUser } from "../../actions/auth";
+import { logout } from "../../actions/auth";
 import { connect } from "react-redux";
-import colorHoverChange from "../utils/colorHoverChange";
+import { colorHoverChange, arrowColorchange } from "../utils/colorHoverChange";
 import { openDiscover, closeDiscover } from "../../actions/layout";
 import { useHistory } from "react-router";
 import NavDropdown from "./NavDropdown";
@@ -19,7 +19,9 @@ const Navbar = ({
   swatch
 }) => {
   const [buttonClass, setButtonClass] = useState("btn-primary");
+  const [arrowClass, setArrowClass] = useState("#06d6a0");
   const [logoClass, setLogoClass] = useState("nav-logo");
+  const [dropDown, setDropDown] = useState(false);
 
   const location = useLocation();
 
@@ -35,6 +37,11 @@ const Navbar = ({
   const handleLoginHover = () => {
     const classColor = colorHoverChange(buttonClass, "loginButton");
     setButtonClass(classColor);
+  };
+
+  const handleArrowHover = () => {
+    const arrowColor = arrowColorchange(arrowClass, "#06d6a0");
+    setArrowClass(arrowColor);
   };
 
   const handleLogoHover = () => {
@@ -60,7 +67,8 @@ const Navbar = ({
       </li>
       <li>
         <button
-          onMouseLeave={handleLoginHover}
+          onMouseLeave={(handleLoginHover, () => setArrowClass("#06d6a0"))}
+          onMouseEnter={handleArrowHover}
           className={buttonClass}
           onClick={() => openLogin(true)}
         >
@@ -80,13 +88,21 @@ const Navbar = ({
         </li>
       )}
       <li>
-        <Link
-          to='/profile'
-          onMouseLeave={handleLoginHover}
+        <button
+          style={{ position: "relative" }}
+          onClick={() => setDropDown(!dropDown)}
+          onMouseLeave={(handleLoginHover, () => setArrowClass("#06d6a0"))}
+          onMouseEnter={handleArrowHover}
           className={buttonClass}
         >
           {user}
-        </Link>
+          <div className='down-arrow'>
+            <i
+              style={{ color: arrowClass, fontSize: "25px" }}
+              class='fas fa-sort-down'
+            ></i>
+          </div>
+        </button>
       </li>
     </ul>
   );
@@ -110,7 +126,7 @@ const Navbar = ({
         <div className='nav-buttons-area'>
           {!isAuthenticated ? guestLinks : userLinks}
         </div>
-        <NavDropdown />
+        {dropDown && <NavDropdown setDropDown={setDropDown} />}
       </div>
     </nav>
   );

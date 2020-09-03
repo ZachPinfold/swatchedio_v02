@@ -1,4 +1,4 @@
-const colorHoverChange = (buttonClass, type) => {
+export const colorHoverChange = (buttonClass, type) => {
   if (type === "landing") {
     if (buttonClass === "btn-primary btn-landing")
       return "btn-primary-1 btn-landing";
@@ -23,4 +23,13 @@ const colorHoverChange = (buttonClass, type) => {
   }
 };
 
-export default colorHoverChange;
+export const arrowColorchange = (buttonClass, type) => {
+  if (type === "#06d6a0") {
+    if (buttonClass === "#06d6a0") return "#ff6459";
+    else if (buttonClass === "down-arrow-1") return "down-arrow-2";
+    else if (buttonClass === "down-arrow-2") return "down-arrow-3";
+    else if (buttonClass === "down-arrow-3") return "down-arrow";
+  }
+};
+
+// export { colorHoverChange };

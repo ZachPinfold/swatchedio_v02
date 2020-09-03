@@ -97,9 +97,6 @@ const Register = ({ register, openRegister }) => {
                   value={email}
                   onChange={onInputChange}
                 />
-                <span className='icon is-small is-left'>
-                  <i className='fas fa-envelope'></i>
-                </span>
               </p>
             </div>
             <div className='field'>
@@ -112,9 +109,6 @@ const Register = ({ register, openRegister }) => {
                   value={password}
                   onChange={onInputChange}
                 />
-                <span className='icon is-small is-left'>
-                  <i className='fas fa-lock'></i>
-                </span>
               </p>
             </div>
             <div className='field'>
@@ -127,9 +121,6 @@ const Register = ({ register, openRegister }) => {
                   value={confirmpassword}
                   onChange={onInputChange}
                 />
-                <span className='icon is-small is-left'>
-                  <i className='fas fa-lock'></i>
-                </span>
               </p>
             </div>
             <div style={{ marginTop: "15px" }} className='break-line'></div>

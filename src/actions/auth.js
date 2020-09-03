@@ -53,6 +53,7 @@ export const login = (username, password, cb) => async dispatch => {
   try {
     const user = await Auth.signIn(username, password);
     dispatch({ type: LOGIN_SUCCESS, payload: username });
+    cb("no error");
   } catch (error) {
     let err = null;
     !error.message ? (err = { message: error }) : (err = error);
@@ -63,7 +64,7 @@ export const login = (username, password, cb) => async dispatch => {
   }
 };
 
-// Login User
+// Logout User
 
 export const logout = () => async dispatch => {
   Auth.signOut();

@@ -2,8 +2,8 @@ import React, { useState, useEffect, Fragment } from "react";
 import BackgroundCard from "./BackgroundCard";
 import { getColors } from "../../actions/colors";
 import { connect } from "react-redux";
-import colorHoverChange from "../utils/colorHoverChange";
 import DiscoverPanel from "./DiscoverPanel";
+import { colorHoverChange } from "../utils/colorHoverChange";
 import { revertHome } from "../../actions/swatch";
 import Loader from "../layout/Loader";
 
@@ -13,8 +13,6 @@ const Background = ({
   layout: { discover },
   revertHome
 }) => {
-  console.log();
-
   const [backGroundWidth, setBackgroundWidth] = useState({
     onHover: "20.00vw",
     offHover: "20.00vw",
@@ -40,6 +38,8 @@ const Background = ({
   });
 
   useEffect(() => {
+    console.log("hello");
+
     revertHome();
     getColors(null, firstColorLoad);
     setFirstColorLoad(false);

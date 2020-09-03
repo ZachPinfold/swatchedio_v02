@@ -56,11 +56,11 @@ nav {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  padding: 15px 0px;
+  padding: 5px 0px;
   background-color: white;
   border-bottom: 1px solid var(--green);
   overflow: hidden; /* Hide scrollbars */
-  z-index: 100;
+  z-index: 1;
   height: 50px;
   overflow: visible;
   /* position: fixed; */
@@ -164,6 +164,10 @@ nav ul {
   color: var(--orange);
 }
 
+.explore-link:hover {
+  text-decoration: underline;
+}
+
 .new-palette-btn-discover {
   height: 35px;
   color: white;
@@ -179,12 +183,61 @@ nav ul {
   position: absolute;
   z-index: 1500;
   margin-top: 20px;
-  margin-left: 45px;
+  margin-left: 54px;
   padding: 10px;
   /* margin-right: 20px; */
-  width: 140px;
+  width: 132px;
   background-color: white;
   border: 0.3px solid var(--green);
+}
+
+.link-to-swatch {
+  font-family: var(--HelveticaM);
+  font-size: large;
+  color: var(--green);
+  text-decoration: none;
+}
+
+.link-to-swatch:hover {
+  text-decoration: underline;
+  color: var(--orange);
+}
+
+.secondary-links {
+  font-family: var(--HelveticaL);
+  margin-top: 3px;
+  font-size: var(--smallFont);
+}
+
+.secondary-links:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.down-arrow-3,
+.down-arrow-2,
+.down-arrow-1,
+.down-arrow {
+  color: var(--green);
+  position: absolute;
+  margin-top: -12px;
+  margin-left: 35px;
+}
+
+.down-arrow:hover {
+  color: var(--orange);
+}
+
+.down-arrow-1:hover {
+  color: #1693a7;
+}
+
+.down-arrow-2:hover {
+  color: #2d1b33;
+}
+
+.down-arrow-3:hover {
+  color: #c85866;
 }
 
 /* Modal */

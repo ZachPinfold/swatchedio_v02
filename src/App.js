@@ -34,6 +34,7 @@ function App() {
             <Route exact path='/' component={Landing} />
             <Route exact path='/profile' component={ProjectPage} />
           </Switch>
+          <Navbar openLogin={openLogin} openRegister={openRegister} />
         </Fragment>
       </Router>
     </Provider>

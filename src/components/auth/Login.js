@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormErrors from "../utility/FormErrors";
 import Validate from "../utility/FormValidation";
 import { login } from "../../actions/auth";
 import { connect } from "react-redux";
 
-const Login = ({ login, openLogin }) => {
+const Login = ({ auth, login, openLogin }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -13,6 +13,12 @@ const Login = ({ login, openLogin }) => {
       blankfield: false
     }
   });
+
+  useEffect(() => {
+    if (auth.isAuthenticated === true) {
+      openLogin(false);
+    }
+  }, [auth.isAuthenticated]);
 
   const { username, password, errors } = formData;
 
@@ -26,7 +32,7 @@ const Login = ({ login, openLogin }) => {
     });
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
     // Form validation
@@ -43,7 +49,7 @@ const Login = ({ login, openLogin }) => {
       });
     }
 
-    // AWS Cognito integration here
+    // // AWS Cognito integration here
 
     login(username, password, err => {
       setFormData({ ...formData, errors: { ...errors, cognito: err } });
@@ -90,13 +96,9 @@ const Login = ({ login, openLogin }) => {
                   value={password}
                   onChange={onInputChange}
                 />
-                <span className='icon is-small is-left'>
-                  <i className='fas fa-lock'></i>
-                </span>
               </p>
             </div>
             <div style={{ marginTop: "15px" }} className='break-line'></div>
-
             <div className='field'>
               <p className='control'>
                 <button
@@ -119,4 +121,8 @@ const Login = ({ login, openLogin }) => {
   );
 };
 
-export default connect(null, { login })(Login);
+const mstp = state => ({
+  auth: state.auth
+});
+
+export default connect(mstp, { login })(Login);
