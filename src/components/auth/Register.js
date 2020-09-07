@@ -17,6 +17,7 @@ const Register = ({ register, openRegister }) => {
       passwordmatch: false
     }
   });
+  const [resgisterComplete, toggleComplete] = useState(false);
 
   const { username, email, password, confirmpassword, errors } = formData;
 
@@ -36,21 +37,23 @@ const Register = ({ register, openRegister }) => {
 
     // Form validation
     clearErrorState();
-    const error = Validate(event, formData);
-    if (error) {
-      setFormData({
-        ...formData,
-        errors: {
-          ...error,
+    // const error = Validate(event, formData);
+    // if (error) {
+    //   setFormData({
+    //     ...formData,
+    //     errors: {
+    //       ...error,
 
-          errors
-        }
-      });
-    }
+    //       errors
+    //     }
+    //   });
+    // }
+    // console.log(error);
 
     // AWS Cognito integration here
 
     register(username, password, email, err => {
+      if (err === "no error") toggleComplete(true);
       setFormData({ ...formData, errors: { ...errors, cognito: err } });
     });
   };
@@ -64,6 +67,14 @@ const Register = ({ register, openRegister }) => {
     <section className='modal-wrapper'>
       <div onClick={() => openRegister(false)} className='modal-backdrop'>
         <div onClick={e => e.stopPropagation()} className='modal-box'>
+          {resgisterComplete && (
+            <div className='modal-overlay'>
+              <h3 style={{ padding: "30px" }} className='project-added-copy'>
+                You're all signed up! Head over to your emails to confirm your
+                account, then you can login.{" "}
+              </h3>
+            </div>
+          )}
           <p onClick={() => openRegister(false)} className='close-modal-x'>
             x
           </p>
@@ -124,7 +135,7 @@ const Register = ({ register, openRegister }) => {
               </p>
             </div>
             <div style={{ marginTop: "15px" }} className='break-line'></div>
-            <div className='field'>
+            <div className='field-btn'>
               <p className='control'>
                 <button
                   style={{ marginTop: "20px", padding: "4px 70px" }}

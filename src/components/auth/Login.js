@@ -80,7 +80,7 @@ const Login = ({ auth, login, openLogin }) => {
                   type='text'
                   id='username'
                   aria-describedby='usernameHelp'
-                  placeholder='Enter username or email'
+                  placeholder='Enter username'
                   value={username}
                   onChange={onInputChange}
                 />
@@ -99,7 +99,7 @@ const Login = ({ auth, login, openLogin }) => {
               </p>
             </div>
             <div style={{ marginTop: "15px" }} className='break-line'></div>
-            <div className='field'>
+            <div className='field-btn'>
               <p className='control'>
                 <button
                   style={{ marginTop: "20px", padding: "4px 70px" }}

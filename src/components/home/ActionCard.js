@@ -256,16 +256,18 @@ const ActionCard = ({
           </div>
           <div className='break-line'></div>
           {isAuthenticated && (
-            <button
-              onClick={handleAddToProject}
-              style={{
-                marginTop: "10px",
-                opacity: projectIds.length > 0 || addToMaster ? "1" : "0.6"
-              }}
-              className='btn-primary'
-            >
-              Add to swatch
-            </button>
+            <div className='field-btn'>
+              <button
+                onClick={handleAddToProject}
+                style={{
+                  marginTop: "10px",
+                  opacity: projectIds.length > 0 || addToMaster ? "1" : "0.6"
+                }}
+                className='btn-primary'
+              >
+                Add to swatch
+              </button>
+            </div>
           )}
           {!isAuthenticated && (
             <button style={{ marginTop: "10px" }} className='btn-primary'>

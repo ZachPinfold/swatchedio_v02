@@ -10,6 +10,7 @@ import { testAction } from "../../actions/testAction";
 import styled from "styled-components";
 import { API, graphqlOperation } from "aws-amplify";
 import Loader from "../layout/Loader";
+import DragScroll from "react-dragscroll";
 
 const ProjectPage = ({
   projectList,
@@ -58,7 +59,7 @@ const ProjectPage = ({
   return pageLoad ? (
     <Loader />
   ) : (
-    <div style={{ paddingLeft: "30px" }}>
+    <div style={{ paddingLeft: "30px", width: "100%" }}>
       <ColorArea>
         <h3 className='top-color-text'>Today's top color:</h3>
         <h3 className='top-color-text'>#345fht</h3>

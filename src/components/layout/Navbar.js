@@ -126,7 +126,9 @@ const Navbar = ({
         <div className='nav-buttons-area'>
           {!isAuthenticated ? guestLinks : userLinks}
         </div>
-        {dropDown && <NavDropdown setDropDown={setDropDown} />}
+        <div className='dropdown-container'>
+          {dropDown && <NavDropdown setDropDown={setDropDown} />}
+        </div>
       </div>
     </nav>
   );

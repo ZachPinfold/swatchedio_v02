@@ -84,11 +84,14 @@ nav ul {
 .btn-primary-1,
 .btn-primary {
   color: black;
+  display: flex;
+  justify-content: center;
   font-family: "CreteRound";
   background-color: var(--green);
   text-decoration: none;
   border: none;
   padding: 3px 24px;
+  overflow: visible;
   font-size: 16px;
 }
 
@@ -177,15 +180,24 @@ nav ul {
 
 .nav-link-area {
   /* padding-top: 50px; */
+  /* text-align: right; */
+}
+
+.dropdown-container {
+  width: 100%;
+  height: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: right;
 }
 
 .nav-dropdown {
   position: absolute;
   z-index: 1500;
   margin-top: 20px;
-  margin-left: 54px;
   padding: 10px;
-  /* margin-right: 20px; */
+  margin-right: 20px;
+  /* text-align: right; */
   width: 132px;
   background-color: white;
   border: 0.3px solid var(--green);
@@ -220,8 +232,8 @@ nav ul {
 .down-arrow {
   color: var(--green);
   position: absolute;
-  margin-top: -12px;
-  margin-left: 35px;
+  margin-top: 9px;
+  /* margin-left: 35px; */
 }
 
 .down-arrow:hover {
@@ -276,6 +288,18 @@ nav ul {
   border-radius: 5px;
 }
 
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: var(--green);
+  position: absolute;
+  margin: -15px -30px -20px -30px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .close-modal-x {
   /* position: absolute; */
   text-align: left;
@@ -303,7 +327,7 @@ nav ul {
 }
 
 .input {
-  color: green;
+  /* color: green; */
   margin-top: 15px;
   padding: 10px 10px;
   border: 0.3px solid grey;
@@ -338,17 +362,27 @@ input:-webkit-autofill:focus {
 
 .login-register-sublink {
   font-family: var(--HelveticaM);
-  font-size: var(--regularFont);
+  font-size: var(--smallFont);
   opacity: 0.6;
+  cursor: pointer;
 }
 
 .login-register-sublink:hover {
   opacity: 1;
+  text-decoration: underline;
 }
 
 .field-login {
   margin-top: 5px;
   cursor: pointer;
+}
+
+.field-btn {
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  /* text-align: center; */
 }
 
 /* Landing page */
@@ -414,6 +448,12 @@ input:-webkit-autofill:focus {
 
 .btn-landing:active {
   transform: scale(0.95);
+}
+
+.error-copy {
+  font-family: var(--HelveticaL);
+  color: var(--orange);
+  margin-top: 10px;
 }
 
 /* Color Cards */
