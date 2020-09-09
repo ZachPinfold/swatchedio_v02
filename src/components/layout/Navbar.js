@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import { logout } from "../../actions/auth";
@@ -15,7 +15,7 @@ const Navbar = ({
   openDiscover,
   closeDiscover,
   layout: { discover },
-  auth: { user, isAuthenticated },
+  auth: { username, isAuthenticated },
   swatch
 }) => {
   const [buttonClass, setButtonClass] = useState("btn-primary");
@@ -79,32 +79,36 @@ const Navbar = ({
   );
 
   const userLinks = (
-    <ul>
-      {!discover && (
-        <li>
-          <a className='explore-link' onClick={() => openDiscover()}>
-            Discover
-          </a>
-        </li>
+    <Fragment>
+      {isAuthenticated && (
+        <ul>
+          {!discover && (
+            <li>
+              <a className='explore-link' onClick={() => openDiscover()}>
+                Discover
+              </a>
+            </li>
+          )}
+          <li>
+            <button
+              style={{ position: "relative" }}
+              onClick={() => setDropDown(!dropDown)}
+              onMouseLeave={(handleLoginHover, () => setArrowClass("#06d6a0"))}
+              onMouseEnter={handleArrowHover}
+              className={buttonClass}
+            >
+              {username}
+              <div className='down-arrow'>
+                <i
+                  style={{ color: arrowClass, fontSize: "25px" }}
+                  class='fas fa-sort-down'
+                ></i>
+              </div>
+            </button>
+          </li>
+        </ul>
       )}
-      <li>
-        <button
-          style={{ position: "relative" }}
-          onClick={() => setDropDown(!dropDown)}
-          onMouseLeave={(handleLoginHover, () => setArrowClass("#06d6a0"))}
-          onMouseEnter={handleArrowHover}
-          className={buttonClass}
-        >
-          {user}
-          <div className='down-arrow'>
-            <i
-              style={{ color: arrowClass, fontSize: "25px" }}
-              class='fas fa-sort-down'
-            ></i>
-          </div>
-        </button>
-      </li>
-    </ul>
+    </Fragment>
   );
 
   return (

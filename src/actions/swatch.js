@@ -22,8 +22,16 @@ import {
 
 // LOAD PROJECTS
 
-export const loadProjects = project => async dispatch => {
-  const result = await API.graphql(graphqlOperation(listProjects));
+export const loadProjects = id => async dispatch => {
+  const result = await API.graphql(
+    graphqlOperation(listProjects, {
+      filter: {
+        ownerId: {
+          eq: id
+        }
+      }
+    })
+  );
   const orderedProjects = result.data.listProjects.items.sort((a, b) => {
     return a.order - b.order;
   });
@@ -38,10 +46,16 @@ export const loadProjects = project => async dispatch => {
 
 // ADD PROJECT
 
-export const addProject = (projectTitle, index) => async dispatch => {
+export const addProject = (
+  projectTitle,
+  index,
+  id,
+  username
+) => async dispatch => {
+  console.log("fire");
   const input = {
-    ownerId: "123",
-    ownerUsername: "zach",
+    ownerId: id,
+    ownerUsername: username,
     projectTitle: projectTitle,
     order: index
   };
@@ -91,11 +105,13 @@ export const addSwatch = (
   swatchHexCode,
   projectId,
   index,
-  swatches
+  swatches,
+  id,
+  username
 ) => async dispatch => {
   const input = {
-    ownerId: "123",
-    ownerUsername: "zach",
+    ownerId: id,
+    ownerUsername: username,
     hexCode: swatchHexCode,
     order: index,
     projectSwatchesId: projectId

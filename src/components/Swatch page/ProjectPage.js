@@ -19,18 +19,19 @@ const ProjectPage = ({
   secondPageReset,
   testAction,
   test,
+  auth: { id, isAuthenticated },
   loadProjects
 }) => {
   const [pageLoad, setLoad] = useState(true);
 
   useEffect(() => {
-    loadProjects();
+    if (isAuthenticated) loadProjects(id);
     secondPageReset();
     closeDiscover();
     setTimeout(() => {
       setLoad(false);
     }, 1000);
-  }, []);
+  }, [isAuthenticated]);
 
   if (!pageLoad) {
     document.body.style.background = "#1F334C";
@@ -113,7 +114,8 @@ const styles = {
 
 const mts = state => ({
   projectList: state.swatchReducer,
-  test: state.test
+  test: state.test,
+  auth: state.auth
 });
 
 export default connect(mts, {

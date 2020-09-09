@@ -9,6 +9,7 @@ import {
   LOGOUT
 } from "./types";
 import { Auth } from "aws-amplify";
+import { addProject } from "../actions/swatch";
 
 // Load User
 
@@ -16,7 +17,11 @@ export const loadUser = () => async dispatch => {
   try {
     const session = await Auth.currentSession();
     const user = await Auth.currentAuthenticatedUser();
-    dispatch({ type: USER_LOADED, payload: user.username });
+    console.log(user);
+    dispatch({
+      type: USER_LOADED,
+      payload: { username: user.username, id: user.attributes.sub }
+    });
   } catch (error) {
     dispatch({
       type: AUTH_ERROR
@@ -35,6 +40,14 @@ export const register = (username, password, email, cb) => async dispatch => {
         email
       }
     });
+    dispatch(
+      addProject(
+        "Master",
+        0,
+        signUpResponse.userSub,
+        signUpResponse.user.username
+      )
+    );
     cb("no error");
     dispatch({ type: REGISTER_SUCCESS, payload: username });
   } catch (error) {
@@ -52,7 +65,11 @@ export const register = (username, password, email, cb) => async dispatch => {
 export const login = (username, password, cb) => async dispatch => {
   try {
     const user = await Auth.signIn(username, password);
-    dispatch({ type: LOGIN_SUCCESS, payload: username });
+    console.log(user);
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: { username: user.username, id: user.attributes.sub }
+    });
     cb("no error");
   } catch (error) {
     let err = null;

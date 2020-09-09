@@ -11,7 +11,8 @@ const SwatchActionButton = ({
   addSwatch,
   listId,
   swatches,
-  swatchList
+  swatchList,
+  auth: { isAuthenticated, id, username }
 }) => {
   const [text, setForm] = useState("");
   const [openForm, setOpenForm] = useState(false);
@@ -69,7 +70,7 @@ const SwatchActionButton = ({
     if (swatchList.projects.length === 0) index = 0;
     else index = swatchList.projects.length;
     if (text) {
-      addProject(text, index);
+      addProject(text, index, id, username);
       setForm("");
     } else return;
   };
@@ -80,7 +81,7 @@ const SwatchActionButton = ({
     else index = swatches.length;
     if (text) {
       setCorrectRegex(true);
-      addSwatch(text, listId, index, swatches);
+      addSwatch(text, listId, index, swatches, id, username);
       setForm("");
       setCopyColor(null);
     }
@@ -156,7 +157,8 @@ const styles = {
 };
 
 const mpst = state => ({
-  swatchList: state.swatchReducer
+  swatchList: state.swatchReducer,
+  auth: state.auth
 });
 
 export default connect(mpst, { addProject, addSwatch })(SwatchActionButton);

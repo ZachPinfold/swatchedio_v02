@@ -11,29 +11,25 @@ import {
 const initiaState = {
   isAuthenticated: false,
   loading: true,
-  user: null
+  username: null,
+  id: null
 };
 
 export default function (state = initiaState, action) {
   const { type, payload } = action;
   switch (type) {
     case USER_LOADED:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: payload
+        username: payload.username,
+        id: payload.id
       };
     case REGISTER_SUCCESS:
       return {
         ...state
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        user: payload,
-        isAuthenticated: true,
-        loading: false
       };
     case REGISTER_FAIL:
     case AUTH_ERROR:
