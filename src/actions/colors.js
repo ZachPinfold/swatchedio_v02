@@ -15,16 +15,44 @@ export const getColors = (
   random,
   first,
   discover,
-  hueColour
+  colour
 ) => async dispatch => {
   try {
+    if (discover === "hexCode") {
+      console.log(colour);
+      const runHexCodeAPI = async () => {
+        const result1 = await API.graphql(
+          graphqlOperation(listColorHexDiscovers, {
+            format: "json",
+            hex: colour ? colour : "null"
+          })
+        );
+        const obj = JSON.parse(result1.data.listColorHexDiscovers);
+        console.log(obj);
+
+        const randomColour = obj[Math.floor(Math.random() * obj.length)];
+
+        if (randomColour.colors.length === 5) return randomColour.colors;
+        else return runHexCodeAPI();
+      };
+
+      const paletteAPIResult = runHexCodeAPI();
+
+      paletteAPIResult.then(payload => {
+        dispatch({
+          type: random === "new_random" ? GET_RANDOM_COLORS : GET_COLORS,
+          payload: payload
+        });
+      });
+    }
+
     if (discover === "discover") {
-      console.log(hueColour);
+      console.log("disco");
       const runPaletteAPI = async () => {
         const result1 = await API.graphql(
           graphqlOperation(listColorHexDiscovers, {
             format: "json",
-            hueOption: hueColour ? hueColour : "null"
+            hueOption: colour ? colour : "null"
           })
         );
         const obj = JSON.parse(result1.data.listColorHexDiscovers);
@@ -43,7 +71,7 @@ export const getColors = (
       });
     }
 
-    if (discover !== "discover") {
+    if (discover !== "discover" && discover !== "hexCode") {
       console.log("not discover");
       const runRandomAPI = async () => {
         const result1 = await API.graphql(

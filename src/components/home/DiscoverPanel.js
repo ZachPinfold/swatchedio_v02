@@ -27,15 +27,32 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
   }, []);
 
   const [hueColour, setHueColour] = useState("");
+  const [hexCode, setHexCode] = useState("");
 
   const handleHueChange = e => {
-    console.log(e.target.name);
+    setHexCode("");
     setHueColour(e.target.name);
     getColors("new_random", "first", "discover", e.target.name);
   };
 
+  const handleInputChange = e => {
+    setHueColour("");
+    const regex = /^#[0-9A-F]{6}$/i;
+    const test = regex.test(e.target.value);
+    if (test) {
+      const colour = e.target.value.substring(1);
+      setHexCode(colour);
+      getColors("new_random", "first", "hexCode", colour);
+    } else if (!test) {
+    }
+  };
+
   return (
     <div className='discover-palette-area'>
+      <form action=''>
+        <input onChange={handleInputChange} type='text' />
+      </form>
+
       <HueButton
         selected={hueColour === "green" ? true : false}
         name='green'
@@ -76,7 +93,12 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
       </HueButton>
 
       <button
-        onClick={() => handleClick("discover", hueColour)}
+        onClick={() =>
+          handleClick(
+            hexCode < 1 ? "discover" : "hexCode",
+            hexCode < 1 ? hueColour : hexCode
+          )
+        }
         className={`${buttonClass} new-palette-btn-discover `}
         style={{
           width: "150px",

@@ -32,7 +32,7 @@ function App() {
           {register && <Register openRegister={openRegister} />}
           <Switch>
             <Route exact path='/' component={Landing} />
-            <Route exact path='/profile' component={ProjectPage} />
+            <PrivateRoute exact path='/profile' component={ProjectPage} />
           </Switch>
           {/* <Navbar openLogin={openLogin} openRegister={openRegister} /> */}
         </Fragment>

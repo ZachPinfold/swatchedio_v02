@@ -155,7 +155,11 @@ export const getColorHexDiscover = /* GraphQL */ `
 `;
 
 export const listColorHexDiscovers = /* GraphQL */ `
-  query ListColorHexDiscovers($hueOption: String, $format: String!) {
-    listColorHexDiscovers(hueOption: $hueOption, format: $format)
+  query ListColorHexDiscovers(
+    $hueOption: String
+    $hex: String
+    $format: String!
+  ) {
+    listColorHexDiscovers(hex: $hex, hueOption: $hueOption, format: $format)
   }
 `;
