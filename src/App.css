@@ -387,15 +387,28 @@ input:-webkit-autofill:focus {
 
 /* Landing page */
 
+.discover-warning-message {
+  display: flex;
+  flex-direction: column;
+}
+
+.disco-warning-text {
+  color: var(--orange);
+  font-family: var(--HelveticaL);
+  font-size: var(--smallFont);
+  margin: 0px 0px 5px 0px;
+}
+
 .discover-palette-area {
   /* position: fixed; */
   /* top: 70px; */
   padding-bottom: 11px;
   padding-top: 12px;
   text-align: center;
-  width: 100%;
+  width: auto;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
   display: flex;
   border-bottom: 1px solid var(--orange);
   background-color: #fafafa;

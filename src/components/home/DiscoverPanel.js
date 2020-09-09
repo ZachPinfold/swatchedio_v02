@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getColors } from "../../actions/colors";
 import { connect } from "react-redux";
+import getContrastYIQ from "../utils/dominantColor";
 
 const HueButton = styled.button`
   height: 25px;
@@ -28,6 +29,8 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
 
   const [hueColour, setHueColour] = useState("");
   const [hexCode, setHexCode] = useState("");
+  const [hexMessage, toggleHexMessage] = useState(false);
+  const [copyColor, setCopyColor] = useState(null);
 
   const handleHueChange = e => {
     setHexCode("");
@@ -36,22 +39,67 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
   };
 
   const handleInputChange = e => {
-    setHueColour("");
-    const regex = /^#[0-9A-F]{6}$/i;
-    const test = regex.test(e.target.value);
-    if (test) {
-      const colour = e.target.value.substring(1);
-      setHexCode(colour);
-      getColors("new_random", "first", "hexCode", colour);
-    } else if (!test) {
+    if (e.target.value === "") {
+      toggleHexMessage(false);
+      setCopyColor(null);
+      setHexCode("");
+    } else {
+      setHueColour("");
+      const regex = /^#[0-9A-F]{6}$/i;
+      const test = regex.test(e.target.value);
+      if (test) {
+        const textColor = getContrastYIQ(e.target.value);
+        setCopyColor(textColor);
+
+        toggleHexMessage(true);
+        const colour = e.target.value.substring(1);
+        setHexCode(colour);
+        getColors("new_random", "first", "hexCode", colour);
+      } else if (!test) {
+        toggleHexMessage(false);
+        setCopyColor(null);
+      }
     }
   };
 
+  console.log(hexMessage);
+
   return (
-    <div className='discover-palette-area'>
-      <form action=''>
-        <input onChange={handleInputChange} type='text' />
-      </form>
+    <div
+      style={{ paddingTop: hexMessage && "20px" }}
+      className='discover-palette-area'
+    >
+      <div
+        style={{
+          marginTop: hexMessage && "-15px",
+          marginRight: "30px"
+        }}
+        className='discover-warning-message'
+      >
+        {hexMessage && hexCode.length > 0 && (
+          <p className='disco-warning-text'>valid hex code - #876057</p>
+        )}
+        <form action=''>
+          <input
+            onFocus={e => {
+              setHueColour("");
+              handleInputChange(e);
+            }}
+            style={{
+              opacity: hueColour.length > 0 ? "0.3" : "1",
+              color: !copyColor ? "black" : copyColor,
+              backgroundColor: !hexMessage ? "white" : `#${hexCode}`,
+              padding: "2px",
+              marginTop: "0px",
+              width: "150px"
+            }}
+            class='input'
+            placeholder='#hex'
+            onChange={handleInputChange}
+            type='text'
+          />
+        </form>
+      </div>
 
       <HueButton
         selected={hueColour === "green" ? true : false}
@@ -106,7 +154,7 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
           fontSize: "16px",
           padding: "2px 10px",
           height: "auto",
-          marginLeft: "15px"
+          marginLeft: "30px"
         }}
       >
         New Palette
