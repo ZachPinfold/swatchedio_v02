@@ -44,7 +44,7 @@ export default function Test() {
     <div>
       <button style={{ width: "20px" }} onClick={handleClick}></button>
 
-      <div className='test'>
+      <div className='test-div'>
         <TestCard
           handleHoverOut={handleHoverOut}
           hoverEffect={hoverEffect}
