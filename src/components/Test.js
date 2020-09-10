@@ -42,7 +42,9 @@ export default function Test() {
 
   return (
     <div>
-      <button style={{ width: "20px" }} onClick={handleClick}></button>
+      <button style={{ width: "20px" }} onClick={handleClick}>
+        Flip
+      </button>
 
       <div className='test-div'>
         <TestCard
