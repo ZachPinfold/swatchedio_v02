@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import ActionCard from "./ActionCard";
 import CopyArea from "./CopyArea";
 import copyToClip from "../utils/copyToClip";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const BackgroundCard = ({
   hoverEffect,
@@ -21,6 +20,7 @@ const BackgroundCard = ({
   allFlipped,
   firstFlip,
   randomLoad,
+  colorBooleon,
   auth: { isAuthenticated }
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -86,6 +86,8 @@ const BackgroundCard = ({
 
   const handleMoreClick = () => {};
 
+  console.log(colorBooleon);
+
   return (
     <Fragment>
       <ReactCardFlip
@@ -95,11 +97,12 @@ const BackgroundCard = ({
         {/* // First Card // */}
         <div
           style={{
-            // width: id === divId ? onHover : offHover,
-            width: id === divId ? "20vw" : "20vw",
+            width: "20vw",
 
             backgroundColor: randomLoad ? color : color2,
-            transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`
+            transform:
+              id === divId ? `scale(${onHover})` : `scale(${offHover})`,
+            transition: !colorBooleon && "transform 0.2s ease-out"
             // transform: `scale(${frontScale})`
           }}
           onMouseOver={e => handleHover(e, "front")}
@@ -139,10 +142,12 @@ const BackgroundCard = ({
 
         <div
           style={{
-            width: id === divId ? "20vw" : "20vw",
+            width: "20vw",
             backgroundColor: !firstFlip ? color1Temp : color1,
             // transform: `scale(${BackScale})`
-            transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`
+            transform:
+              id === divId ? `scale(${onHover})` : `scale(${offHover})`,
+            transition: colorBooleon && "transform 0.2s ease-out"
           }}
           onMouseOver={e => handleHover(e, "back")}
           onMouseOut={handleHoverOut}

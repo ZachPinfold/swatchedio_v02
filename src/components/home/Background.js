@@ -91,6 +91,8 @@ const Background = ({
     if (allFlipped.firstFlip) setSecondFlip(true);
   };
 
+  console.log(colorBooleon);
+
   return pageLoad ? (
     <Loader />
   ) : (
@@ -135,6 +137,7 @@ const Background = ({
               randomLoad={randomLoad}
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
+              colorBooleon={colorBooleon}
             />
             <BackgroundCard
               showAction={showAction}
@@ -151,6 +154,7 @@ const Background = ({
               randomLoad={randomLoad}
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
+              colorBooleon={colorBooleon}
             />
             <BackgroundCard
               showAction={showAction}
@@ -167,6 +171,7 @@ const Background = ({
               randomLoad={randomLoad}
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
+              colorBooleon={colorBooleon}
             />
             <BackgroundCard
               showAction={showAction}
@@ -183,6 +188,7 @@ const Background = ({
               randomLoad={randomLoad}
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
+              colorBooleon={colorBooleon}
             />
             <BackgroundCard
               showAction={showAction}
@@ -199,6 +205,7 @@ const Background = ({
               randomLoad={randomLoad}
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
+              colorBooleon={colorBooleon}
             />
           </div>
         </div>

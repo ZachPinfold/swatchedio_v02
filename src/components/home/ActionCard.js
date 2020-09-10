@@ -6,7 +6,7 @@ import { API, graphqlOperation } from "aws-amplify";
 // import useOnClickOutside from "use-onclickoutside";
 
 const ActionCard = ({
-  auth: { isAuthenticated },
+  auth: { isAuthenticated, id, username },
   handleHover,
   divId,
   showCopy,
@@ -39,7 +39,15 @@ const ActionCard = ({
 
   const handleMasterToggle = async () => {
     toggleAddToMaster(!addToMaster);
-    const result = await API.graphql(graphqlOperation(listProjects));
+    const result = await API.graphql(
+      graphqlOperation(listProjects, {
+        filter: {
+          ownerId: {
+            eq: id
+          }
+        }
+      })
+    );
     result.data.listProjects.items.forEach(project => {
       if (project.projectTitle === "Master") {
         addMasterProject(project);
@@ -53,7 +61,9 @@ const ActionCard = ({
         randomLoad ? color : color2,
         masterProject.id,
         masterProject.swatches.items.length,
-        masterProject.swatches.items
+        masterProject.swatches.items,
+        id,
+        username
       );
       actionCompleted();
     }
@@ -65,7 +75,9 @@ const ActionCard = ({
             randomLoad ? color : color2,
             project.id,
             project.swatches.items.length,
-            project.swatches.items
+            project.swatches.items,
+            id,
+            username
           );
           actionCompleted();
         }
@@ -84,14 +96,22 @@ const ActionCard = ({
       toggleViewProject(false);
       setColorsAdded(false);
       toggleShowAction(false);
-    }, 1000);
+    }, 2000);
   };
 
   const toggleViewLoadProjects = async () => {
     if (viewProjects) toggleViewProject(false);
     else {
       const projectArr = [];
-      const result = await API.graphql(graphqlOperation(listProjects));
+      const result = await API.graphql(
+        graphqlOperation(listProjects, {
+          filter: {
+            ownerId: {
+              eq: id
+            }
+          }
+        })
+      );
       result.data.listProjects.items.forEach(project => {
         if (project.projectTitle !== "Master") {
           projectArr.push(project);
@@ -173,7 +193,7 @@ const ActionCard = ({
               // style={{ opacity: colorsAdded ? "1" : "0" }}
               className='action-complete-overlay'
             >
-              <h3 className='project-added-copy'>Colors added!</h3>
+              <h3 className='project-added-copy'>Color added!</h3>
             </div>
           )}
 
@@ -270,9 +290,11 @@ const ActionCard = ({
             </div>
           )}
           {!isAuthenticated && (
-            <button style={{ marginTop: "10px" }} className='btn-primary'>
-              Login to Access
-            </button>
+            <div className='field-btn'>
+              <button style={{ marginTop: "10px" }} className='btn-primary'>
+                Login to Access
+              </button>
+            </div>
           )}
         </div>
       )}
