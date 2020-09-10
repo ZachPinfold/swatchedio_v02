@@ -14,8 +14,8 @@ const Background = ({
   revertHome
 }) => {
   const [backGroundWidth, setBackgroundWidth] = useState({
-    onHover: "20.00vw",
-    offHover: "20.00vw",
+    onHover: "1",
+    offHover: "1",
     id: null
   });
   const [allFlipped, setAllFlipped] = useState({
@@ -53,23 +53,22 @@ const Background = ({
     const num = id.toString();
     if (id === "5") {
       setBackgroundWidth({
-        offHover: "19vw",
-        onHover: "24vw",
+        offHover: "1",
+        onHover: "0.97, 0.98",
         id
       });
     } else
       setBackgroundWidth({
-        ...backGroundWidth,
-        offHover: "19vw",
-        onHover: "24vw",
+        offHover: "1",
+        onHover: "0.97, 0.98",
         id
       });
   };
 
   const offHoverEffect = e => {
     setBackgroundWidth({
-      offHover: "20.00vw",
-      onHover: "23vw",
+      offHover: "1",
+      onHover: "0.98",
       id: null
     });
   };

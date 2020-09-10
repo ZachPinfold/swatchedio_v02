@@ -9,18 +9,21 @@ export default function TestCard({
   divId,
   hoverEffect,
   handleHoverOut,
-  color
+  color,
+  zIndex
 }) {
+  console.log(zIndex);
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
       <div
         onMouseOver={e => hoverEffect(e, "front")}
         onMouseOut={handleHoverOut}
         style={{
-          width: id === divId ? onHover : offHover,
+          // width: id === divId ? onHover : offHover,
+          transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`,
           backgroundColor: color,
           color: "white",
-          gridColumn: "1"
+          zIndex: "1000"
         }}
         className='test-card'
         id={divId}
@@ -33,10 +36,9 @@ export default function TestCard({
         onMouseOver={e => hoverEffect(e, "front")}
         onMouseOut={handleHoverOut}
         style={{
-          width: id === divId ? onHover : offHover,
+          transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`,
           backgroundColor: color,
-          color: "white",
-          gridColumn: "1"
+          color: "white"
         }}
         className='test-card'
       >

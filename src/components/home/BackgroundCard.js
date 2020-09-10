@@ -1,9 +1,11 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useRef } from "react";
 import ReactCardFlip from "react-card-flip";
 import getContrastYIQ from "../utils/dominantColor";
 import { connect } from "react-redux";
 import ActionCard from "./ActionCard";
 import CopyArea from "./CopyArea";
+import copyToClip from "../utils/copyToClip";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const BackgroundCard = ({
   hoverEffect,
@@ -25,6 +27,8 @@ const BackgroundCard = ({
   const [showCopy, flipShowCopy] = useState(false);
   const [copyColor, setCopyColor] = useState(null);
   const [copied, setCopied] = useState(false);
+  const textAreaRef = useRef(null);
+
   const [frontScale, setFrontScale] = useState(1);
   const [BackScale, setBackScale] = useState(1);
 
@@ -48,7 +52,8 @@ const BackgroundCard = ({
       }, 100);
     }
 
-    navigator.clipboard.writeText(color);
+    copyToClip(color);
+
     setCopied(true);
   };
 
@@ -81,7 +86,6 @@ const BackgroundCard = ({
 
   const handleMoreClick = () => {};
 
-  
   return (
     <Fragment>
       <ReactCardFlip
@@ -89,12 +93,14 @@ const BackgroundCard = ({
         flipDirection='horizontal'
       >
         {/* // First Card // */}
-
         <div
           style={{
-            width: id === divId ? onHover : offHover,
+            // width: id === divId ? onHover : offHover,
+            width: id === divId ? "20vw" : "20vw",
+
             backgroundColor: randomLoad ? color : color2,
-            transform: `scale(${frontScale})`
+            transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`
+            // transform: `scale(${frontScale})`
           }}
           onMouseOver={e => handleHover(e, "front")}
           onMouseOut={handleHoverOut}
@@ -133,9 +139,10 @@ const BackgroundCard = ({
 
         <div
           style={{
-            width: id === divId ? onHover : offHover,
+            width: id === divId ? "20vw" : "20vw",
             backgroundColor: !firstFlip ? color1Temp : color1,
-            transform: `scale(${BackScale})`
+            // transform: `scale(${BackScale})`
+            transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`
           }}
           onMouseOver={e => handleHover(e, "back")}
           onMouseOut={handleHoverOut}

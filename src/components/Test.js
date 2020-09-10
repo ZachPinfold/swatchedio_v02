@@ -5,8 +5,8 @@ import TestCard from "./TestCard";
 export default function Test() {
   const [isFlipped, toggleFlip] = useState(false);
   const [backGroundWidth, setBackgroundWidth] = useState({
-    onHover: "20vw",
-    offHover: "20vw",
+    onHover: "1",
+    offHover: "1",
     id: null
   });
 
@@ -20,8 +20,8 @@ export default function Test() {
     const num = id.toString();
     setBackgroundWidth({
       ...backGroundWidth,
-      offHover: "15vw",
-      onHover: "30vw",
+      offHover: "1",
+      onHover: "0.98",
       id
     });
   };
@@ -32,8 +32,8 @@ export default function Test() {
 
   const offHoverEffect = e => {
     setBackgroundWidth({
-      offHover: "20.00vw",
-      onHover: "20.00vw",
+      offHover: "1",
+      onHover: "1",
       id: null
     });
   };
@@ -59,6 +59,7 @@ export default function Test() {
           id={backGroundWidth.id}
           divId={"1"}
           color='blue'
+          zIndex={"-100"}
         />
         <TestCard
           handleHoverOut={handleHoverOut}
@@ -69,6 +70,29 @@ export default function Test() {
           id={backGroundWidth.id}
           divId={"2"}
           color='green'
+          zIndex={"100"}
+        />
+        <TestCard
+          handleHoverOut={handleHoverOut}
+          hoverEffect={hoverEffect}
+          isFlipped={isFlipped}
+          onHover={backGroundWidth.onHover}
+          offHover={backGroundWidth.offHover}
+          id={backGroundWidth.id}
+          divId={"3"}
+          color='orange'
+          zIndex={"-100"}
+        />
+        <TestCard
+          handleHoverOut={handleHoverOut}
+          hoverEffect={hoverEffect}
+          isFlipped={isFlipped}
+          onHover={backGroundWidth.onHover}
+          offHover={backGroundWidth.offHover}
+          id={backGroundWidth.id}
+          divId={"4"}
+          zIndex={"-100"}
+          color='black'
         />
       </div>
     </div>
