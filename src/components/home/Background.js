@@ -53,22 +53,22 @@ const Background = ({
     const num = id.toString();
     if (id === "5") {
       setBackgroundWidth({
-        offHover: "19.26vw",
-        onHover: "23vw",
+        offHover: "19vw",
+        onHover: "24vw",
         id
       });
     } else
       setBackgroundWidth({
         ...backGroundWidth,
-        offHover: "19.26vw",
-        onHover: "23vw",
+        offHover: "19vw",
+        onHover: "24vw",
         id
       });
   };
 
   const offHoverEffect = e => {
     setBackgroundWidth({
-      offHover: "20.01vw",
+      offHover: "20.00vw",
       onHover: "23vw",
       id: null
     });
@@ -78,11 +78,11 @@ const Background = ({
     toggleShowAction(false);
     const buttonColor = colorHoverChange(buttonClass, "landing");
     setButtonClass(buttonColor);
-    setBackgroundWidth({
-      offHover: "20.03vw",
-      onHover: "20.03vw",
-      id: null
-    });
+    // setBackgroundWidth({
+    //   offHover: "20.00vw",
+    //   onHover: "20.00vw",
+    //   id: null
+    // });
     getColors("new_random", "first", discover, hueColour);
     setColorFlipBooleon(!colorBooleon);
     !firstLoad && !allFlipped.firstFlip && setColor1(colors2);

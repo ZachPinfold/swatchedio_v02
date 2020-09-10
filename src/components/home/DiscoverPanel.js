@@ -31,12 +31,14 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
   const [hexCode, setHexCode] = useState("");
   const [hexMessage, toggleHexMessage] = useState(false);
   const [copyColor, setCopyColor] = useState(null);
+  const [correctHex, toggleCorrectHex] = useState(false);
 
   const handleHueChange = e => {
     setHexCode("");
     setHueColour(e.target.name);
     getColors("new_random", "first", "discover", e.target.name);
   };
+
 
   const handleInputChange = e => {
     if (e.target.value === "") {
@@ -45,61 +47,43 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
       setHexCode("");
     } else {
       setHueColour("");
+      setHexCode(e.target.value)
       const regex = /^#[0-9A-F]{6}$/i;
       const test = regex.test(e.target.value);
       if (test) {
         const textColor = getContrastYIQ(e.target.value);
         setCopyColor(textColor);
-
-        toggleHexMessage(true);
+        toggleHexMessage(false);
         const colour = e.target.value.substring(1);
         setHexCode(colour);
         getColors("new_random", "first", "hexCode", colour);
+        toggleCorrectHex(true)
       } else if (!test) {
-        toggleHexMessage(false);
+        toggleHexMessage(true);
         setCopyColor(null);
+        toggleCorrectHex(false)
       }
     }
   };
 
-  console.log(hexMessage);
+  const handleButtonPress = () => {
+    if (hexCode === '000000') {
+      console.log('black')
+      handleClick('hexCode', '000000')
+    }
+    else handleClick(
+      hexCode < 1 ? "discover" : "hexCode",
+      hexCode < 1 ? hueColour : hexCode
+    )
+  }
+
 
   return (
     <div
       style={{ paddingTop: hexMessage && "20px" }}
       className='discover-palette-area'
     >
-      <div
-        style={{
-          marginTop: hexMessage && "-15px",
-          marginRight: "30px"
-        }}
-        className='discover-warning-message'
-      >
-        {hexMessage && hexCode.length > 0 && (
-          <p className='disco-warning-text'>valid hex code - #876057</p>
-        )}
-        <form action=''>
-          <input
-            onFocus={e => {
-              setHueColour("");
-              handleInputChange(e);
-            }}
-            style={{
-              opacity: hueColour.length > 0 ? "0.3" : "1",
-              color: !copyColor ? "black" : copyColor,
-              backgroundColor: !hexMessage ? "white" : `#${hexCode}`,
-              padding: "2px",
-              marginTop: "0px",
-              width: "150px"
-            }}
-            class='input'
-            placeholder='#hex'
-            onChange={handleInputChange}
-            type='text'
-          />
-        </form>
-      </div>
+      
 
       <HueButton
         selected={hueColour === "green" ? true : false}
@@ -140,13 +124,40 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
         Yellow
       </HueButton>
 
+      <div
+        style={{
+          marginTop: hexMessage && "-15px",
+        }}
+        className='discover-warning-message'
+      >
+        {hexMessage && hexCode.length > 0 && (
+          <p className='disco-warning-text'>Enter hex code, eg #876057</p>
+        )}
+        <form action=''>
+          <input
+            onFocus={e => {
+              setHueColour("");
+              handleInputChange(e);
+            }}
+            onKeyUp={() => {hexCode === '' && toggleCorrectHex(false)}}
+            style={{
+              opacity: hueColour.length > 0 ? "0.3" : "1",
+              color: !copyColor ? "black" : copyColor,
+              backgroundColor: !correctHex ? "white" : `#${hexCode}`,
+              padding: "2px",
+              marginTop: "0px",
+              width: "150px"
+            }}
+            class='input'
+            placeholder='#hex'
+            onChange={handleInputChange}
+            type='text'
+          />
+        </form>
+      </div>
+
       <button
-        onClick={() =>
-          handleClick(
-            hexCode < 1 ? "discover" : "hexCode",
-            hexCode < 1 ? hueColour : hexCode
-          )
-        }
+        onClick={handleButtonPress}
         className={`${buttonClass} new-palette-btn-discover `}
         style={{
           width: "150px",
@@ -154,7 +165,7 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
           fontSize: "16px",
           padding: "2px 10px",
           height: "auto",
-          marginLeft: "30px"
+          marginLeft: "15px"
         }}
       >
         New Palette

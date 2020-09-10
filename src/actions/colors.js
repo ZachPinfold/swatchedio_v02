@@ -19,7 +19,6 @@ export const getColors = (
 ) => async dispatch => {
   try {
     if (discover === "hexCode") {
-      console.log(colour);
       const runHexCodeAPI = async () => {
         const result1 = await API.graphql(
           graphqlOperation(listColorHexDiscovers, {

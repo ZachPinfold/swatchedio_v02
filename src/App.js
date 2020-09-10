@@ -5,6 +5,7 @@ import Register from "./components/auth/Register";
 import LogIn from "./components/auth/Login";
 import Landing from "./components/home/Landing";
 import Navbar from "./components/layout/Navbar";
+import Test from './components/Test'
 
 // Redux
 
@@ -31,7 +32,7 @@ function App() {
           {login && <LogIn openLogin={openLogin} />}
           {register && <Register openRegister={openRegister} />}
           <Switch>
-            <Route exact path='/' component={Landing} />
+            <Route exact path='/' component={Test} />
             <PrivateRoute exact path='/profile' component={ProjectPage} />
           </Switch>
           {/* <Navbar openLogin={openLogin} openRegister={openRegister} /> */}
