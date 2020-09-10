@@ -5,8 +5,8 @@ import TestCard from "./TestCard";
 export default function Test() {
   const [isFlipped, toggleFlip] = useState(false);
   const [backGroundWidth, setBackgroundWidth] = useState({
-    onHover: "20%",
-    offHover: "20%",
+    onHover: "20vw",
+    offHover: "20vw",
     id: null
   });
 
