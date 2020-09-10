@@ -42,7 +42,10 @@ export default function Test() {
 
   return (
     <div>
-      <button style={{ width: "20px" }} onClick={handleClick}>
+      <button
+        style={{ width: "50px", backgroundColor: "orange", color: "white" }}
+        onClick={handleClick}
+      >
         Flip
       </button>
 
