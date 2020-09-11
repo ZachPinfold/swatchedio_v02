@@ -426,15 +426,22 @@ input:-webkit-autofill:focus {
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* justify-content: flex-start; */
 }
 
 .landing-div-background {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   height: 91.4vh;
-  width: 100vw;
+  width: 100%;
+  /* align-items: flex-start; */
   /* margin-top: 77px; */
   /* position: absolute; */
+}
+
+.landing-div-background:first-child {
+  /* display: flex;
+  align-items: flex-start;  */
 }
 
 .hero-message {
@@ -816,11 +823,11 @@ input:-webkit-autofill:focus {
   width: 100vw;
   display: flex;
   flex-direction: row;
-  /* justify-content: flex-start; */
+  justify-content: flex-start;
 }
 
 .test-card {
-  /* float: left; */
+  float: left;
 
   /* position: absolute; */
   background-color: blue;

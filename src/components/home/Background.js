@@ -24,6 +24,7 @@ const Background = ({
   });
   const [secondFlip, setSecondFlip] = useState(false);
   const [colorBooleon, setColorFlipBooleon] = useState(false);
+  const [flexReset, toggleFlexReset] = useState(false);
   const [color1, setColor1] = useState(null);
   const [color2, setColor2] = useState(null);
   const [firstColorLoad, setFirstColorLoad] = useState(true);
@@ -77,11 +78,11 @@ const Background = ({
     toggleShowAction(false);
     const buttonColor = colorHoverChange(buttonClass, "landing");
     setButtonClass(buttonColor);
-    // setBackgroundWidth({
-    //   offHover: "20.00vw",
-    //   onHover: "20.00vw",
-    //   id: null
-    // });
+    setBackgroundWidth({
+      offHover: "20.00vw",
+      onHover: "20.00vw",
+      id: null
+    });
     getColors("new_random", "first", discover, hueColour);
     setColorFlipBooleon(!colorBooleon);
     !firstLoad && !allFlipped.firstFlip && setColor1(colors2);
@@ -91,14 +92,23 @@ const Background = ({
     if (allFlipped.firstFlip) setSecondFlip(true);
   };
 
-  console.log(colorBooleon);
+  if (colorBooleon) {
+    setTimeout(() => {
+      toggleFlexReset(true);
+    }, 2000);
+  }
+
+  console.log(flexReset);
 
   return pageLoad ? (
     <Loader />
   ) : (
     <Fragment>
       {!loading && (
-        <div className='background-container'>
+        <div
+          // style={{ width: flexReset && "200px" }}
+          className='background-container'
+        >
           {discover && (
             <DiscoverPanel
               handleClick={handleClick}
@@ -108,7 +118,8 @@ const Background = ({
           <div
             style={{
               // marginTop: discover && "130px"
-              height: discover && "85vh"
+              height: discover && "85vh",
+              width: flexReset && "200px"
             }}
             className='landing-div-background'
           >

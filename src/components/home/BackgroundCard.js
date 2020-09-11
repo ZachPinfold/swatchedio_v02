@@ -29,8 +29,8 @@ const BackgroundCard = ({
   const [copied, setCopied] = useState(false);
   const textAreaRef = useRef(null);
 
-  const [frontScale, setFrontScale] = useState(1);
-  const [BackScale, setBackScale] = useState(1);
+  const [frontScale, setFrontScale] = useState(0.98);
+  const [BackScale, setBackScale] = useState(0.98);
 
   useEffect(() => {
     const textColor = getContrastYIQ(color);
@@ -39,17 +39,17 @@ const BackgroundCard = ({
 
   const handleClick = (color, frontback) => {
     if (frontback === "front") {
-      setFrontScale(0.95);
+      setFrontScale(1);
       setTimeout(() => {
-        setFrontScale(1);
-      }, 100);
+        setFrontScale(0.98);
+      }, 220);
     }
 
     if (frontback === "back") {
-      setBackScale(0.95);
+      setBackScale(1);
       setTimeout(() => {
-        setBackScale(1);
-      }, 100);
+        setBackScale(0.98);
+      }, 220);
     }
 
     copyToClip(color);
@@ -86,8 +86,6 @@ const BackgroundCard = ({
 
   const handleMoreClick = () => {};
 
-  console.log(colorBooleon);
-
   return (
     <Fragment>
       <ReactCardFlip
@@ -101,9 +99,12 @@ const BackgroundCard = ({
 
             backgroundColor: randomLoad ? color : color2,
             transform:
-              id === divId ? `scale(${onHover})` : `scale(${offHover})`,
+              frontScale === 1
+                ? `scale(${frontScale})`
+                : id === divId
+                ? `scale(${onHover})`
+                : `scale(${offHover})`,
             transition: !colorBooleon && "transform 0.2s ease-out"
-            // transform: `scale(${frontScale})`
           }}
           onMouseOver={e => handleHover(e, "front")}
           onMouseOut={handleHoverOut}
@@ -144,9 +145,12 @@ const BackgroundCard = ({
           style={{
             width: "20vw",
             backgroundColor: !firstFlip ? color1Temp : color1,
-            // transform: `scale(${BackScale})`
             transform:
-              id === divId ? `scale(${onHover})` : `scale(${offHover})`,
+              BackScale === 1
+                ? `scale(${BackScale})`
+                : id === divId
+                ? `scale(${onHover})`
+                : `scale(${offHover})`,
             transition: colorBooleon && "transform 0.2s ease-out"
           }}
           onMouseOver={e => handleHover(e, "back")}
