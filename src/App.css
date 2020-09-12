@@ -614,7 +614,7 @@ input:-webkit-autofill:focus {
   width: 80%;
   text-align: center;
   height: auto;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   border-radius: 5px;
   padding: 10px;
   cursor: default;
