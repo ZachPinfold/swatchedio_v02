@@ -107,7 +107,7 @@ const BackgroundCard = ({
           }}
           onMouseOver={e => handleHover(e, "front")}
           onMouseOut={handleHoverOut}
-          onClick={() => handleClick(randomLoad ? color : color2, "front")}
+          onMouseDown={() => handleClick(randomLoad ? color : color2, "front")}
           id={divId}
           className='background-div-card'
         >

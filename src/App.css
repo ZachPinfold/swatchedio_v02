@@ -421,16 +421,16 @@ input:-webkit-autofill:focus {
   display: flex;
   border-bottom: 1px solid var(--orange);
   background-color: #fafafa;
+}
 
-  /* position: absolute; */
-  /* background-color: blue; */
+.discover-right-section {
+  display: flex;
 }
 
 .background-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* justify-content: flex-start; */
 }
 
 .landing-div-background {
@@ -441,8 +441,6 @@ input:-webkit-autofill:focus {
 }
 
 .landing-div-background:first-child {
-  /* display: flex;
-  align-items: flex-start;  */
 }
 
 .hero-message {
@@ -482,6 +480,10 @@ input:-webkit-autofill:focus {
   margin-top: 10px;
 }
 
+/* .discover-area {
+  display: flex;
+} */
+
 @media (max-width: 1030px) {
   .hero-heading {
     width: 600px;
@@ -502,6 +504,18 @@ input:-webkit-autofill:focus {
     /* padding-right: 20px; */
     width: 100%;
     font-size: 40px;
+  }
+  .discover-palette-area {
+    flex-direction: column;
+  }
+  .disco-input {
+    margin-left: -15px;
+  }
+  .disco-hue-container {
+    margin-bottom: 10px;
+  }
+  .card-copy-div {
+    padding-bottom: 0px;
   }
 }
 
@@ -769,7 +783,10 @@ input:-webkit-autofill:focus {
 @media (max-width: 760px) {
   .background-div-card {
     width: 100vw;
-    height: 20vh;
+    height: 25vh;
+  }
+  .card-copy-div {
+    padding-bottom: 30px;
   }
 }
 
