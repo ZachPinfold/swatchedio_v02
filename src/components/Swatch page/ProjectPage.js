@@ -60,7 +60,15 @@ const ProjectPage = ({
   return pageLoad ? (
     <Loader />
   ) : (
-    <div style={{ paddingLeft: "30px", width: "100%" }}>
+    <div
+      claddname='profile-background'
+      style={{
+        height: "100%",
+        paddingBottom: "30px",
+        paddingLeft: "30px",
+        width: "100%"
+      }}
+    >
       <ColorArea>
         <h3 className='top-color-text'>Today's top color:</h3>
         <h3 className='top-color-text'>#345fht</h3>
@@ -68,7 +76,11 @@ const ProjectPage = ({
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId='all-lists' direction='horizontal' type='list'>
           {provided => (
-            <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
+            <ListContainer
+              style={{ marginBottom: "30px" }}
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
               {projectList.projects.map((project, index) => (
                 <SwatchList
                   projectList={projectList.projects}
