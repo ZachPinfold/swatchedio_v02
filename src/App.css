@@ -86,7 +86,7 @@ nav ul {
 .btn-primary {
   color: black;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   font-family: "CreteRound";
   background-color: var(--green);
   text-decoration: none;
@@ -195,9 +195,9 @@ nav ul {
 .nav-dropdown {
   position: absolute;
   z-index: 1500;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 10px;
-  margin-right: 20px;
+  right: 20px;
   /* text-align: right; */
   width: 132px;
   background-color: white;
@@ -232,9 +232,9 @@ nav ul {
 .down-arrow-1,
 .down-arrow {
   color: var(--green);
-  position: absolute;
-  margin-top: 9px;
-  /* margin-left: 35px; */
+  position: fixed;
+  /* margin-top: 9px; */
+  margin-left: 35px;
 }
 
 .down-arrow:hover {
@@ -464,6 +464,7 @@ input:-webkit-autofill:focus {
 .btn-landing {
   width: 200px;
   padding: 10px 10px;
+  justify-content: center;
   margin-top: 20px;
   color: white;
   font-size: 22px;
@@ -560,6 +561,15 @@ input:-webkit-autofill:focus {
   text-align: center;
 }
 
+.card-copy-div-mobile {
+  position: absolute;
+  overflow: hidden;
+  align-self: flex-end;
+  padding-bottom: 10%;
+  text-align: center;
+  display: none;
+}
+
 .card-hex-copy {
   font-family: var(--Crete);
 }
@@ -614,7 +624,7 @@ input:-webkit-autofill:focus {
   width: 80%;
   text-align: center;
   height: auto;
-  /* overflow-y: auto; */
+  overflow-y: auto;
   border-radius: 5px;
   padding: 10px;
   cursor: default;
@@ -782,11 +792,20 @@ input:-webkit-autofill:focus {
 
 @media (max-width: 760px) {
   .background-div-card {
-    width: 100vw;
+    width: 100%;
     height: 30vh;
+  }
+  .card-copy-div-mobile {
+    display: block;
+  }
+  .card-copy-div {
+    display: none;
   }
   .card-copy-div {
     padding-bottom: 30px;
+  }
+  .actions-area {
+    display: none;
   }
 }
 

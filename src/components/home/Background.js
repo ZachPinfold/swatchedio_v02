@@ -115,8 +115,8 @@ const Background = ({
           <div
             style={{
               // marginTop: discover && "130px"
-              height: discover && "85vh",
-              width: flexReset && "200px"
+              height: discover && "85vh"
+              // width: flexReset && "200px"
             }}
             className='landing-div-background'
           >

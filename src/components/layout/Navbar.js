@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useRef } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import { logout } from "../../actions/auth";
@@ -7,6 +7,7 @@ import { colorHoverChange, arrowColorchange } from "../utils/colorHoverChange";
 import { openDiscover, closeDiscover } from "../../actions/layout";
 import { useHistory } from "react-router";
 import NavDropdown from "./NavDropdown";
+import useOnClickOutside from "use-onclickoutside";
 
 const Navbar = ({
   logout,
@@ -22,8 +23,12 @@ const Navbar = ({
   const [arrowClass, setArrowClass] = useState("#06d6a0");
   const [logoClass, setLogoClass] = useState("nav-logo");
   const [dropDown, setDropDown] = useState(false);
+  const wrapperRef = useRef(null);
 
-  console.log(openLogin);
+  const closeDeleteBox = () => {
+    setDropDown(false);
+  };
+  useOnClickOutside(wrapperRef, closeDeleteBox);
 
   const location = useLocation();
 
@@ -98,13 +103,14 @@ const Navbar = ({
               onMouseLeave={(handleLoginHover, () => setArrowClass("#06d6a0"))}
               onMouseEnter={handleArrowHover}
               className={buttonClass}
+              ref={wrapperRef}
             >
               {username}
               <div className='down-arrow'>
-                <i
+                {/* <i
                   style={{ color: arrowClass, fontSize: "25px" }}
                   class='fas fa-sort-down'
-                ></i>
+                ></i> */}
               </div>
             </button>
           </li>
@@ -132,7 +138,7 @@ const Navbar = ({
         <div className='nav-buttons-area'>
           {!isAuthenticated ? guestLinks : userLinks}
         </div>
-        <div className='dropdown-container'>
+        <div ref={wrapperRef} className='dropdown-container'>
           {dropDown && <NavDropdown setDropDown={setDropDown} />}
         </div>
       </div>

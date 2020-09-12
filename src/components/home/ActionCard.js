@@ -142,7 +142,11 @@ const ActionCard = ({
   };
 
   return (
-    <div onClick={e => e.stopPropagation()} className='actions-area'>
+    <div
+      onMouseEnter={e => e.stopPropagation()}
+      onClick={e => e.stopPropagation()}
+      className='actions-area'
+    >
       <div
         onMouseOver={e => handleHover(e, frontBack)}
         onClick={e => e.stopPropagation()}
