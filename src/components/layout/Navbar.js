@@ -23,6 +23,8 @@ const Navbar = ({
   const [logoClass, setLogoClass] = useState("nav-logo");
   const [dropDown, setDropDown] = useState(false);
 
+  console.log(openLogin);
+
   const location = useLocation();
 
   const handleLogoClick = () => {

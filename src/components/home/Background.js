@@ -11,7 +11,8 @@ const Background = ({
   getColors,
   colors: { loading, colors, colors2, randomLoad, secondLoad, firstLoad, hex },
   layout: { discover },
-  revertHome
+  revertHome,
+  openLogin
 }) => {
   const [backGroundWidth, setBackgroundWidth] = useState({
     onHover: "1",
@@ -147,6 +148,7 @@ const Background = ({
               colorBooleon={colorBooleon}
               hex={hex}
               handleBackClick={handleClick}
+              openLogin={openLogin}
             />
             <BackgroundCard
               showAction={showAction}
@@ -166,6 +168,7 @@ const Background = ({
               colorBooleon={colorBooleon}
               hex={hex}
               handleBackClick={handleClick}
+              openLogin={openLogin}
             />
             <BackgroundCard
               showAction={showAction}
@@ -185,6 +188,7 @@ const Background = ({
               colorBooleon={colorBooleon}
               hex={hex}
               handleBackClick={handleClick}
+              openLogin={openLogin}
             />
             <BackgroundCard
               showAction={showAction}
@@ -204,6 +208,7 @@ const Background = ({
               colorBooleon={colorBooleon}
               hex={hex}
               handleBackClick={handleClick}
+              openLogin={openLogin}
             />
             <BackgroundCard
               showAction={showAction}
@@ -223,6 +228,7 @@ const Background = ({
               colorBooleon={colorBooleon}
               hex={hex}
               handleBackClick={handleClick}
+              openLogin={openLogin}
             />
           </div>
         </div>

@@ -389,7 +389,11 @@ input:-webkit-autofill:focus {
   /* text-align: center; */
 }
 
+/*  */
+/*  */
 /* Landing page */
+/*  */
+/*  */
 
 .discover-warning-message {
   display: flex;
@@ -434,9 +438,6 @@ input:-webkit-autofill:focus {
   justify-content: flex-start;
   height: 91.4vh;
   width: 100%;
-  /* align-items: flex-start; */
-  /* margin-top: 77px; */
-  /* position: absolute; */
 }
 
 .landing-div-background:first-child {
@@ -481,7 +482,34 @@ input:-webkit-autofill:focus {
   margin-top: 10px;
 }
 
+@media (max-width: 1030px) {
+  .hero-heading {
+    width: 600px;
+    font-size: 65px;
+  }
+}
+
+@media (max-width: 760px) {
+  .landing-div-background {
+    flex-direction: column;
+  }
+  .hero-message {
+    top: 35%;
+    left: 10%;
+    padding-right: 20px;
+  }
+  .hero-heading {
+    /* padding-right: 20px; */
+    width: 100%;
+    font-size: 40px;
+  }
+}
+
+/*  */
+/*  */
 /* Color Cards */
+/*  */
+/*  */
 
 .card-backdrop {
   width: 100vw;
@@ -492,6 +520,7 @@ input:-webkit-autofill:focus {
 }
 
 .background-div-card {
+  width: 20vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -731,12 +760,24 @@ input:-webkit-autofill:focus {
 
 .card-star {
   color: white;
-  margin-left: 10px;
+  left: 10px;
   margin-top: 10px;
   font-size: 20px;
+  position: absolute;
 }
 
+@media (max-width: 760px) {
+  .background-div-card {
+    width: 100vw;
+    height: 20vh;
+  }
+}
+
+/*  */
+/*  */
 /* Loader */
+/*  */
+/*  */
 
 @keyframes ldio-3ma625hz2r {
   0% {

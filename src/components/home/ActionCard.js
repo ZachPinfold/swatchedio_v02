@@ -20,7 +20,8 @@ const ActionCard = ({
   color,
   color2,
   addSwatch,
-  colors
+  colors,
+  openLogin
 }) => {
   const [circleSize, setCircleSize] = useState(false);
   const [addToMaster, toggleAddToMaster] = useState(false);
@@ -209,7 +210,7 @@ const ActionCard = ({
           <div style={{ marginBottom: "10px" }} className='action-button-area'>
             <div className='action-copy-line'>
               <h3
-                onClick={handleMasterToggle}
+                onClick={isAuthenticated && handleMasterToggle}
                 className={
                   isAuthenticated
                     ? "more-card-add-btn-on"
@@ -231,7 +232,7 @@ const ActionCard = ({
             </div>
 
             <h3
-              onClick={toggleViewLoadProjects}
+              onClick={isAuthenticated && toggleViewLoadProjects}
               className={
                 isAuthenticated
                   ? "more-card-add-btn-on"
@@ -291,7 +292,11 @@ const ActionCard = ({
           )}
           {!isAuthenticated && (
             <div className='field-btn'>
-              <button style={{ marginTop: "10px" }} className='btn-primary'>
+              <button
+                onClick={() => openLogin(true)}
+                style={{ marginTop: "10px" }}
+                className='btn-primary'
+              >
                 Login to Access
               </button>
             </div>

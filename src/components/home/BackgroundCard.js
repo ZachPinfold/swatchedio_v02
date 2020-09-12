@@ -22,7 +22,10 @@ const BackgroundCard = ({
   randomLoad,
   colorBooleon,
   auth: { isAuthenticated },
-  handleBackClick
+  handleBackClick,
+  layout: { discover },
+  hex,
+  openLogin
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [showCopy, flipShowCopy] = useState(false);
@@ -84,8 +87,6 @@ const BackgroundCard = ({
 
   const handleMoreClick = () => {};
 
-  // console.log(copyColor);
-
   return (
     <Fragment>
       <ReactCardFlip
@@ -95,8 +96,6 @@ const BackgroundCard = ({
         {/* // First Card // */}
         <div
           style={{
-            width: "20vw",
-
             backgroundColor: randomLoad ? color : color2,
             transform:
               frontScale === 1
@@ -112,7 +111,9 @@ const BackgroundCard = ({
           id={divId}
           className='background-div-card'
         >
-          <i style={{ color: copyColor }} class='fas fa-star card-star'></i>
+          {discover && `#${hex}` === color2 && (
+            <i style={{ color: copyColor }} class='far fa-star card-star'></i>
+          )}
 
           <ActionCard
             handleHover={handleHover}
@@ -126,6 +127,7 @@ const BackgroundCard = ({
             randomLoad={randomLoad}
             color={color}
             color2={color2}
+            openLogin={openLogin}
           />
 
           <CopyArea
@@ -145,7 +147,6 @@ const BackgroundCard = ({
 
         <div
           style={{
-            width: "20vw",
             backgroundColor: !firstFlip ? color1Temp : color1,
             transform:
               BackScale === 1
@@ -161,8 +162,9 @@ const BackgroundCard = ({
           id={divId}
           className='background-div-card'
         >
-          <i style={{ color: copyColor }} class='fas fa-star card-star'></i>
-
+          {discover && `#${hex}` === color1 && (
+            <i style={{ color: copyColor }} class='far fa-star card-star'></i>
+          )}
           <ActionCard
             handleHover={handleHover}
             divId={divId}
@@ -175,6 +177,7 @@ const BackgroundCard = ({
             randomLoad={randomLoad}
             color={color1Temp}
             color2={color1}
+            openLogin={openLogin}
           />
 
           <CopyArea

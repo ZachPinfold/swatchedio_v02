@@ -32,7 +32,11 @@ function App() {
           {login && <LogIn openLogin={openLogin} />}
           {register && <Register openRegister={openRegister} />}
           <Switch>
-            <Route exact path='/' component={Landing} />
+            <Route
+              exact
+              path='/'
+              render={props => <Landing {...props} openLogin={openLogin} />}
+            />
             <PrivateRoute exact path='/profile' component={ProjectPage} />
           </Switch>
           {/* <Navbar openLogin={openLogin} openRegister={openRegister} /> */}
