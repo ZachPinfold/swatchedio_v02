@@ -23,3 +23,4 @@ export const SECOND_PAGE_RESET = "SECOND_PAGE_RESET";
 export const ADD_USER = "ADD_USER";
 export const LOAD_PROJECTS = "LOAD_PROJECTS";
 export const HOME_REVERT = "HOME_REVERT";
+export const GET_HEX_COLOURS = "GET_HEX_COLOURS";

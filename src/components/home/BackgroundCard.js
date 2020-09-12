@@ -21,21 +21,35 @@ const BackgroundCard = ({
   firstFlip,
   randomLoad,
   colorBooleon,
-  auth: { isAuthenticated }
+  auth: { isAuthenticated },
+  handleBackClick
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [showCopy, flipShowCopy] = useState(false);
   const [copyColor, setCopyColor] = useState(null);
   const [copied, setCopied] = useState(false);
   const textAreaRef = useRef(null);
-
   const [frontScale, setFrontScale] = useState(0.98);
   const [BackScale, setBackScale] = useState(0.98);
 
   useEffect(() => {
-    const textColor = getContrastYIQ(color);
-    setCopyColor(textColor);
-  }, []);
+    if (randomLoad) {
+      const textColor = getContrastYIQ(color);
+      setCopyColor(textColor);
+    }
+    if (!randomLoad && colorBooleon === false) {
+      const textColor = getContrastYIQ(color2);
+      setCopyColor(textColor);
+    }
+    if (!randomLoad && colorBooleon === true) {
+      const textColor = getContrastYIQ(color1);
+      setCopyColor(textColor);
+    }
+    if (!firstFlip && colorBooleon === true) {
+      const textColor = getContrastYIQ(color1Temp);
+      setCopyColor(textColor);
+    }
+  }, [handleBackClick]);
 
   const handleClick = (color, frontback) => {
     if (frontback === "front") {
@@ -60,22 +74,6 @@ const BackgroundCard = ({
   const handleHover = (e, frontback) => {
     hoverEffect(e);
     flipShowCopy(true);
-    if (randomLoad) {
-      const textColor = getContrastYIQ(color);
-      setCopyColor(textColor);
-    }
-    if (!randomLoad && frontback === "front") {
-      const textColor = getContrastYIQ(color2);
-      setCopyColor(textColor);
-    }
-    if (!randomLoad && frontback === "back") {
-      const textColor = getContrastYIQ(color1);
-      setCopyColor(textColor);
-    }
-    if (!firstFlip && frontback === "back") {
-      const textColor = getContrastYIQ(color1Temp);
-      setCopyColor(textColor);
-    }
   };
 
   const handleHoverOut = e => {
@@ -85,6 +83,8 @@ const BackgroundCard = ({
   };
 
   const handleMoreClick = () => {};
+
+  // console.log(copyColor);
 
   return (
     <Fragment>
@@ -112,6 +112,8 @@ const BackgroundCard = ({
           id={divId}
           className='background-div-card'
         >
+          <i style={{ color: copyColor }} class='fas fa-star card-star'></i>
+
           <ActionCard
             handleHover={handleHover}
             divId={divId}
@@ -159,6 +161,8 @@ const BackgroundCard = ({
           id={divId}
           className='background-div-card'
         >
+          <i style={{ color: copyColor }} class='fas fa-star card-star'></i>
+
           <ActionCard
             handleHover={handleHover}
             divId={divId}
@@ -191,7 +195,8 @@ const BackgroundCard = ({
 };
 
 const mstp = state => ({
-  auth: state.auth
+  auth: state.auth,
+  layout: state.layout
 });
 
 export default connect(mstp, null)(BackgroundCard);

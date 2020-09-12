@@ -3,7 +3,8 @@ import {
   COLOR_ERROR,
   GET_RANDOM_COLORS,
   GET_SECOND_COLORS,
-  SECOND_PAGE_RESET
+  SECOND_PAGE_RESET,
+  GET_HEX_COLOURS
 } from "../actions/types";
 
 const initialState = {
@@ -13,10 +14,11 @@ const initialState = {
   secondLoad: true,
   colors: null,
   colors2: null,
-  error: {}
+  error: {},
+  hex: null
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_COLORS:
@@ -24,21 +26,33 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         colors: payload,
-        firstLoad: false
+        firstLoad: false,
+        hex: null
       };
     case GET_SECOND_COLORS:
       return {
         ...state,
         loading: false,
         colors2: payload,
-        secondLoad: false
+        secondLoad: false,
+        hex: null
       };
     case GET_RANDOM_COLORS:
       return {
         ...state,
         loading: false,
         colors: payload,
-        randomLoad: false
+        randomLoad: false,
+        hex: null
+      };
+    case GET_HEX_COLOURS:
+      console.log(payload);
+      return {
+        ...state,
+        loading: false,
+        colors: payload.payload,
+        randomLoad: false,
+        hex: payload.colour
       };
     case COLOR_ERROR:
       return {

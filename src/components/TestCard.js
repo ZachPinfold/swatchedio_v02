@@ -19,8 +19,8 @@ export default function TestCard({
         onMouseOver={e => hoverEffect(e, "front")}
         onMouseOut={handleHoverOut}
         style={{
-          // width: id === divId ? onHover : offHover,
-          transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`,
+          width: id === divId ? onHover : offHover,
+          // transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`,
           backgroundColor: color,
           color: "white",
           zIndex: "1000"
@@ -36,7 +36,9 @@ export default function TestCard({
         onMouseOver={e => hoverEffect(e, "front")}
         onMouseOut={handleHoverOut}
         style={{
-          transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`,
+          width: id === divId ? onHover : offHover,
+
+          // transform: id === divId ? `scale(${onHover})` : `scale(${offHover})`,
           backgroundColor: color,
           color: "white"
         }}

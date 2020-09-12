@@ -5,8 +5,8 @@ import TestCard from "./TestCard";
 export default function Test() {
   const [isFlipped, toggleFlip] = useState(false);
   const [backGroundWidth, setBackgroundWidth] = useState({
-    onHover: "1",
-    offHover: "1",
+    onHover: "20vw",
+    offHover: "20vw",
     id: null
   });
 
@@ -20,8 +20,8 @@ export default function Test() {
     const num = id.toString();
     setBackgroundWidth({
       ...backGroundWidth,
-      offHover: "1",
-      onHover: "0.98",
+      offHover: "18vw",
+      onHover: "22vw",
       id
     });
   };

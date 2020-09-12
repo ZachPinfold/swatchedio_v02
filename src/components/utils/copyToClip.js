@@ -3,10 +3,10 @@ import * as clipboard from "clipboard-polyfill/text";
 function copyToCLip(color) {
   clipboard.writeText(color).then(
     function() {
-      console.log("success!");
+      // console.log("success!");
     },
     function() {
-      console.log("error!");
+      // console.log("error!");
     }
   );
 }

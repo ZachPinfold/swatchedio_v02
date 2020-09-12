@@ -9,7 +9,7 @@ import Loader from "../layout/Loader";
 
 const Background = ({
   getColors,
-  colors: { loading, colors, colors2, randomLoad, secondLoad, firstLoad },
+  colors: { loading, colors, colors2, randomLoad, secondLoad, firstLoad, hex },
   layout: { discover },
   revertHome
 }) => {
@@ -39,8 +39,6 @@ const Background = ({
   });
 
   useEffect(() => {
-    console.log("hello");
-
     revertHome();
     getColors(null, firstColorLoad);
     setFirstColorLoad(false);
@@ -98,8 +96,6 @@ const Background = ({
     }, 2000);
   }
 
-  console.log(flexReset);
-
   return pageLoad ? (
     <Loader />
   ) : (
@@ -149,6 +145,8 @@ const Background = ({
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
               colorBooleon={colorBooleon}
+              hex={hex}
+              handleBackClick={handleClick}
             />
             <BackgroundCard
               showAction={showAction}
@@ -166,6 +164,8 @@ const Background = ({
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
               colorBooleon={colorBooleon}
+              hex={hex}
+              handleBackClick={handleClick}
             />
             <BackgroundCard
               showAction={showAction}
@@ -183,6 +183,8 @@ const Background = ({
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
               colorBooleon={colorBooleon}
+              hex={hex}
+              handleBackClick={handleClick}
             />
             <BackgroundCard
               showAction={showAction}
@@ -200,6 +202,8 @@ const Background = ({
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
               colorBooleon={colorBooleon}
+              hex={hex}
+              handleBackClick={handleClick}
             />
             <BackgroundCard
               showAction={showAction}
@@ -217,6 +221,8 @@ const Background = ({
               allFlipped={allFlipped.multiFlip}
               firstFlip={allFlipped.firstFlip}
               colorBooleon={colorBooleon}
+              hex={hex}
+              handleBackClick={handleClick}
             />
           </div>
         </div>

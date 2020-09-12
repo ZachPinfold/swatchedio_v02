@@ -729,6 +729,13 @@ input:-webkit-autofill:focus {
   text-decoration: underline;
 }
 
+.card-star {
+  color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
 /* Loader */
 
 @keyframes ldio-3ma625hz2r {

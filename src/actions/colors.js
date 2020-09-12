@@ -4,7 +4,8 @@ import {
   COLOR_ERROR,
   GET_RANDOM_COLORS,
   GET_SECOND_COLORS,
-  SECOND_PAGE_RESET
+  SECOND_PAGE_RESET,
+  GET_HEX_COLOURS
 } from "./types";
 import { API, graphqlOperation } from "aws-amplify";
 import { listColorHexs, listColorHexDiscovers } from "../graphql/queries";
@@ -39,8 +40,8 @@ export const getColors = (
 
       paletteAPIResult.then(payload => {
         dispatch({
-          type: random === "new_random" ? GET_RANDOM_COLORS : GET_COLORS,
-          payload: payload
+          type: random === "new_random" ? GET_HEX_COLOURS : GET_COLORS,
+          payload: { payload, colour }
         });
       });
     }
