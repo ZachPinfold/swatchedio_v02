@@ -6,13 +6,15 @@ import DiscoverPanel from "./DiscoverPanel";
 import { colorHoverChange } from "../utils/colorHoverChange";
 import { revertHome } from "../../actions/swatch";
 import Loader from "../layout/Loader";
+import { closeProfile } from "../../actions/layout";
 
 const Background = ({
   getColors,
   colors: { loading, colors, colors2, randomLoad, secondLoad, firstLoad, hex },
   layout: { discover },
   revertHome,
-  openLogin
+  openLogin,
+  closeProfile
 }) => {
   const [backGroundWidth, setBackgroundWidth] = useState({
     onHover: "1",
@@ -40,6 +42,8 @@ const Background = ({
   });
 
   useEffect(() => {
+    closeProfile();
+
     revertHome();
     getColors(null, firstColorLoad);
     setFirstColorLoad(false);
@@ -242,4 +246,6 @@ const mts = state => ({
   layout: state.layout
 });
 
-export default connect(mts, { getColors, revertHome })(Background);
+export default connect(mts, { getColors, revertHome, closeProfile })(
+  Background
+);

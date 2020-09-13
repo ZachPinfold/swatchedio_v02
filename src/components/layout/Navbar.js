@@ -15,7 +15,7 @@ const Navbar = ({
   openRegister,
   openDiscover,
   closeDiscover,
-  layout: { discover },
+  layout: { discover, profile },
   auth: { username, isAuthenticated },
   swatch
 }) => {
@@ -24,11 +24,12 @@ const Navbar = ({
   const [logoClass, setLogoClass] = useState("nav-logo");
   const [dropDown, setDropDown] = useState(false);
   const wrapperRef = useRef(null);
+  const buttonRef = useRef(null);
 
-  const closeDeleteBox = () => {
-    setDropDown(false);
+  const closeDeleteBox = event => {
+    if (!buttonRef.current.contains(event.target)) setDropDown(false);
   };
-  useOnClickOutside(wrapperRef, closeDeleteBox);
+  useOnClickOutside(wrapperRef, e => closeDeleteBox(e));
 
   const location = useLocation();
 
@@ -89,12 +90,19 @@ const Navbar = ({
     <Fragment>
       {isAuthenticated && (
         <ul>
-          {!discover && (
+          {!profile && (
             <li>
               <a className='explore-link' onClick={() => openDiscover()}>
                 Discover
               </a>
             </li>
+          )}
+          {!discover && profile && (
+            <Link style={{ textDecoration: "none" }} to='/'>
+              <a className='explore-link' onClick={() => openDiscover()}>
+                Discover
+              </a>
+            </Link>
           )}
           <li>
             <button
@@ -103,7 +111,7 @@ const Navbar = ({
               onMouseLeave={(handleLoginHover, () => setArrowClass("#06d6a0"))}
               onMouseEnter={handleArrowHover}
               className={buttonClass}
-              ref={wrapperRef}
+              ref={buttonRef}
             >
               {username}
               <div className='down-arrow'>

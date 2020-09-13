@@ -5,6 +5,8 @@ import SwatchActionButton from "./SwatchActionButton";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sortSwatches, loadProjects } from "../../actions/swatch";
 import { closeDiscover } from "../../actions/layout";
+import { openProfile } from "../../actions/layout";
+
 import { secondPageReset } from "../../actions/colors";
 import { testAction } from "../../actions/testAction";
 import styled from "styled-components";
@@ -20,7 +22,8 @@ const ProjectPage = ({
   testAction,
   test,
   auth: { id, isAuthenticated },
-  loadProjects
+  loadProjects,
+  openProfile
 }) => {
   const [pageLoad, setLoad] = useState(true);
 
@@ -28,6 +31,7 @@ const ProjectPage = ({
     if (isAuthenticated) loadProjects(id);
     secondPageReset();
     closeDiscover();
+    openProfile();
     setTimeout(() => {
       setLoad(false);
     }, 1000);
@@ -134,6 +138,7 @@ export default connect(mts, {
   sortSwatches,
   closeDiscover,
   secondPageReset,
+  openProfile,
   testAction,
   loadProjects
 })(ProjectPage);
