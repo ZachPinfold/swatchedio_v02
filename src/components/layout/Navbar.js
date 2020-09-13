@@ -27,7 +27,10 @@ const Navbar = ({
   const buttonRef = useRef(null);
 
   const closeDeleteBox = event => {
-    if (!buttonRef.current.contains(event.target)) setDropDown(false);
+    console.log("fire");
+    if (dropDown === true) {
+      if (!buttonRef.current.contains(event.target)) setDropDown(false);
+    }
   };
   useOnClickOutside(wrapperRef, e => closeDeleteBox(e));
 

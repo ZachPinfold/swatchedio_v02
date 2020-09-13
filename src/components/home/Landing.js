@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import Backgroud from "./Background";
 import { API, graphqlOperation } from "aws-amplify";
-import { closeProfile } from "../../actions/layout";
 
 import { listColorHexs } from "../../graphql/queries";
 
 const Landing = ({ openLogin, test }) => {
   useEffect(() => {
-    closeProfile();
     getPosts();
     document.body.style.background = "white";
   }, []);

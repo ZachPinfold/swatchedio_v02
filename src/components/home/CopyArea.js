@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
 
-export default function CopyArea({
+const CopyArea = ({
   copyColor,
   showCopy,
   hoverEffect,
@@ -8,8 +9,9 @@ export default function CopyArea({
   randomLoad,
   color2,
   color,
-  copied
-}) {
+  copied,
+  layout: { discover }
+}) => {
   return (
     <Fragment>
       <div className='card-copy-div'>
@@ -33,26 +35,34 @@ export default function CopyArea({
           {!copied ? "Click to Copy" : "Copied!"}
         </h3>
       </div>
-      <div className='card-copy-div-mobile'>
-        <h3
-          style={{
-            color: copyColor
-          }}
-          onMouseEnter={e => hoverEffect(e)}
-          id={divId}
-          className='card-copy-copy'
-        >
-          {randomLoad ? color : color2}
-        </h3>
-        <h3
-          style={{ color: copyColor }}
-          onMouseEnter={e => hoverEffect(e)}
-          id={divId}
-          className='card-copy-copy'
-        >
-          {!copied ? "Click to Copy" : "Copied!"}
-        </h3>
-      </div>
+      {discover && (
+        <div className='card-copy-div-mobile'>
+          <h3
+            style={{
+              color: copyColor
+            }}
+            onMouseEnter={e => hoverEffect(e)}
+            id={divId}
+            className='card-copy-copy'
+          >
+            {randomLoad ? color : color2}
+          </h3>
+          <h3
+            style={{ color: copyColor }}
+            onMouseEnter={e => hoverEffect(e)}
+            id={divId}
+            className='card-copy-copy'
+          >
+            {!copied ? "Click to Copy" : "Copied!"}
+          </h3>
+        </div>
+      )}
     </Fragment>
   );
-}
+};
+
+const mstp = state => ({
+  layout: state.layout
+});
+
+export default connect(mstp, null)(CopyArea);
