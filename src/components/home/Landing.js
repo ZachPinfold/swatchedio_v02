@@ -10,13 +10,9 @@ const Landing = ({ openLogin, test }) => {
     document.body.style.background = "white";
   }, []);
 
-  console.log(test);
-
   const getPosts = async () => {
-    const result = await API.graphql(
-      graphqlOperation(listColorHexs, { format: "json" })
-    );
-    const obj = JSON.parse(result.data.listColorHexs);
+    API.graphql(graphqlOperation(listColorHexs, { format: "json" }));
+    // const obj = JSON.parse(result.data.listColorHexs);
   };
 
   return <Backgroud openLogin={openLogin} />;

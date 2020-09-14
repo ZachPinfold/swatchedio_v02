@@ -1,11 +1,9 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import FormErrors from "../utility/FormErrors";
-import Validate from "../utility/FormValidation";
-import { Auth } from "aws-amplify";
 import { register } from "../../actions/auth";
 import { connect } from "react-redux";
 
-const Register = ({ register, openRegister }) => {
+const Register = ({ register, openRegister, openLogin }) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -35,22 +33,7 @@ const Register = ({ register, openRegister }) => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    // Form validation
     clearErrorState();
-    // const error = Validate(event, formData);
-    // if (error) {
-    //   setFormData({
-    //     ...formData,
-    //     errors: {
-    //       ...error,
-
-    //       errors
-    //     }
-    //   });
-    // }
-    // console.log(error);
-
-    // AWS Cognito integration here
 
     register(username, password, email, err => {
       if (err === "no error") toggleComplete(true);
@@ -147,9 +130,15 @@ const Register = ({ register, openRegister }) => {
             </div>
             <div className='field field-login'>
               <p className='control'>
-                <a className='login-register-sublink'>
+                <button
+                  onClick={() => {
+                    openRegister(false);
+                    openLogin(true);
+                  }}
+                  className='login-register-sublink '
+                >
                   Already signed up? Login
-                </a>
+                </button>
               </p>
             </div>
           </form>

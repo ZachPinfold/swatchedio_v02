@@ -5,7 +5,6 @@ import { logout } from "../../actions/auth";
 import { connect } from "react-redux";
 import { colorHoverChange, arrowColorchange } from "../utils/colorHoverChange";
 import { openDiscover, closeDiscover } from "../../actions/layout";
-import { useHistory } from "react-router";
 import NavDropdown from "./NavDropdown";
 import useOnClickOutside from "use-onclickoutside";
 import BurgerMenu from "./BurgerMenu";
@@ -28,7 +27,6 @@ const Navbar = ({
   const buttonRef = useRef(null);
 
   const closeDeleteBox = event => {
-    console.log("fire");
     if (dropDown === true) {
       if (!buttonRef.current.contains(event.target)) setDropDown(false);
     }
@@ -39,11 +37,6 @@ const Navbar = ({
 
   const handleLogoClick = () => {
     if (location.pathname === "/") closeDiscover();
-  };
-
-  const handleLogout = e => {
-    e.preventDefault();
-    logout();
   };
 
   const handleLoginHover = () => {
@@ -61,21 +54,19 @@ const Navbar = ({
     setLogoClass(classColor);
   };
 
-  const history = useHistory();
-
   const guestLinks = (
     <ul>
       {!discover && (
         <li>
-          <a className='explore-link' onClick={() => openDiscover()}>
+          <button className='explore-link' onClick={() => openDiscover()}>
             Discover
-          </a>
+          </button>
         </li>
       )}
       <li>
-        <a className='register-link' onClick={() => openRegister(true)}>
+        <button className='register-link' onClick={() => openRegister(true)}>
           Register
-        </a>
+        </button>
       </li>
       <li>
         <button
@@ -96,16 +87,16 @@ const Navbar = ({
         <ul>
           {!profile && (
             <li>
-              <a className='explore-link' onClick={() => openDiscover()}>
+              <button className='explore-link' onClick={() => openDiscover()}>
                 Discover
-              </a>
+              </button>
             </li>
           )}
           {!discover && profile && (
             <Link style={{ textDecoration: "none" }} to='/'>
-              <a className='explore-link' onClick={() => openDiscover()}>
+              <p className='explore-link' onClick={() => openDiscover()}>
                 Discover
-              </a>
+              </p>
             </Link>
           )}
           <li>
@@ -118,12 +109,7 @@ const Navbar = ({
               ref={buttonRef}
             >
               {username}
-              <div className='down-arrow'>
-                {/* <i
-                  style={{ color: arrowClass, fontSize: "25px" }}
-                  class='fas fa-sort-down'
-                ></i> */}
-              </div>
+              <div className='down-arrow'></div>
             </button>
           </li>
         </ul>
@@ -137,9 +123,12 @@ const Navbar = ({
         <ul>
           {!profile && (
             <li>
-              <a className='explore-link mobile' onClick={() => openDiscover()}>
+              <button
+                className='explore-link mobile'
+                onClick={() => openDiscover()}
+              >
                 Discover
-              </a>
+              </button>
             </li>
           )}
           {!discover && profile && (
@@ -147,9 +136,12 @@ const Navbar = ({
               style={{ textDecoration: "none", marginBottom: "10px" }}
               to='/'
             >
-              <a className='explore-link mobile' onClick={() => openDiscover()}>
+              <button
+                className='explore-link mobile'
+                onClick={() => openDiscover()}
+              >
                 Discover
-              </a>
+              </button>
             </Link>
           )}
           <li>
@@ -176,15 +168,21 @@ const Navbar = ({
     <ul>
       {!discover && (
         <li>
-          <a className='explore-link mobile' onClick={() => openDiscover()}>
+          <button
+            className='explore-link mobile'
+            onClick={() => openDiscover()}
+          >
             Discover
-          </a>
+          </button>
         </li>
       )}
       <li>
-        <a className='register-link mobile' onClick={() => openRegister(true)}>
+        <button
+          className='register-link mobile'
+          onClick={() => openRegister(true)}
+        >
           Register
-        </a>
+        </button>
       </li>
       <li>
         <button

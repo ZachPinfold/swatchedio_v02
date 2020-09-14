@@ -27,7 +27,6 @@ const Background = ({
   });
   const [secondFlip, setSecondFlip] = useState(false);
   const [colorBooleon, setColorFlipBooleon] = useState(false);
-  const [flexReset, toggleFlexReset] = useState(false);
   const [color1, setColor1] = useState(null);
   const [color2, setColor2] = useState(null);
   const [firstColorLoad, setFirstColorLoad] = useState(true);
@@ -50,11 +49,11 @@ const Background = ({
     setTimeout(() => {
       setLoad(false);
     }, 2000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getColors]);
 
   const hoverEffect = e => {
     const { id } = e.currentTarget;
-    const num = id.toString();
     if (id === "5") {
       setBackgroundWidth({
         offHover: "1",
@@ -94,12 +93,6 @@ const Background = ({
     setAllFlipped({ firstFlip: true, multiFlip: !allFlipped.multiFlip });
     if (allFlipped.firstFlip) setSecondFlip(true);
   };
-
-  if (colorBooleon) {
-    setTimeout(() => {
-      toggleFlexReset(true);
-    }, 2000);
-  }
 
   return pageLoad ? (
     <Loader />

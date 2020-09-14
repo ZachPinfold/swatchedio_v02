@@ -18,6 +18,7 @@ const Login = ({ auth, login, openLogin }) => {
     if (auth.isAuthenticated === true) {
       openLogin(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.isAuthenticated]);
 
   const { username, password, errors } = formData;

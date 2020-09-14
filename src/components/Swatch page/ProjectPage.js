@@ -8,19 +8,14 @@ import { closeDiscover } from "../../actions/layout";
 import { openProfile } from "../../actions/layout";
 
 import { secondPageReset } from "../../actions/colors";
-import { testAction } from "../../actions/testAction";
 import styled from "styled-components";
-import { API, graphqlOperation } from "aws-amplify";
 import Loader from "../layout/Loader";
-import DragScroll from "react-dragscroll";
 
 const ProjectPage = ({
   projectList,
   sortSwatches,
   closeDiscover,
   secondPageReset,
-  testAction,
-  test,
   auth: { id, isAuthenticated },
   loadProjects,
   openProfile
@@ -35,6 +30,7 @@ const ProjectPage = ({
     setTimeout(() => {
       setLoad(false);
     }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   if (!pageLoad) {
@@ -116,18 +112,6 @@ const ColorArea = styled.div`
   padding-top: 100px;
 `;
 
-const styles = {
-  listContainer: {
-    display: "flex",
-    flexDirection: "row",
-    // width: "100vw",
-    marginLeft: 20,
-    paddingRight: 20,
-    position: "absolute",
-    marginTop: 100
-  }
-};
-
 const mts = state => ({
   projectList: state.swatchReducer,
   test: state.test,
@@ -139,6 +123,5 @@ export default connect(mts, {
   closeDiscover,
   secondPageReset,
   openProfile,
-  testAction,
   loadProjects
 })(ProjectPage);

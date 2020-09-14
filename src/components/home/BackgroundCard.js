@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect, useRef } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import ReactCardFlip from "react-card-flip";
 import getContrastYIQ from "../utils/dominantColor";
 import { connect } from "react-redux";
@@ -21,17 +21,14 @@ const BackgroundCard = ({
   firstFlip,
   randomLoad,
   colorBooleon,
-  auth: { isAuthenticated },
   handleBackClick,
   layout: { discover },
   hex,
   openLogin
 }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
   const [showCopy, flipShowCopy] = useState(false);
   const [copyColor, setCopyColor] = useState(null);
   const [copied, setCopied] = useState(false);
-  const textAreaRef = useRef(null);
   const [frontScale, setFrontScale] = useState(0.98);
   const [BackScale, setBackScale] = useState(0.98);
 
@@ -52,6 +49,7 @@ const BackgroundCard = ({
       const textColor = getContrastYIQ(color1Temp);
       setCopyColor(textColor);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleBackClick]);
 
   const handleClick = (color, frontback) => {
@@ -90,7 +88,7 @@ const BackgroundCard = ({
   return (
     <Fragment>
       <ReactCardFlip
-        isFlipped={allFlipped || isFlipped}
+        isFlipped={allFlipped || colorBooleon}
         flipDirection='horizontal'
       >
         {/* // First Card // */}
@@ -158,7 +156,9 @@ const BackgroundCard = ({
           }}
           onMouseOver={e => handleHover(e, "back")}
           onMouseOut={handleHoverOut}
-          onClick={() => handleClick(!firstFlip ? color1Temp : color1, "back")}
+          onMouseDown={() =>
+            handleClick(!firstFlip ? color1Temp : color1, "back")
+          }
           id={divId}
           className='background-div-card'
         >
@@ -198,7 +198,6 @@ const BackgroundCard = ({
 };
 
 const mstp = state => ({
-  auth: state.auth,
   layout: state.layout
 });
 

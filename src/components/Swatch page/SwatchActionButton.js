@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Icon, Card, Button } from "@material-ui/core";
-import TextareaAutosize from "react-textarea-autosize";
+import { Card } from "@material-ui/core";
 import { addProject, addSwatch } from "../../actions/swatch";
 import { connect } from "react-redux";
 import getContrastYIQ from "../utils/dominantColor";
@@ -12,7 +11,7 @@ const SwatchActionButton = ({
   listId,
   swatches,
   swatchList,
-  auth: { isAuthenticated, id, username }
+  auth: { id, username }
 }) => {
   const [text, setForm] = useState("");
   const [openForm, setOpenForm] = useState(false);
@@ -21,10 +20,16 @@ const SwatchActionButton = ({
   const [copyColor, setCopyColor] = useState(null);
 
   const buttonRender = () => {
-    const buttonText = list ? "Add a new project" : "# add new hex code";
+    const buttonText = list ? (
+      <div className='add-project-copy-container'>
+        <i className='fas fa-plus plus'></i>
+        <span className='add-project-text'>Add a new project</span>
+      </div>
+    ) : (
+      "# Add new hex code"
+    );
     const buttonTextOpacity = list ? "1" : "0.5";
     const buttonTextColour = list ? "white" : "inherit";
-    const buttonTextBackground = list ? "rgba(0,0,0,.15)" : "inherit";
 
     return (
       <div
@@ -34,11 +39,10 @@ const SwatchActionButton = ({
         style={{
           ...styles.openButtonGroup,
           opacity: buttonTextOpacity,
-          color: buttonTextColour,
-          backgroundColor: buttonTextBackground
+          color: buttonTextColour
         }}
       >
-        <p className='add-new-text'>{buttonText}</p>
+        <span className='add-new-text'>{buttonText}</span>
       </div>
     );
   };
@@ -102,9 +106,9 @@ const SwatchActionButton = ({
           style={{
             backgroundColor: !allowButton ? "white" : text,
             overflow: "visible",
-            minHeight: 90,
-            minWidth: 272,
-            padding: "6px 8px 2px"
+            minHeight: 20,
+            minWidth: 252,
+            padding: "10px 10px"
           }}
         >
           <input
@@ -115,7 +119,7 @@ const SwatchActionButton = ({
             value={text}
             onChange={handleInputChange}
             style={{
-              color: !copyColor ? "black" : copyColor,
+              color: !allowButton ? "black" : copyColor,
               backgroundColor: !allowButton ? "white" : text,
               resize: "none",
               width: "100%",
@@ -132,7 +136,10 @@ const SwatchActionButton = ({
             disabled={!list && !allowButton && true}
             onMouseDown={list ? handleAddProject : handleAddSwatch}
             variant='contained'
-            style={{ marginTop: "10px", opacity: !allowButton ? "0.6" : "1" }}
+            style={{
+              marginTop: "10px",
+              opacity: list ? "1" : !allowButton ? "0.6" : "1"
+            }}
           >
             {buttonTitle}
           </button>

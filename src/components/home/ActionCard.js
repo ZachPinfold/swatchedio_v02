@@ -20,7 +20,6 @@ const ActionCard = ({
   color,
   color2,
   addSwatch,
-  colors,
   openLogin
 }) => {
   const [circleSize, setCircleSize] = useState(false);
@@ -32,11 +31,6 @@ const ActionCard = ({
   const [viewProjects, toggleViewProject] = useState(false);
   const [colorsAdded, setColorsAdded] = useState(false);
   const wrapperRef = useRef(null);
-
-  // const closeDeleteBox = () => {
-  //   toggleShowAction(false);
-  // };
-  // useOnClickOutside(wrapperRef, closeDeleteBox);
 
   const handleMasterToggle = async () => {
     toggleAddToMaster(!addToMaster);
@@ -144,12 +138,12 @@ const ActionCard = ({
   return (
     <div
       onMouseEnter={e => e.stopPropagation()}
-      onClick={e => e.stopPropagation()}
+      // onClick={e => e.stopPropagation()}
       className='actions-area'
     >
       <div
+        onMouseDown={e => e.stopPropagation()}
         onMouseOver={e => handleHover(e, frontBack)}
-        onClick={e => e.stopPropagation()}
         id={divId}
         className='click-more-circles'
       >
@@ -190,7 +184,7 @@ const ActionCard = ({
       {showAction[divId] && (
         <div
           ref={wrapperRef}
-          onClick={e => e.stopPropagation()}
+          onMouseDown={e => e.stopPropagation()}
           className='more-card-box'
         >
           {colorsAdded && (

@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   GET_COLORS,
   COLOR_ERROR,
@@ -18,7 +17,6 @@ export const getColors = (
   discover,
   colour
 ) => async dispatch => {
-  console.log(random, first, discover, colour);
   try {
     if (discover === "hexCode") {
       const runHexCodeAPI = async () => {
@@ -73,7 +71,6 @@ export const getColors = (
     }
 
     if (discover !== "discover" && discover !== "hexCode") {
-      console.log("not discover");
       const runRandomAPI = async () => {
         const result1 = await API.graphql(
           graphqlOperation(listColorHexs, { format: "json" })

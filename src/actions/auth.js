@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -15,9 +14,8 @@ import { addProject } from "../actions/swatch";
 
 export const loadUser = () => async dispatch => {
   try {
-    const session = await Auth.currentSession();
+    await Auth.currentSession();
     const user = await Auth.currentAuthenticatedUser();
-    console.log(user);
     dispatch({
       type: USER_LOADED,
       payload: { username: user.username, id: user.attributes.sub }
@@ -65,7 +63,6 @@ export const register = (username, password, email, cb) => async dispatch => {
 export const login = (username, password, cb) => async dispatch => {
   try {
     const user = await Auth.signIn(username, password);
-    console.log(user);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: { username: user.username, id: user.attributes.sub }

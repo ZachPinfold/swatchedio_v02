@@ -1,10 +1,4 @@
-import {
-  SHOW_EXPLORE,
-  NEW_PALETTE,
-  HIDE_EXPLORE,
-  OFF_PROFILE,
-  ON_PROFILE
-} from "./types";
+import { SHOW_EXPLORE, HIDE_EXPLORE, OFF_PROFILE, ON_PROFILE } from "./types";
 
 // Open discover
 
@@ -21,7 +15,6 @@ export const closeDiscover = () => dispatch => {
 // Open profile
 
 export const openProfile = () => dispatch => {
-  console.log("open");
   dispatch({ type: ON_PROFILE });
 };
 

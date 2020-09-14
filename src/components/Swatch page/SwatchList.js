@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import SwatchCard from "./SwatchCard";
 import SwatchActionButton from "./SwatchActionButton";
 import { Droppable, Draggable } from "react-beautiful-dnd";
@@ -66,7 +66,10 @@ const SwatchList = ({
                   }}
                 >
                   {title === "Master" && (
-                    <i style={{ marginRight: "5px" }} class='far fa-star'></i>
+                    <i
+                      style={{ marginRight: "5px" }}
+                      className='far fa-star'
+                    ></i>
                   )}
 
                   <h4

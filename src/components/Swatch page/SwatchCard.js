@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Card from "@material-ui/core/Card";
 import { Draggable } from "react-beautiful-dnd";
-import { Provider } from "react-redux";
 import styled from "styled-components";
 import getContrastYIQ from "../utils/dominantColor";
 import { deleteSwatchCard } from "../../actions/swatch";
@@ -9,10 +8,6 @@ import { connect } from "react-redux";
 import useOnClickOutside from "use-onclickoutside";
 
 const CardContainer = styled.div`
-  margin-bottom: 8px;
-`;
-
-const Car = styled.div`
   margin-bottom: 8px;
 `;
 
@@ -36,6 +31,7 @@ const SwatchCard = ({
   useEffect(() => {
     const textColor = getContrastYIQ(hexCode);
     setCopyColor(textColor);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const closeDeleteBox = () => {
@@ -156,7 +152,7 @@ const SwatchCard = ({
                         cursor: "pointer",
                         color: copyColor
                       }}
-                      class='fas fa-copy'
+                      className='fas fa-copy'
                     ></i>
                   </div>
                 </div>

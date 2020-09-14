@@ -5,7 +5,6 @@ import Register from "./components/auth/Register";
 import LogIn from "./components/auth/Login";
 import Landing from "./components/home/Landing";
 import Navbar from "./components/layout/Navbar";
-import Test from "./components/Test";
 
 // Redux
 
@@ -18,7 +17,6 @@ import ProjectPage from "./components/Swatch page/ProjectPage";
 function App() {
   const [login, openLogin] = useState(false);
   const [register, openRegister] = useState(false);
-  const [loading, setLoad] = useState(true);
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -30,7 +28,9 @@ function App() {
         <Fragment>
           <Navbar openLogin={openLogin} openRegister={openRegister} />
           {login && <LogIn openLogin={openLogin} />}
-          {register && <Register openRegister={openRegister} />}
+          {register && (
+            <Register openLogin={openLogin} openRegister={openRegister} />
+          )}
           <Switch>
             <Route
               exact

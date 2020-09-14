@@ -58,7 +58,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        colors: payload,
         error: payload,
         colors: null
       };

@@ -159,6 +159,15 @@ nav ul {
   margin-right: 12px;
   cursor: pointer;
   font-family: var(--Crete);
+  font-size: var(--regularFont);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.register-link:hover {
+  text-decoration: underline;
 }
 
 .explore-link {
@@ -166,6 +175,12 @@ nav ul {
   cursor: pointer;
   font-family: var(--Crete);
   color: var(--orange);
+  font-size: var(--regularFont);
+
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .explore-link:hover {
@@ -369,6 +384,13 @@ input:-webkit-autofill:focus {
   font-size: var(--smallFont);
   opacity: 0.6;
   cursor: pointer;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 .login-register-sublink:hover {
@@ -762,6 +784,28 @@ input:-webkit-autofill:focus {
 .add-new-text {
   font-family: var(--HelveticaL);
   font-size: var(--regularFont);
+}
+
+.add-project-copy-container {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.add-project-text {
+  margin-left: 5px;
+  font-size: var(--regularFont);
+  font-family: var(--HelveticaM);
+}
+
+.plus {
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.plus:hover,
+.add-new-text:hover {
+  color: var(--green);
 }
 
 .master-subtitle {

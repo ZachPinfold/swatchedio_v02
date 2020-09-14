@@ -1,6 +1,5 @@
 import React from "react";
 import { logout } from "../../actions/auth";
-import { Nav } from "aws-amplify-react/lib-esm/AmplifyTheme";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 

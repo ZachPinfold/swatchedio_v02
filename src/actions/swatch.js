@@ -182,6 +182,7 @@ export const sortSwatches = (
     if (droppableIdStart === droppableIdEnd) {
       const mappArr = projects.filter(project => {
         if (project.id === droppableIdStart) return project;
+        // eslint-disable-next-line array-callback-return
       });
 
       const targetProject = mappArr[0].swatches.items.map((swatch, index) => {

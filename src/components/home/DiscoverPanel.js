@@ -25,6 +25,7 @@ const HueButton = styled.button`
 const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
   useEffect(() => {
     handleClick();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [hueColour, setHueColour] = useState("");
@@ -77,7 +78,6 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
   };
 
   return (
-    // <div className="discover-area"></div>
     <div
       style={{ paddingTop: hexMessage && "20px" }}
       className='discover-palette-area'
@@ -149,7 +149,7 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
                 marginTop: "0px",
                 width: "129px"
               }}
-              class='input disco-input'
+              className='input disco-input'
               placeholder='#hex'
               onChange={handleInputChange}
               type='text'

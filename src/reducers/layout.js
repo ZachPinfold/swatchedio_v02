@@ -19,29 +19,24 @@ export default function(state = initialState, action) {
         ...state,
         discover: true
       };
-  }
-  switch (type) {
     case HIDE_EXPLORE:
       return {
         ...state,
         discover: false
       };
-  }
-  switch (type) {
+
     case NEW_PALETTE:
       return {
         ...state,
         discover: true
       };
-  }
-  switch (type) {
+
     case ON_PROFILE:
       return {
         ...state,
         profile: true
       };
-  }
-  switch (type) {
+
     case OFF_PROFILE:
       return {
         ...state,
