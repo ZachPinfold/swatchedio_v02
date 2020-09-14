@@ -8,6 +8,7 @@ import { openDiscover, closeDiscover } from "../../actions/layout";
 import { useHistory } from "react-router";
 import NavDropdown from "./NavDropdown";
 import useOnClickOutside from "use-onclickoutside";
+import BurgerMenu from "./BurgerMenu";
 
 const Navbar = ({
   logout,
@@ -130,6 +131,74 @@ const Navbar = ({
     </Fragment>
   );
 
+  const userNavLinks = (
+    <Fragment>
+      {isAuthenticated && (
+        <ul>
+          {!profile && (
+            <li>
+              <a className='explore-link mobile' onClick={() => openDiscover()}>
+                Discover
+              </a>
+            </li>
+          )}
+          {!discover && profile && (
+            <Link
+              style={{ textDecoration: "none", marginBottom: "10px" }}
+              to='/'
+            >
+              <a className='explore-link mobile' onClick={() => openDiscover()}>
+                Discover
+              </a>
+            </Link>
+          )}
+          <li>
+            <Link className='burger-links mobile' to='/profile'>
+              My Swatches
+            </Link>
+          </li>
+          <li
+            style={{ marginTop: "5px" }}
+            className='secondary-links mobile'
+            onClick={() => {
+              logout();
+              setDropDown(false);
+            }}
+          >
+            Logout
+          </li>
+        </ul>
+      )}
+    </Fragment>
+  );
+
+  const guestNavLinks = (
+    <ul>
+      {!discover && (
+        <li>
+          <a className='explore-link mobile' onClick={() => openDiscover()}>
+            Discover
+          </a>
+        </li>
+      )}
+      <li>
+        <a className='register-link mobile' onClick={() => openRegister(true)}>
+          Register
+        </a>
+      </li>
+      <li>
+        <button
+          onMouseLeave={(handleLoginHover, () => setArrowClass("#06d6a0"))}
+          onMouseEnter={handleArrowHover}
+          className={buttonClass}
+          onClick={() => openLogin(true)}
+        >
+          Login
+        </button>
+      </li>
+    </ul>
+  );
+
   return (
     <nav
       style={{
@@ -152,6 +221,15 @@ const Navbar = ({
         <div ref={wrapperRef} className='dropdown-container'>
           {dropDown && <NavDropdown setDropDown={setDropDown} />}
         </div>
+      </div>
+      <div className='burger-area'>
+        <BurgerMenu
+          isAuthenticated={isAuthenticated}
+          authLinks={userLinks}
+          guestLinks={guestLinks}
+          userNavLinks={userNavLinks}
+          guestNavLinks={guestNavLinks}
+        />
       </div>
     </nav>
   );

@@ -389,6 +389,24 @@ input:-webkit-autofill:focus {
   /* text-align: center; */
 }
 
+@media (max-width: 768px) {
+  .nav-link-area {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .modal-box {
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) {
+  .burger-area {
+    display: none;
+  }
+}
+
 /*  */
 /*  */
 /* Landing page */
@@ -807,6 +825,25 @@ input:-webkit-autofill:focus {
   .actions-area {
     display: none;
   }
+}
+
+/*  */
+/*  */
+/* Mobile */
+/*  */
+/*  */
+
+.mobile {
+  color: white;
+  font-family: var(--HelveticaM);
+  font-size: var(--largeFont);
+  text-decoration: none;
+  margin: 0px;
+  padding: 10px 10px;
+}
+
+.nav-mobile {
+  padding: 0px;
 }
 
 /*  */
