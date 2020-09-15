@@ -32,7 +32,7 @@ const NavDropdown = ({ logout, setDropDown }) => {
         >
           Logout
         </li>
-        <li className='secondary-links'>Change password</li>
+        {/* <li className='secondary-links'>Change password</li> */}
       </ul>
     </div>
   );
