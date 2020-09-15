@@ -268,7 +268,20 @@ nav ul {
   color: #c85866;
 }
 
+.discovery-ui-indicator {
+  position: absolute;
+  right: 20px;
+}
+
+.disco-indicator {
+  display: inline-block;
+}
+
+/*  */
+/*  */
 /* Modal */
+/*  */
+/*  */
 
 .modal-wrapper {
   position: fixed;

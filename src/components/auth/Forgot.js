@@ -3,25 +3,25 @@ import FormErrors from "../utility/FormErrors";
 import Validate from "../utility/FormValidation";
 import { login } from "../../actions/auth";
 import { connect } from "react-redux";
+import { Auth } from "aws-amplify";
 
-const Login = ({ auth, login, openLogin, forgot }) => {
+const Forgot = ({ openForgot, openForgotLogin }) => {
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+    email: "",
     errors: {
       cognito: null,
       blankfield: false
     }
   });
 
-  useEffect(() => {
-    if (auth.isAuthenticated === true) {
-      openLogin(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth.isAuthenticated]);
+  //   useEffect(() => {
+  //     if (auth.isAuthenticated === true) {
+  //       openLogin(false);
+  //     }
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, [auth.isAuthenticated]);
 
-  const { username, password, errors } = formData;
+  const { email, errors } = formData;
 
   const clearErrorState = () => {
     setFormData({
@@ -33,28 +33,37 @@ const Login = ({ auth, login, openLogin, forgot }) => {
     });
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     // Form validation
-    clearErrorState();
-    const error = Validate(event, formData);
-    if (error) {
+    // clearErrorState();
+    // const error = Validate(event, formData);
+    // if (error) {
+    //   setFormData({
+    //     ...formData,
+    //     errors: {
+    //       ...error,
+    //       errors
+    //     }
+    //   });
+    // }
+
+    // // AWS Cognito integration here
+
+    try {
+      await Auth.forgotPassword(email);
+      openForgotLogin(true);
+      openForgot(false);
+    } catch (error) {
       setFormData({
         ...formData,
         errors: {
           ...error,
-
-          errors
+          cognito: error
         }
       });
     }
-
-    // // AWS Cognito integration here
-
-    login(username, password, err => {
-      setFormData({ ...formData, errors: { ...errors, cognito: err } });
-    });
   };
 
   const onInputChange = event => {
@@ -64,12 +73,12 @@ const Login = ({ auth, login, openLogin, forgot }) => {
 
   return (
     <section className='modal-wrapper'>
-      <div onClick={() => openLogin(false)} className='modal-backdrop'>
+      <div onClick={() => openForgot(false)} className='modal-backdrop'>
         <div onClick={e => e.stopPropagation()} className='modal-box'>
-          <p onClick={() => openLogin(false)} className='close-modal-x'>
+          <p onClick={() => openForgot(false)} className='close-modal-x'>
             x
           </p>
-          <h3 className='login-register-title'>Log in</h3>
+          <h3 className='login-register-title'>Forgot Password</h3>
           <div className='break-line'></div>
           <FormErrors formerrors={errors} />
 
@@ -79,22 +88,10 @@ const Login = ({ auth, login, openLogin, forgot }) => {
                 <input
                   className='input'
                   type='text'
-                  id='username'
+                  id='email'
                   aria-describedby='usernameHelp'
                   placeholder='Enter username'
-                  value={username}
-                  onChange={onInputChange}
-                />
-              </p>
-            </div>
-            <div className='field'>
-              <p className='control has-icons-left'>
-                <input
-                  className='input'
-                  type='password'
-                  id='password'
-                  placeholder='Password'
-                  value={password}
+                  value={email}
                   onChange={onInputChange}
                 />
               </p>
@@ -106,23 +103,15 @@ const Login = ({ auth, login, openLogin, forgot }) => {
                   style={{ marginTop: "20px", padding: "4px 70px" }}
                   className='btn-primary btn-login-modal'
                 >
-                  Login
+                  Send code
                 </button>
               </p>
             </div>
-            <div className='field field-login'>
+            {/* <div className='field field-login'>
               <p className='control'>
-                <button
-                  onClick={() => {
-                    openLogin(false);
-                    forgot(true);
-                  }}
-                  className='login-register-sublink'
-                >
-                  Forgot password?
-                </button>
+                <a className='login-register-sublink'>Forgot password?</a>
               </p>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
@@ -134,4 +123,4 @@ const mstp = state => ({
   auth: state.auth
 });
 
-export default connect(mstp, { login })(Login);
+export default connect(mstp, { login })(Forgot);

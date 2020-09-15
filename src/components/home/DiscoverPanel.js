@@ -171,6 +171,11 @@ const DiscoverPanel = ({ buttonClass, handleClick, getColors }) => {
         >
           New Palette
         </button>
+        {/* <div className='discovery-ui-indicator'>
+          <p className='disco-indicator'>Test</p>
+          <p className='disco-indicator'>/</p>
+          <p className='disco-indicator'>20</p>
+        </div> */}
       </div>
     </div>
   );

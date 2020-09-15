@@ -15,7 +15,8 @@ const initialState = {
   colors: null,
   colors2: null,
   error: {},
-  hex: null
+  hex: null,
+  hue: null
 };
 
 export default function(state = initialState, action) {
