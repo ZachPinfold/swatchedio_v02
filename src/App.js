@@ -7,6 +7,9 @@ import Forgot from "./components/auth/Forgot";
 import ForgotLogin from "./components/auth/ForgotLogin";
 import Landing from "./components/home/Landing";
 import Navbar from "./components/layout/Navbar";
+import ProjectPage from "./components/Swatch page/ProjectPage";
+import NotFound from "./components/layout/NotFound";
+import HowItWorks from "./components/layout/HowItWorks";
 
 // Redux
 
@@ -14,7 +17,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import { loadUser } from "./actions/auth";
-import ProjectPage from "./components/Swatch page/ProjectPage";
 
 function App() {
   const [login, openLogin] = useState(false);
@@ -50,8 +52,9 @@ function App() {
               render={props => <Landing {...props} openLogin={openLogin} />}
             />
             <PrivateRoute exact path='/profile' component={ProjectPage} />
+            <Route exact path='/how-it-works' component={HowItWorks} />
+            <Route exact path='*' component={NotFound} />
           </Switch>
-          {/* <Navbar openLogin={openLogin} openRegister={openRegister} /> */}
         </Fragment>
       </Router>
     </Provider>

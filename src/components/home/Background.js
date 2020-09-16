@@ -7,6 +7,7 @@ import { colorHoverChange } from "../utils/colorHoverChange";
 import { revertHome } from "../../actions/swatch";
 import Loader from "../layout/Loader";
 import { closeProfile } from "../../actions/layout";
+import Footer from "../layout/Footer";
 
 const Background = ({
   getColors,
@@ -230,6 +231,7 @@ const Background = ({
           </div>
         </div>
       )}
+      <Footer />
     </Fragment>
   );
 };

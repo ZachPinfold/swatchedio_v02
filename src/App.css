@@ -1013,3 +1013,114 @@ input:-webkit-autofill:focus {
   margin: 0px;
   width: 20vw;
 }
+
+/*  */
+/*  */
+/* Footer */
+/*  */
+/*  */
+
+footer {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-copy {
+  font-family: var(--HelveticaL);
+  font-size: var(--regularFont);
+}
+
+.zach-footer {
+  font-family: var(--Crete);
+  color: var(--orange);
+  text-decoration: none;
+}
+
+.zach-footer:hover {
+  text-decoration: underline;
+}
+
+.how {
+  font-family: var(--HelveticaL);
+}
+
+/*  */
+/*  */
+/* Footer */
+/*  */
+/*  */
+
+.video-screen {
+  /* padding-top: 160px; */
+  display: flex;
+  justify-content: center;
+  background-color: var(--orange);
+  height: 89vh;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  position: relative;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 40.25%;
+}
+
+.video-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-heading {
+  font-family: var(--Crete);
+  color: white;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 1600px) {
+  .video-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 35.25%;
+  }
+}
+
+@media (max-height: 540px) {
+  .video-container {
+    height: 100%;
+    width: 100%;
+  }
+  .video-screen {
+    height: 100%;
+  }
+}
+
+/*  */
+/*  */
+/* 404 */
+/*  */
+/*  */
+
+.not-found-container {
+  display: flex;
+  background-color: var(--orange);
+  height: 93vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-copy {
+  color: white;
+  font-family: var(--Crete);
+  font-size: var(--largeFont);
+}
