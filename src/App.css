@@ -1095,13 +1095,17 @@ footer {
   }
 }
 
-@media (max-height: 540px) {
+@media (max-height: 700px) {
   .video-container {
     height: 100%;
     width: 100%;
   }
   .video-screen {
     height: 100%;
+    padding-bottom: 50px;
+  }
+  .video-heading {
+    margin-top: 20px;
   }
 }
 
