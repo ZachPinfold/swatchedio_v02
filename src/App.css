@@ -1024,6 +1024,7 @@ footer {
   padding: 15px;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid var(--green);
 }
 
 .footer-copy {
